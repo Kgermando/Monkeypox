@@ -1,0 +1,98 @@
+<div
+    class="sidebar-area bg-white box-shadow"
+    [ngClass]="{'active': isToggled}"
+    [class.dark-sidebar]="themeService.isSidebarDark()"
+    [class.right-sidebar]="themeService.isRightSidebar()"
+    [class.hide-sidebar]="themeService.isHideSidebar()"
+>
+    <div class="logo bg-white">
+        <a routerLink="/" class="d-flex align-items-center">
+            <img src="assets/img/logo-icon.png" alt="logo">
+            <span>Work Management</span>
+        </a>
+    </div>
+    <div class="burger-menu" (click)="toggle()" [ngClass]="{'active': isToggled}">
+        <span class="top-bar"></span>
+        <span class="middle-bar"></span>
+        <span class="bottom-bar"></span>
+    </div>
+    <ng-scrollbar visibility="hover" style="height: 100vh;">
+        <div class="sidebar-inner">
+            <div class="sidebar-menu">
+                <mat-accordion>
+                    <span class="sub-title gray-color">MAIN</span>
+                    <a routerLink="/dashboard" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <i class="flaticon-menu-1"></i>
+                        <span class="title">Dashboard</span>
+                                <span class="badge">4</span>
+                    </a>
+                    <span class="sub-title gray-color">PERSONNELS</span> 
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-people"></i>
+                                <span class="title">Personnels</span>
+                                <span class="badge two">4</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/personnels-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Liste
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/members-grid-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Members Grid 2
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/members-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Members List
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Member Profile
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+                    <span class="sub-title gray-color">PRESENCES</span>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-phone-call"></i>
+                                <span class="title">Presence</span>
+                                <span class="badge two">4</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/members-grid" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Liste
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/members-grid-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Absences
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/members-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Maladies
+                                </a>
+                            </li>
+                            <li class="sidemenu-item">
+                                <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Member Profile
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
+                   
+                </mat-accordion>
+            </div>
+        </div>
+    </ng-scrollbar>
+</div>
