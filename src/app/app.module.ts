@@ -13,6 +13,9 @@ import { FooterComponent } from './common/footer/footer.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { NotFoundComponent } from './common/not-found/not-found.component';
 import { InternalErrorComponent } from './common/internal-error/internal-error.component';
+import { UsersModule } from './users/users.module';
+import { AuthModule } from './auth/auth.module';
+import { DashboardModule } from './dashboard/dashboard.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +33,9 @@ import { InternalErrorComponent } from './common/internal-error/internal-error.c
     BrowserAnimationsModule,
 
     SharedModule,
+    AuthModule,
+    UsersModule,
+    DashboardModule,
 
     NgxEchartsModule.forRoot({
         echarts: () => import('echarts')
