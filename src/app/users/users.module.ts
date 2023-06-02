@@ -7,6 +7,7 @@ import { UserViewComponent } from './user-view/user-view.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UsersService } from './users.service';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -18,7 +19,9 @@ import { UsersService } from './users.service';
   ],
   imports: [
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+
+    SharedModule
   ],
   providers: [
     UsersService

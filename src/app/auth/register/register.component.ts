@@ -43,54 +43,28 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit(): void {
         this.identiteFormGroup = this._formBuilder.group({
-            photo: [''],
+            structure: ['', Validators.required],
+            // photo: [''],
             nom: ['', Validators.required],
             postnom: ['', Validators.required],
-
             prenom: ['', Validators.required],
             sexe: ['', Validators.required],
-
-            date_naissance: ['', Validators.required],
-            lieu_naissance: ['', Validators.required],
             nationalite: ['', Validators.required],
-
+            etat_civile: ['', Validators.required],
+            adresse: ['', Validators.required],
+            titre: ['', Validators.required],
+            // pays: ['', Validators.required],
+            province: ['', Validators.required],
+            zone_sante: ['', Validators.required],
             email: ['', Validators.required],
             telephone: ['', Validators.required],
-
-            etat_civile: ['', Validators.required],
-            nbr_enfant: ['', Validators.required],
-
-            nbr_dependants: ['', Validators.required],
-            nbr_dependants_max: ['', Validators.required],
-
-            adresse: ['', Validators.required],
-
-            // matricule: [''],
-            // numero_cnss: [''],
-            // role: [''],
-            // departement: [''],
-            // title: [''],
-            // fonction: [''],
-            // services: [''],
-            // site_location: [''],
-            // type_contrat: [''],
-            // date_debut_contrat: [''],
-            // date_fin_contrat: [''],
-            // salaire: [''],
-            // compte_bancaire: [''],
-            // nom_banque: [''],
-            // frais_bancaire: [''],
-            // statut_personnel: [''],
-            // cv_url: [''],
-            // signature: [''],
-            // // created: [''],
-            // // update_created: [''],
-            // statut_presence: [''],
-            // syndicat: [''],
+            matricule: ['', Validators.required],
+            password: ['', Validators.required],
+            password_confirm: ['', Validators.required],
         });
     }
 
-
+ 
 
     onSubmitIdentite() {
         console.log("reactive form submitted");
@@ -98,46 +72,29 @@ export class RegisterComponent implements OnInit {
         if (this.identiteFormGroup.valid) {
             this.isLoading = true;
             var body = {
-                photo: this.identiteFormGroup.value.photo,
+                structure: this.identiteFormGroup.value.structure,
+                photo: '-',
                 nom: this.identiteFormGroup.value.nom,
                 postnom: this.identiteFormGroup.value.postnom,
                 prenom: this.identiteFormGroup.value.prenom,
                 sexe: this.identiteFormGroup.value.sexe,
-                date_naissance: this.identiteFormGroup.value.date_naissance,
-                lieu_naissance: this.identiteFormGroup.value.lieu_naissance,
                 nationalite: this.identiteFormGroup.value.nationalite,
+                etat_civile: this.identiteFormGroup.value.etat_civile,
+                adresse: this.identiteFormGroup.value.adresse,
+                titre: this.identiteFormGroup.value.titre,
+                pays: 'RDC',
+                province: this.identiteFormGroup.value.province,
+                zone_sante: this.identiteFormGroup.value.zone_sante,
                 email: this.identiteFormGroup.value.email,
                 telephone: this.identiteFormGroup.value.telephone,
-                etat_civile: this.identiteFormGroup.value.etat_civile,
-                nbr_enfant: this.identiteFormGroup.value.nbr_enfant,
-                nbr_dependants: this.identiteFormGroup.value.nbr_dependants,
-                nbr_dependants_max: this.identiteFormGroup.value.nbr_dependants_max,
-                adresse: this.identiteFormGroup.value.adresse,
-                matricule: '1234',
-                numero_cnss: '1234',
-                role: '1',
-                departement: 'DP',
-                title: '-',
-                fonction: '-',
-                services: '-',
-                site_location: '-',
-                type_contrat: '-',
-                date_debut_contrat: this.identiteFormGroup.value.date_naissance,
-                date_fin_contrat: this.identiteFormGroup.value.date_naissance,
-                salaire: 0,
-                compte_bancaire: '-',
-                nom_banque: '-',
-                frais_bancaire: 0,
-                statut_personnel: false,
-                cv_url: '-',
+                matricule: this.identiteFormGroup.value.matricule,
+                password: this.identiteFormGroup.value.password,
+                password_confirm: this.identiteFormGroup.value.password_confirm,
                 signature: '-',
                 created: new Date(),
-                update_created: new Date(),
-                password: '1234',
-                password_confirm: '1234',
-                statut_presence: false,
-                syndicat: false 
+                update_created: new Date()
             };
+            console.log(body);
             this.authService.register(body).subscribe(() => {
                 this.isLoading = false;
                 this.router.navigate(['/dashboard']);

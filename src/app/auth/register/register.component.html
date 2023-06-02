@@ -13,7 +13,7 @@
             <li class="breadcrumb-item">
                 <a routerLink="/">
                     <i class="ri-home-8-line"></i>
-                    Personnels
+                    Agents
                 </a>
             </li>
             <li class="breadcrumb-item gray-color">users</li>
@@ -28,6 +28,20 @@
         <mat-card-content>
             <form [formGroup]="identiteFormGroup" (ngSubmit)="onSubmitIdentite()">
                 <div class="row"> 
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="tagus-form-group">
+                            <label class="d-block mb-12 fw-semibold gray-color">Structure</label>
+                            <mat-form-field appearance="fill">
+                                <i class="ri-road-map-line"></i>
+                                <mat-label>Entrer structure</mat-label>
+                                <mat-select formControlName="structure" required="Champs obligatoire">
+                                    <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
+                                        {{countrie.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="tagus-form-group">
                             <label class="d-block mb-12 fw-semibold gray-color">Nom</label>
@@ -72,28 +86,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="tagus-form-group">
-                            <label class="d-block mb-12 fw-semibold gray-color">Date naissance</label>
-                            <mat-form-field appearance="fill" class="date-input">
-                                <mat-label>MM/DD/YYYY</mat-label>
-                                <input matInput [matDatepicker]="picker1" formControlName="date_naissance" required="Champs obligatoire">
-                                <mat-datepicker-toggle matIconSuffix [for]="picker1"></mat-datepicker-toggle>
-                                <mat-datepicker #picker1></mat-datepicker>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <div class="tagus-form-group">
-                            <label class="d-block mb-12 fw-semibold gray-color">Lieu naissance</label>
-                            <mat-form-field appearance="fill">
-                                <i class="ri-map-2-line"></i>
-                                <mat-label>Entrer lieu naissance</mat-label>
-                                <input matInput formControlName="lieu_naissance" required="Champs obligatoire">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="tagus-form-group">
                             <label class="d-block mb-12 fw-semibold gray-color">Nationalite</label>
                             <mat-form-field appearance="fill">
@@ -107,8 +100,62 @@
                             </mat-form-field>
                         </div>
                     </div>
-
-
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="tagus-form-group">
+                            <mat-form-field appearance="fill">
+                                <i class="ri-user-heart-line"></i>
+                                <mat-label>Etat civil</mat-label>
+                                <mat-select formControlName="etat_civile" required="Champs obligatoire">
+                                    <mat-option value="CELIBATAIRE">Célibataire</mat-option>
+                                    <mat-option value="MARIE(E)">Marié</mat-option> 
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="tagus-form-group">
+                            <label class="d-block mb-12 fw-semibold gray-color">Adresse</label>
+                            <mat-form-field appearance="fill">
+                                <i class="ri-map-pin-line"></i>
+                                <mat-label>Entrer adresse</mat-label>
+                                <input matInput formControlName="adresse" required="Champs obligatoire">
+                            </mat-form-field>
+                        </div>
+                    </div> 
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="tagus-form-group">
+                            <label class="d-block mb-12 fw-semibold gray-color">Titre</label>
+                            <mat-form-field appearance="fill">
+                                <i class="ri-team-line"></i>
+                                <mat-label>Entrer titre</mat-label>
+                                <input matInput formControlName="titre" required="Champs obligatoire">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="tagus-form-group">
+                            <label class="d-block mb-12 fw-semibold gray-color">Province</label>
+                            <mat-form-field appearance="fill">
+                                <i class="ri-road-map-line"></i>
+                                <mat-label>Entrer province</mat-label>
+                                <mat-select formControlName="province" required="Champs obligatoire">
+                                    <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
+                                        {{countrie.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="tagus-form-group">
+                            <label class="d-block mb-12 fw-semibold gray-color">Zone de santé</label>
+                            <mat-form-field appearance="fill">
+                                <i class="ri-team-line"></i>
+                                <mat-label>Entrer zone sante</mat-label>
+                                <input matInput formControlName="zone_sante" required="Champs obligatoire">
+                            </mat-form-field>
+                        </div>
+                    </div> 
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="tagus-form-group">
                             <label class="d-block mb-12 fw-semibold gray-color">Email <span>*</span></label>
@@ -129,64 +176,40 @@
                             </mat-form-field>
                         </div>
                     </div>
-
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="tagus-form-group">
-                            <mat-form-field appearance="fill">
-                                <i class="ri-user-heart-line"></i>
-                                <mat-label>Etat civil</mat-label>
-                                <mat-select formControlName="etat_civile" required="Champs obligatoire">
-                                    <mat-option value="CELIBATAIRE">Célibataire</mat-option>
-                                    <mat-option value="MARIE(E)">Marié</mat-option> 
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="tagus-form-group">
-                            <label class="d-block mb-12 fw-semibold gray-color">Nombre enfants</label>
+                            <label class="d-block mb-12 fw-semibold gray-color">Matricule</label>
                             <mat-form-field appearance="fill">
                                 <i class="ri-team-line"></i>
-                                <mat-label>Entrer Nombre enfants</mat-label>
-                                <input matInput type="number" formControlName="nbr_enfant" required="Champs obligatoire">
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-6 col-md-6 col-sm-6">
-                        <div class="tagus-form-group">
-                            <label class="d-block mb-12 fw-semibold gray-color">Nombre dependants <span>*</span></label>
-                            <mat-form-field appearance="fill">
-                                <i class="ri-mickey-line"></i>
-                                <mat-label>Entrer Nombre dependants</mat-label>
-                                <input matInput type="number" formControlName="nbr_dependants" required="Champs obligatoire">
+                                <mat-label>Entrer matricule</mat-label>
+                                <input matInput formControlName="matricule" required="Champs obligatoire">
                             </mat-form-field>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="tagus-form-group">
-                            <label class="d-block mb-12 fw-semibold gray-color">Nombre dependants max</label>
+                            <label class="d-block mb-12 fw-semibold gray-color">Mot de passe</label>
                             <mat-form-field appearance="fill">
-                                <i class="ri-mickey-fill"></i>
-                                <mat-label>Entrer Nombre dependants max</mat-label>
-                                <input matInput type="number" formControlName="nbr_dependants_max" required="Champs obligatoire">
+                                <i class="ri-team-line"></i>
+                                <mat-label>Entrer password</mat-label>
+                                <input matInput formControlName="password" required="Champs obligatoire">
                             </mat-form-field>
                         </div>
                     </div>
-
-                    <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="tagus-form-group">
-                            <label class="d-block mb-12 fw-semibold gray-color">Adresse</label>
+                            <label class="d-block mb-12 fw-semibold gray-color">Confirmation Mot de passe</label>
                             <mat-form-field appearance="fill">
-                                <i class="ri-map-pin-line"></i>
-                                <mat-label>Entrer adresse</mat-label>
-                                <input matInput formControlName="adresse" required="Champs obligatoire">
+                                <i class="ri-team-line"></i>
+                                <mat-label>Entrer password_confirm</mat-label>
+                                <input matInput formControlName="password_confirm" required="Champs obligatoire">
                             </mat-form-field>
                         </div>
-                    </div> 
+                    </div>
 
                 </div>
                 <div>
+                    
                     <button mat-flat-button class="tagus" matStepperSuivant [disabled]="!identiteFormGroup.valid">Suivant</button>
                 </div>
             </form>

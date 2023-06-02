@@ -3,6 +3,7 @@ import { ToggleService } from './toggle.service';
 import { DatePipe } from '@angular/common';
 import { CustomizerSettingsService } from '../customizer-settings/customizer-settings.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { UserModel } from 'src/app/users/models/user-models';
 
 @Component({
   selector: 'app-header',
@@ -22,6 +23,32 @@ export class HeaderComponent implements OnInit {
     }
 
     isToggled = false;
+
+    loading = false;
+    currentUser: UserModel = {
+        id: 0,
+        structure: '-',
+        photo: '-',
+        nom: '-',
+        postnom: '-',
+        prenom: '-',
+        sexe: '-',
+        nationalite: '-',
+        etat_civile: '-',
+        adresse: '-',
+        titre: '-',
+        pays: '-',
+        province: '-',
+        zone_sante: '-',
+        email: '-',
+        telephone: '-',
+        matricule: '-',
+        password: '-',
+        signature: '-',
+        created: new Date,
+        update_created: new Date
+    };
+
     
     constructor(
         private toggleService: ToggleService,
@@ -36,11 +63,12 @@ export class HeaderComponent implements OnInit {
 
 
     ngOnInit(): void {
-        // this.authService.user().subscribe(
-        //     res => {
-        //         console.log(`user ${res}`);
-        //     } 
-        // )
+        this.authService.user().subscribe(
+            res => {
+                console.log(res);
+                this.currentUser = res; 
+            }
+        )
     }
 
     toggleTheme() {

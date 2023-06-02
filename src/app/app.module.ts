@@ -16,6 +16,7 @@ import { InternalErrorComponent } from './common/internal-error/internal-error.c
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,9 @@ import { DashboardModule } from './dashboard/dashboard.module';
     }),
     QuillModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    DatePipe
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

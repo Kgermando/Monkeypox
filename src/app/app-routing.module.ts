@@ -10,6 +10,9 @@ const routes: Routes = [
   {
     path: 'dashboard', loadChildren: () => import('../app/dashboard/dashboard.module').then(m => m.DashboardModule),
   },
+  {
+    path: 'users', loadChildren: () => import('../app/users/users.module').then(m => m.UsersModule),
+  },
  
 
   {path: 'error-500', component: InternalErrorComponent },

@@ -7,9 +7,8 @@ import {
   ApexChart,
   ApexFill,
   ChartComponent
-} from "ng-apexcharts";
-import { PersonnelModel } from 'src/app/personnel/models/personnel-model';
-import { Observable } from 'rxjs';
+} from "ng-apexcharts"; 
+import { UserModel } from 'src/app/users/models/user-models';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -30,8 +29,36 @@ export class ProfileComponent implements OnInit {
   @ViewChild("chart")
   chart!: ChartComponent;
     public chartOptions: Partial<ChartOptions>;
+
+
+    loading = false;
  
-    public currentUser: Observable<PersonnelModel | null>;
+    // public currentUser: Observable<UserModel | null>;
+
+ 
+    currentUser: UserModel = {
+        id: 0,
+        structure: '',
+        photo: '',
+        nom: 'Kataku',
+        postnom: '',
+        prenom: 'Germain',
+        sexe: '',
+        nationalite: '',
+        etat_civile: '',
+        adresse: '',
+        titre: '',
+        pays: '',
+        province: '',
+        zone_sante: '',
+        email: '',
+        telephone: '',
+        matricule: '',
+        password: '',
+        signature: '',
+        created: new Date,
+        update_created: new Date
+    };
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -67,10 +94,11 @@ export class ProfileComponent implements OnInit {
             }
         };
  
-    } 
+    }
 
 
-  ngOnInit(): void {
+   ngOnInit(): void {
+    // this.getUser()
     this.authService.user().subscribe(
             res => {
                 console.log(res);
@@ -78,6 +106,29 @@ export class ProfileComponent implements OnInit {
             }
         )
     }
+
+
+    getUser(): void {
+        this.loading = true;
+        this.authService.user().subscribe(
+            res => {
+                console.log(res);
+                this.currentUser = res; 
+                this.loading = false;
+            }
+        )
+        this.loading = false;  
+      }
+
+
+
+
+
+
+
+
+
+
 
     toggleTheme() {
         this.themeService.toggleTheme();

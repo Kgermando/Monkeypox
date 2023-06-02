@@ -51,10 +51,13 @@ import { ColorPickerModule } from 'ngx-color-picker';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
  
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    FileUploadComponent
+  ],
   imports: [
     CommonModule,
     MatMenuModule,
