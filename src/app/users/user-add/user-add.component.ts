@@ -17,7 +17,7 @@ interface Sexe {
   templateUrl: './user-add.component.html',
   styleUrls: ['./user-add.component.scss']
 })
-export class UserAddComponent {
+export class UserAddComponent implements OnInit {
   hide = true;
 
     isLoading: boolean = false;
@@ -29,7 +29,29 @@ export class UserAddComponent {
     ];
 
 
-    employee: UserModel = new UserModel();
+    user: UserModel = {
+      id: undefined,
+      structure: undefined,
+      photo: undefined,
+      nom: undefined,
+      postnom: undefined,
+      prenom: undefined,
+      sexe: undefined,
+      nationalite: undefined,
+      etat_civile: undefined,
+      adresse: undefined,
+      titre: undefined,
+      pays: undefined,
+      province: undefined,
+      zone_sante: undefined,
+      email: undefined,
+      telephone: undefined,
+      matricule: undefined,
+      password: undefined,
+      signature: undefined,
+      created: undefined,
+      update_created: undefined
+    };
 
     constructor(
         public themeService: CustomizerSettingsService,
@@ -42,6 +64,23 @@ export class UserAddComponent {
     ngOnInit(): void {
          
     }
+
+
+  save() {
+    this.usersService.createData(this.user);
+  }
+
+  // to navigate to the corresponding path / to employee list page
+  goToList() {
+    this.router.navigate(['/users/user-list'])
+  }
+
+  onSubmit() { 
+    this.isLoading = true;
+    console.log(this.user);
+    this.save();
+    this.isLoading = false;
+  }
 
  
 

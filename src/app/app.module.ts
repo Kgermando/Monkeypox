@@ -17,6 +17,9 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DatePipe } from '@angular/common';
+import { ReglageModule } from './reglage/reglage.module';
+import { PatientsModule } from './patients/patients.module';
+import { EpidemiesModule } from './epidemies/epidemies.module';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,10 @@ import { DatePipe } from '@angular/common';
     AuthModule,
     UsersModule,
     DashboardModule,
+    ReglageModule,
+    PatientsModule,
+    EpidemiesModule,
+    
 
     NgxEchartsModule.forRoot({
         echarts: () => import('echarts')

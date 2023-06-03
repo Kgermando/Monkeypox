@@ -39,15 +39,37 @@
                                 </a>
                             </li> 
                         </ul>
+                    </mat-expansion-panel> 
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-people"></i>
+                                <span class="title">Patients</span> 
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/patients/patient-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    Liste
+                                </a>
+                            </li>
+                        </ul>
                     </mat-expansion-panel>
-                    <a routerLink="/patients" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="flaticon-people"></i>
-                        <span class="title">Patients</span> 
-                    </a>
-                    <a routerLink="/users/user-list" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <i class="flaticon-user"></i>
-                        <span class="title">Personnels</span>
-                    </a>
+                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
+                        <mat-expansion-panel-header>
+                            <mat-panel-title>
+                                <i class="flaticon-user"></i>
+                                <span class="title">Personnels</span>
+                            </mat-panel-title>
+                        </mat-expansion-panel-header>
+                        <ul class="sidebar-sub-menu">
+                            <li class="sidemenu-item">
+                                <a routerLink="/users/user-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                    OPPCO
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-expansion-panel>
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = true">
                         <mat-expansion-panel-header>
                             <mat-panel-title>
@@ -57,17 +79,17 @@
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
-                                <a routerLink="/members-grid" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/reglages/campaign-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Campagnes
                                 </a>
                             </li>
                             <li class="sidemenu-item">
-                                <a routerLink="/members-grid-2" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/reglages/structure-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Zones de santés
                                 </a>
                             </li>
                             <li class="sidemenu-item">
-                                <a routerLink="/member-profile" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/reglages/zone-sante-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Structures
                                 </a>
                             </li>
