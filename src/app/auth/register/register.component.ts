@@ -33,7 +33,7 @@ export class RegisterComponent implements OnInit {
 
     formGroup!: FormGroup;
 
-    structureList: StructureModel[] = [];
+    // structureList: StructureModel[] = [];
 
 
     constructor(
@@ -41,7 +41,6 @@ export class RegisterComponent implements OnInit {
         private _formBuilder: FormBuilder,
         private router: Router,
         private authService: AuthService,
-        private structureService: StructureService,
     ) { }
 
 
@@ -71,7 +70,7 @@ export class RegisterComponent implements OnInit {
         });
     }
 
- 
+
 
     onSubmitIdentite() {
         console.log("reactive form submitted");

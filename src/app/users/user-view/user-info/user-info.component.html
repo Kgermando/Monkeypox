@@ -1,0 +1,78 @@
+<mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+    <mat-card-header class="border-bottom">
+        <h5 class="mb-0">Information Personal</h5>
+    </mat-card-header>
+    <mat-card-content>
+       <ul class="list ps-0 mb-0">
+            <li>
+                <span class="fw-semibold d-inline-block">Nom:</span>
+                <span class="gray-color">{{ user.nom }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Postnom:</span>
+                <span class="gray-color">{{ user.postnom }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Prenom:</span>
+                <span class="gray-color">{{ user.prenom }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Sexe:</span>
+                <span class="gray-color">{{ user.sexe }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Nationalite:</span>
+                <span class="gray-color">{{ user.nationalite }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Etat civile:</span>
+                <span class="gray-color">{{ user.etat_civile }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Adresse:</span>
+                <span class="gray-color">{{ user.adresse }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Titre:</span>
+                <span class="gray-color">{{ user.titre }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Pays:</span>
+                <span class="gray-color">{{ user.pays }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Province:</span>
+                <span class="gray-color">{{ user.province }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Zone sante:</span>
+                <span class="gray-color">{{ user.zone_sante }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Email:</span>
+                <span class="gray-color">{{ user.email }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Telephone:</span>
+                <span class="gray-color">{{ user.telephone }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Matricule:</span>
+                <span class="gray-color">{{ user.matricule }}</span>
+            </li>
+
+            <li>
+                <span class="fw-semibold d-inline-block">Signature:</span>
+                <span class="gray-color">{{ user.signature }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Créé le:</span>
+                <span class="gray-color">{{ user.created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+            </li>
+            <li>
+                <span class="fw-semibold d-inline-block">Mis à jour le:</span>
+                <span class="gray-color">{{ user.update_created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+            </li>
+        </ul>
+    </mat-card-content>
+</mat-card>

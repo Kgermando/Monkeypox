@@ -14,7 +14,7 @@ export class PersonalInfoComponent {
 
     toggleTheme() {
         this.themeService.toggleTheme();
-    }
+    } 
 
 
 }

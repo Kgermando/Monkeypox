@@ -8,6 +8,8 @@ import { UserEditComponent } from './user-edit/user-edit.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UsersService } from './users.service';
 import { SharedModule } from '../shared/shared.module';
+import { UserActivityComponent } from './user-view/user-activity/user-activity.component';
+import { UserInfoComponent } from './user-view/user-info/user-info.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { SharedModule } from '../shared/shared.module';
     UserListComponent,
     UserViewComponent,
     UserEditComponent,
-    UserAddComponent
+    UserAddComponent,
+    UserActivityComponent,
+    UserInfoComponent
   ],
   imports: [
     CommonModule,

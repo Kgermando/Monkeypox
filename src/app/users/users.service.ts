@@ -24,7 +24,11 @@ export class UsersService {
   }
 
   updateData(id: number, data: UserModel): Observable<Object> {
-    return this.httpClient.put(`${environment.apiURL}/users/${id}`, data);
+    return this.httpClient.put(`${environment.apiURL}/users/info/${id}`, data);
+  }
+
+  updatePassword(id: number, data: UserModel): Observable<Object> {
+    return this.httpClient.put(`${environment.apiURL}/users/password/${id}`, data);
   }
 
   deleteData(id: number): Observable<Object> {

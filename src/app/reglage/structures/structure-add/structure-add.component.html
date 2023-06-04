@@ -48,8 +48,11 @@
                 </div>
               
             </div>
-            <div>
-                <button mat-flat-button class="tagus" matStepperSuivant>Soumettre</button>
+            <div class="d-flex justify-content-center" *ngIf="isLoading">
+                <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
+            </div>
+            <div *ngIf="!isLoading">
+                <button mat-flat-button class="tagus" matStepperSuivant [disabled]="!formGroup.valid">Soumettre</button>
             </div>
         </form>
     </mat-card-content>

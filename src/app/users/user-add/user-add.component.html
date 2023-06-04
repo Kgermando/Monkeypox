@@ -1,31 +1,30 @@
 <div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
-    <h5 class="mb-0">Nouveau personnel</h5>
+    <h5 class="mb-0">Nouveau utilisateur</h5>
     <ol class="breadcrumb mb-0 ps-0">
         <li class="breadcrumb-item">
             <a routerLink="/users/user-list">
                 <i class="ri-home-8-line"></i>
-                Personnels
+                User
             </a>
         </li>
-        <li class="breadcrumb-item fw-semibold">new user</li>
+        <li class="breadcrumb-item fw-semibold">Add</li>
     </ol>
 </div>
 
 
 <mat-card class="mb-25 tagus-card">
     <mat-card-content>
-        <form (ngSubmit)="onSubmit()">
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
             <div class="row"> 
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Structure</label>
                         <mat-form-field appearance="fill">
-                            <i class="ri-road-map-line"></i>
+                            <i class="ri-home-heart-line"></i>
                             <mat-label>Entrer structure</mat-label>
-                            <mat-select  id="structure" (ngModel)]="user.structure" name="structure" 
-                                required="Champs obligatoire">
-                                <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
-                                    {{countrie.name}}
+                            <mat-select formControlName="structure" required="Champs obligatoire">
+                                <mat-option *ngFor="let structure of structureList" [value]="structure.single">
+                                    {{structure.single}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -37,7 +36,7 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer nom</mat-label>
-                            <input matInput id="nom" (ngModel)]="user.nom" name="nom" required="Champs obligatoire">
+                            <input matInput formControlName="nom" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div>
@@ -47,7 +46,7 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer postnom</mat-label>
-                            <input matInput id="postnom" (ngModel)]="user.postnom" name="postnom" required="Champs obligatoire">
+                            <input matInput formControlName="postnom" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div>
@@ -57,7 +56,7 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer prenom</mat-label>
-                            <input matInput id="prenom" (ngModel)]="user.prenom" name="prenom" required="Champs obligatoire">
+                            <input matInput formControlName="prenom" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div>
@@ -65,12 +64,10 @@
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Sexe</label>
                         <mat-form-field appearance="fill">
-                            <i class="ri-women-line"></i>
                             <mat-label>Sexe</mat-label>
-                            <mat-select id="sexe" (ngModel)]="user.sexe" name="sexe" required="Champs obligatoire">
-                                <mat-option *ngFor="let sexe of sexes" [value]="sexe.value">
-                                    {{sexe.viewValue}}
-                                </mat-option>
+                            <mat-select formControlName="sexe" required="Champs obligatoire">
+                                <mat-option value="Femme">Femme</mat-option>
+                                <mat-option value="Homme">Homme</mat-option>
                             </mat-select>
                         </mat-form-field>
                     </div>
@@ -80,8 +77,8 @@
                         <label class="d-block mb-12 fw-semibold gray-color">Nationalite</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-road-map-line"></i>
-                            <mat-label>Entrer Nationalite</mat-label>
-                            <mat-select id="nationalite" (ngModel)]="user.nationalite" name="nationalite" required="Champs obligatoire">
+                            <mat-label>Nationalite</mat-label>
+                            <mat-select formControlName="nationalite" required="Champs obligatoire">
                                 <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
                                     {{countrie.name}}
                                 </mat-option>
@@ -94,7 +91,7 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-user-heart-line"></i>
                             <mat-label>Etat civil</mat-label>
-                            <mat-select id="etat_civile" (ngModel)]="user.etat_civile" name="etat_civile" required="Champs obligatoire">
+                            <mat-select formControlName="etat_civile" required="Champs obligatoire">
                                 <mat-option value="CELIBATAIRE">Célibataire</mat-option>
                                 <mat-option value="MARIE(E)">Marié</mat-option> 
                             </mat-select>
@@ -106,8 +103,8 @@
                         <label class="d-block mb-12 fw-semibold gray-color">Adresse</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-map-pin-line"></i>
-                            <mat-label>Entrer adresse</mat-label>
-                            <input matInput id="adresse" (ngModel)]="user.adresse" name="adresse" required="Champs obligatoire">
+                            <mat-label>Entrer l'adresse</mat-label>
+                            <input matInput formControlName="adresse" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div> 
@@ -117,17 +114,17 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-team-line"></i>
                             <mat-label>Entrer titre</mat-label>
-                            <input matInput id="titre" (ngModel)]="user.titre" name="titre" required="Champs obligatoire">
+                            <input matInput formControlName="titre" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Province affectation</label>
+                        <label class="d-block mb-12 fw-semibold gray-color">Province</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-road-map-line"></i>
                             <mat-label>Entrer province</mat-label>
-                            <mat-select id="province" (ngModel)]="user.province" name="province" required="Champs obligatoire">
+                            <mat-select formControlName="province" required="Champs obligatoire">
                                 <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
                                     {{countrie.name}}
                                 </mat-option>
@@ -141,17 +138,17 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-team-line"></i>
                             <mat-label>Entrer zone sante</mat-label>
-                            <input matInput id="zone_sante" (ngModel)]="user.zone_sante" name="zone_sante" required="Champs obligatoire">
+                            <input matInput formControlName="zone_sante" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div> 
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Email <span>*</span></label>
+                        <label class="d-block mb-12 fw-semibold gray-color">Email</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-mail-line"></i>
                             <mat-label>Entrer email</mat-label>
-                            <input matInput type="email" id="email" (ngModel)]="user.email" name="email" required="Champs obligatoire">
+                            <input matInput type="email" formControlName="email">
                         </mat-form-field>
                     </div>
                 </div>
@@ -161,7 +158,7 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-phone-line"></i>
                             <mat-label>Entrer phone number</mat-label>
-                            <input matInput type="tel" id="telephone" (ngModel)]="user.telephone" name="telephone" required="Champs obligatoire">
+                            <input matInput type="tel" formControlName="telephone" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div>
@@ -171,34 +168,17 @@
                         <mat-form-field appearance="fill">
                             <i class="ri-team-line"></i>
                             <mat-label>Entrer matricule</mat-label>
-                            <input matInput id="matricule" (ngModel)]="user.matricule" name="matricule" required="Champs obligatoire">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Mot de passe</label>
-                        <mat-form-field appearance="fill">
-                            <i class="ri-team-line"></i>
-                            <mat-label>Entrer password</mat-label>
-                            <input matInput id="password" (ngModel)]="user.password" name="password" required="Champs obligatoire">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Confirmation Mot de passe</label>
-                        <mat-form-field appearance="fill">
-                            <i class="ri-team-line"></i>
-                            <mat-label>Entrer password_confirm</mat-label>
-                            <input matInput id="password_confirm" (ngModel)]="user.password_confirm" name="password_confirm" required="Champs obligatoire">
+                            <input matInput formControlName="matricule" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div>
 
             </div>
-            <div>
-                <button mat-flat-button class="tagus" matStepperSuivant>Soumettre</button>
+            <div class="d-flex justify-content-center" *ngIf="isLoading">
+                <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
+            </div>
+            <div *ngIf="!isLoading">
+                <button mat-flat-button class="tagus" matStepperSuivant [disabled]="!formGroup.valid">Soumettre</button>
             </div>
         </form>
     </mat-card-content>

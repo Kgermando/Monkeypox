@@ -1,3 +1,65 @@
-<p>user-view works!</p>
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h4 class="mb-0">Utilisateur</h4>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/">
+                <i class="ri-home-8-line"></i>
+                User
+            </a>
+        </li> 
+        <li class="breadcrumb-item fw-semibold">view</li>
+    </ol>
+</div>
 
-<p>{{ user.email }} </p>
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
+</div>
+<ng-container *ngIf="!isLoading">
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
+        <div fxFlex="33%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="33%" fxFlex.md="100%" class="col">
+    
+            <div
+                class="profile-card-box border-radius bg-white box-shadow mb-25"
+                [class.component-dark-theme]="themeService.isDark()"
+                [class.card-borderd-theme]="themeService.isCardBorder()"
+                [class.card-border-radius]="themeService.isCardBorderRadius()"
+                [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+            >
+    
+                <div class="bottom">
+                    <div class="d-md-flex align-items-end justify-content-space-between">
+                        <div class="profile-box position-relative">
+                            <img src="assets/img/user/user15.jpg" class="rounded-circle" alt="user">
+                            <h5 class="fw-semibold">{{user.prenom}} {{user.nom}}</h5>
+                            <span class="d-block gray-color">{{user.titre}}</span>
+                        </div>
+                        <div class="impression-box text-center">
+                            <div class="chart">
+                                <apx-chart
+                                    [series]="chartOptions.series!"
+                                    [chart]="chartOptions.chart!"
+                                    [plotOptions]="chartOptions.plotOptions!"
+                                    [colors]="chartOptions.colors!"
+                                    [labels]="chartOptions.labels!"
+                                    [fill]="chartOptions.fill!"
+                                ></apx-chart>
+                            </div>
+                            <span class="d-block">Excellent</span>
+                            <h5 class="mb-0 fw-semibold gray-color">Performence</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <app-user-info [user]="user"></app-user-info>
+            <button mat-flat-button class="d-block" color="accent" [routerLink]="[ '/users/user-edit', user.id ]">Modifier le profil</button>
+            <button mat-flat-button class="d-block" color="primary">Modifier le mot de passe</button>
+    
+        </div>
+        <div fxFlex="67%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="67%" fxFlex.md="100%" class="col">
+    
+            <app-user-activity></app-user-activity>
+    
+        </div>
+    </div>
+</ng-container>
