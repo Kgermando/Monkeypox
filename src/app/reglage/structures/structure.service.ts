@@ -10,7 +10,7 @@ import { StructureModel } from '../models/structure-model';
 export class StructureService {
   constructor(private httpClient: HttpClient) { }
 
-  getList(): Observable<any[]> { 
+  getList(): Observable<StructureModel[]> { 
     return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures`);
   }
 

@@ -15,7 +15,7 @@ export class UsersService {
     return this.httpClient.get<UserModel[]>(`${environment.apiURL}/users`);  // backticks!, this is a GET request (REST), it interprets the body as a JSON object
   }
 
-  createData(data: UserModel): Observable<Object> {
+  createData(data: any): Observable<Object> {
     return this.httpClient.post(`${environment.apiURL}/users`, data)
   }
 

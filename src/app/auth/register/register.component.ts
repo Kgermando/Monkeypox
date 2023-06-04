@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Countries } from 'src/app/shared/models/country.model';
 import { countries } from 'src/app/shared/utils/countries';
+import { StructureService } from 'src/app/reglage/structures/structure.service';
+import { StructureModel } from 'src/app/reglage/models/structure-model';
 
 interface Sexe {
     value: string;
@@ -22,31 +24,37 @@ export class RegisterComponent implements OnInit {
     hide = true;
 
     isLoading: boolean = false;
-        countries: Countries[] = countries;
+    countries: Countries[] = countries;
 
     sexes: Sexe[] = [
         { value: 'Femme', viewValue: 'Femme' },
         { value: 'Homme', viewValue: 'Homme' },
     ];
 
-    identiteFormGroup!: FormGroup; 
+    formGroup!: FormGroup;
+
+    structureList: StructureModel[] = [];
 
 
     constructor(
         public themeService: CustomizerSettingsService,
         private _formBuilder: FormBuilder,
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private structureService: StructureService,
     ) { }
 
 
     ngOnInit(): void {
-        this.identiteFormGroup = this._formBuilder.group({
-            structure: ['', Validators.required],
+        // this.structureService.getList().subscribe(res => {
+        //     this.structureList = res;
+        // });
+        this.formGroup = this._formBuilder.group({
+            structure: ['ASBL', Validators.required],
             // photo: [''],
             nom: ['', Validators.required],
             postnom: ['', Validators.required],
-            prenom: ['', Validators.required],
+            prenom: ['', Validators.required], 
             sexe: ['', Validators.required],
             nationalite: ['', Validators.required],
             etat_civile: ['', Validators.required],
@@ -67,28 +75,28 @@ export class RegisterComponent implements OnInit {
 
     onSubmitIdentite() {
         console.log("reactive form submitted");
-        console.log(this.identiteFormGroup);
-        if (this.identiteFormGroup.valid) {
+        console.log(this.formGroup);
+        if (this.formGroup.valid) {
             this.isLoading = true;
             var body = {
-                structure: this.identiteFormGroup.value.structure,
+                structure: this.formGroup.value.structure,
                 photo: '-',
-                nom: this.identiteFormGroup.value.nom,
-                postnom: this.identiteFormGroup.value.postnom,
-                prenom: this.identiteFormGroup.value.prenom,
-                sexe: this.identiteFormGroup.value.sexe,
-                nationalite: this.identiteFormGroup.value.nationalite,
-                etat_civile: this.identiteFormGroup.value.etat_civile,
-                adresse: this.identiteFormGroup.value.adresse,
-                titre: this.identiteFormGroup.value.titre,
+                nom: this.formGroup.value.nom,
+                postnom: this.formGroup.value.postnom,
+                prenom: this.formGroup.value.prenom,
+                sexe: this.formGroup.value.sexe,
+                nationalite: this.formGroup.value.nationalite,
+                etat_civile: this.formGroup.value.etat_civile,
+                adresse: this.formGroup.value.adresse,
+                titre: this.formGroup.value.titre,
                 pays: 'RDC',
-                province: this.identiteFormGroup.value.province,
-                zone_sante: this.identiteFormGroup.value.zone_sante,
-                email: this.identiteFormGroup.value.email,
-                telephone: this.identiteFormGroup.value.telephone,
-                matricule: this.identiteFormGroup.value.matricule,
-                password: this.identiteFormGroup.value.password,
-                password_confirm: this.identiteFormGroup.value.password_confirm,
+                province: this.formGroup.value.province,
+                zone_sante: this.formGroup.value.zone_sante,
+                email: this.formGroup.value.email,
+                telephone: this.formGroup.value.telephone,
+                matricule: this.formGroup.value.matricule,
+                password: this.formGroup.value.password,
+                password_confirm: this.formGroup.value.password_confirm,
                 signature: '-',
                 created: new Date(),
                 update_created: new Date()
