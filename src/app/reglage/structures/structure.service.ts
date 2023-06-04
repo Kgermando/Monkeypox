@@ -10,11 +10,15 @@ import { StructureModel } from '../models/structure-model';
 export class StructureService {
   constructor(private httpClient: HttpClient) { }
 
-  getList(): Observable<StructureModel[]> { // it returns a Employee object -> an array is needed
-    return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures`);  // backticks!, this is a GET request (REST), it interprets the body as a JSON object
+  getList(): Observable<any[]> { 
+    return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures`);
   }
 
-  createData(data: StructureModel): Observable<Object> {
+  // getList(page: number): Observable<StructureModel[]> { 
+  //   return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures?page=${page}`);
+  // }
+
+  createData(data: any): Observable<Object> {
     return this.httpClient.post(`${environment.apiURL}/structures`, data)
   }
 
@@ -22,7 +26,7 @@ export class StructureService {
     return this.httpClient.get<StructureModel>(`${environment.apiURL}/structures/${id}`);
   }
 
-  updateData(id: number, data: StructureModel): Observable<Object> {
+  updateData(id: number, data: any): Observable<Object> {
     return this.httpClient.put(`${environment.apiURL}/structures/${id}`, data);
   }
 

@@ -35,7 +35,6 @@ export class RegisterComponent implements OnInit {
     constructor(
         public themeService: CustomizerSettingsService,
         private _formBuilder: FormBuilder,
-        private http: HttpClient,
         private router: Router,
         private authService: AuthService
     ) { }

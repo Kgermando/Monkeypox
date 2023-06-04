@@ -1,1 +1,59 @@
-<p>structure-add works!</p>
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h5 class="mb-0">Nouvelle structure</h5>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/users/user-list">
+                <i class="ri-home-8-line"></i>
+                Structures
+            </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Add</li>
+    </ol>
+</div>
+
+
+<mat-card class="mb-25 tagus-card">
+    <mat-card-content>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Nom complet</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Entrer nom complet</mat-label>
+                            <input matInput formControlName="nom_complet" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Nom court (En sigle)</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Entrer en sigle</mat-label>
+                            <input matInput formControlName="single" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Manager</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Entrer manager</mat-label>
+                            <input matInput formControlName="manager" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div>
+              
+            </div>
+            <div>
+                <button mat-flat-button class="tagus" matStepperSuivant>Soumettre</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>
+
+
+

@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomizerSettingsService } from "src/app/common/customizer-settings/customizer-settings.service";
 import { AuthService } from '../auth.service';
+import { Validators } from 'ngx-editor';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
   constructor(
       public themeService: CustomizerSettingsService,
       private formBuilder: FormBuilder,
-      private http: HttpClient,
     private router: Router,
     private authService: AuthService
   ) {}
@@ -28,19 +27,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
       this.form = this.formBuilder.group({
-        matricule: '',
-        password: ''
+        matricule: ['', Validators.required],
+        password: ['', Validators.required]
       });
   }
 
 
-  submit(): void {
+  onSubmit(): void {
     this.isLoading = true;
     this.authService.login(this.form.getRawValue()).subscribe(res => {
         console.log(res);
         this.isLoading = false;
         this.router.navigate(['/dashboard']);
     });
+   
   }
 
 
