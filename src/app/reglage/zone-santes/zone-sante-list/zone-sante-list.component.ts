@@ -1,6 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ZoneSanteModel } from '../../models/zone-sante-model';
+import { MetaModel } from 'src/app/shared/models/meta-model';
+import { ZoneSanteService } from '../zone-sante.service';
+import { Router } from '@angular/router';
+import { provinces } from 'src/app/shared/utils/province';
 
 @Component({
   selector: 'app-zone-sante-list',
@@ -8,67 +13,38 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./zone-sante-list.component.scss']
 })
 export class ZoneSanteListComponent {
-  displayedColumns: string[] = ['position', 'product', 'customer', 'price', 'vendor', 'date', 'status', 'rating'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['zone', 'province', 'territoire', 'signature', 'created', 'edit', 'delete'];
+ 
+  ELEMENT_DATA: ZoneSanteModel[] = [];
+  
+  metaData: any = [];
+
+  pageMeta: MetaModel;
+
+  provinceList: String[] = provinces;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+
+  dataSource: MatTableDataSource<ZoneSanteModel>;
+
+  constructor(
+    private zoneSanteService: ZoneSanteService,
+    private router: Router) {}
+
   ngAfterViewInit() {
+    this.zoneSanteService.getList().subscribe(res => {
+      this.metaData = res;
+
+      this.ELEMENT_DATA = this.metaData['data'];
+      this.pageMeta = this.metaData['meta'];
+
+      console.log(this.pageMeta);
+      console.log(this.ELEMENT_DATA); 
+      this.dataSource = new MatTableDataSource<ZoneSanteModel>(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+    })
+
   }
 
-  pending = true;
-  outOfStock = true;
-  delivered = true;
-
 }
-
-export interface PeriodicElement {
-  customer: string;
-  position: string;
-  product: any;
-  price: string;
-  vendor: string;
-  date: string;
-  status: any;
-  rating: any;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-      position: '#SK258',
-      product: {
-          productName: 'Laptop Mac Pro',
-          productImage: 'assets/img/recent-orders/product1.jpg',
-      },
-      customer: 'Colin Firth',
-      price: '$289.50',
-      vendor: 'Apple',
-      date: '01-12-2022',
-      status: {
-          pending: 'Pending'
-      },
-      rating: {
-          star: '5.0',
-          overall: '(61 Votes)'
-      }
-  },
-  {
-      position: '#AA257',
-      product: {
-          productName: 'Smart Camera XD6',
-          productImage: 'assets/img/recent-orders/product2.jpg',
-      },
-      customer: 'Alina Smith',
-      price: '$876.55',
-      vendor: 'Camera',
-      date: '02-12-2022',
-      status: {
-          outOfStock: 'Out of Stock'
-      },
-      rating: {
-          star: '4.9',
-          overall: '(55 Votes)'
-      }
-  },
-];

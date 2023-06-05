@@ -97,14 +97,14 @@ onSubmit() {
       etat_civile: this.formGroup.value.etat_civile,
       adresse: this.formGroup.value.adresse,
       titre: this.formGroup.value.titre,
-      pays: 'RDC',
+      pays: this.user.pays,
       province: this.formGroup.value.province,
       zone_sante: this.formGroup.value.zone_sante,
       email: this.formGroup.value.email,
       telephone: this.formGroup.value.telephone,
       matricule: this.formGroup.value.matricule,
       signature: this.currentUser.matricule,
-      created: new Date(),
+      created: this.user.created,
       update_created: new Date()
     };
     console.log(body);

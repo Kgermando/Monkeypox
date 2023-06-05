@@ -9,6 +9,9 @@ import { UserModel } from '../models/user-models';
 import { AuthService } from 'src/app/auth/auth.service';
 import { StructureModel } from 'src/app/reglage/models/structure-model';
 import { StructureService } from 'src/app/reglage/structures/structure.service';
+import { provinces } from 'src/app/shared/utils/province';
+import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
+import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
 
 interface Sexe {
   value: string;
@@ -31,6 +34,11 @@ export class UserAddComponent implements OnInit {
     metaStructure: any = [];
     structureList: StructureModel[] = [];
 
+    metaZoneSante: any = [];
+    zoneSanteList: ZoneSanteModel[] = [];
+
+    provinceList: String[] = provinces;
+
     sexes: Sexe[] = [
         { value: 'Femme', viewValue: 'Femme' },
         { value: 'Homme', viewValue: 'Homme' },
@@ -47,6 +55,7 @@ export class UserAddComponent implements OnInit {
         private authService: AuthService,
         private usersService: UsersService,
         private structureService: StructureService,
+        private zoneSanteService: ZoneSanteService,
     ) { }
 
 
@@ -55,11 +64,17 @@ export class UserAddComponent implements OnInit {
         res => {
             this.currentUser = res; 
         }
-      )
+      );
       this.structureService.getList().subscribe(res => {
         this.metaStructure = res;
         this.structureList = this.metaStructure['data'];
+      });
+
+      this.zoneSanteService.getList().subscribe(res => {
+        this.metaZoneSante = res;
+        this.zoneSanteList = this.metaZoneSante['data'];
       })
+
 
       this.formGroup = this._formBuilder.group({
         structure: ['', Validators.required],

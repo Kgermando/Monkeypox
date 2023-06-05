@@ -14,7 +14,7 @@ export class ZoneSanteService {
     return this.httpClient.get<ZoneSanteModel[]>(`${environment.apiURL}/zone-santes`);  // backticks!, this is a GET request (REST), it interprets the body as a JSON object
   }
 
-  createData(data: ZoneSanteModel): Observable<Object> {
+  createData(data: any): Observable<Object> {
     return this.httpClient.post(`${environment.apiURL}/zone-santes`, data)
   }
 
@@ -22,7 +22,7 @@ export class ZoneSanteService {
     return this.httpClient.get<ZoneSanteModel>(`${environment.apiURL}/zone-santes/${id}`);
   }
 
-  updateData(id: number, data: ZoneSanteModel): Observable<Object> {
+  updateData(id: number, data: any): Observable<Object> {
     return this.httpClient.put(`${environment.apiURL}/zone-santes/${id}`, data);
   }
 

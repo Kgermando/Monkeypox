@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./structure-list.component.scss']
 })
 export class StructureListComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['nom_complet', 'single', 'manager', 'signature'];
+  displayedColumns: string[] = ['nom_complet', 'single', 'manager', 'signature', 'created', 'edit', 'delete'];
 
   ELEMENT_DATA: StructureModel[] = [];
 

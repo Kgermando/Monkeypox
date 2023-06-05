@@ -74,15 +74,11 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Nationalite</label>
+                        <label class="d-block mb-12 fw-semibold gray-color">Nationalité</label>
                         <mat-form-field appearance="fill">
-                            <i class="ri-road-map-line"></i>
-                            <mat-label>Nationalite</mat-label>
-                            <mat-select formControlName="nationalite" required="Champs obligatoire">
-                                <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
-                                    {{countrie.name}}
-                                </mat-option>
-                            </mat-select>
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Entrer Nationalite</mat-label>
+                            <input matInput formControlName="nationalite" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
                 </div>
@@ -125,8 +121,8 @@
                             <i class="ri-road-map-line"></i>
                             <mat-label>Entrer province</mat-label>
                             <mat-select formControlName="province" required="Champs obligatoire">
-                                <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
-                                    {{countrie.name}}
+                                <mat-option *ngFor="let province of provinceList" [value]="province">
+                                    {{province}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -136,9 +132,13 @@
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Zone de santé</label>
                         <mat-form-field appearance="fill">
-                            <i class="ri-team-line"></i>
+                            <i class="ri-road-map-line"></i>
                             <mat-label>Entrer zone sante</mat-label>
-                            <input matInput formControlName="zone_sante" required="Champs obligatoire">
+                            <mat-select formControlName="zone_sante" required="Champs obligatoire">
+                                <mat-option *ngFor="let zoneSante of zoneSanteList" [value]="zoneSante.zone">
+                                    {{zoneSante.zone}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
                 </div> 

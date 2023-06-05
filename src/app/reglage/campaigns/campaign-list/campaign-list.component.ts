@@ -1,6 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { CampaignModel } from '../../models/campaign-model';
+import { MetaModel } from 'src/app/shared/models/meta-model';
+import { CampaignService } from '../campaign.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-campaign-list',
@@ -8,67 +12,47 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./campaign-list.component.scss']
 })
 export class CampaignListComponent {
-  displayedColumns: string[] = ['position', 'product', 'customer', 'price', 'vendor', 'date', 'status', 'rating'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  displayedColumns: string[] = ['nom', 'date_debut', 'date_fin', 'aire_sante', 'nbre_agent', 'signature', 'created', 'edit', 'delete'];
+
+  ELEMENT_DATA: CampaignModel[] = [];
+
+  metaData: any = [];
+
+  pageMeta: MetaModel;
+
+
+  // dataSource = new MatTableDataSource<StructureModel>(this.ELEMENT_DATA);
+  dataSource: MatTableDataSource<CampaignModel>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  constructor(
+    private campaignService: CampaignService,
+    private router: Router) {}
+
   ngAfterViewInit() {
+    this.campaignService.getList().subscribe(res => {
+      this.metaData = res;
+
+      this.ELEMENT_DATA = this.metaData['data'];
+      this.pageMeta = this.metaData['meta'];
+
+      console.log(this.pageMeta);
+      console.log(this.ELEMENT_DATA); 
+      this.dataSource = new MatTableDataSource<CampaignModel>(this.ELEMENT_DATA);
       this.dataSource.paginator = this.paginator;
+    })
+
   }
 
-  pending = true;
-  outOfStock = true;
-  delivered = true;
+  ngOnInit(): void {}
 
+  editItem(id: number){
+    this.router.navigate(['/reglages/campaign-add', id]);
+  }
+
+
+  removeItem(id: number){
+    this.campaignService.deleteData(id);
+  }
 }
-
-export interface PeriodicElement {
-  customer: string;
-  position: string;
-  product: any;
-  price: string;
-  vendor: string;
-  date: string;
-  status: any;
-  rating: any;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-      position: '#SK258',
-      product: {
-          productName: 'Laptop Mac Pro',
-          productImage: 'assets/img/recent-orders/product1.jpg',
-      },
-      customer: 'Colin Firth',
-      price: '$289.50',
-      vendor: 'Apple',
-      date: '01-12-2022',
-      status: {
-          pending: 'Pending'
-      },
-      rating: {
-          star: '5.0',
-          overall: '(61 Votes)'
-      }
-  },
-  {
-      position: '#AA257',
-      product: {
-          productName: 'Smart Camera XD6',
-          productImage: 'assets/img/recent-orders/product2.jpg',
-      },
-      customer: 'Alina Smith',
-      price: '$876.55',
-      vendor: 'Camera',
-      date: '02-12-2022',
-      status: {
-          outOfStock: 'Out of Stock'
-      },
-      rating: {
-          star: '4.9',
-          overall: '(55 Votes)'
-      }
-  },
-];

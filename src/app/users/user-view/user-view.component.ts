@@ -30,14 +30,13 @@ export class UserViewComponent implements OnInit {
 
   @ViewChild("chart")
   chart!: ChartComponent;
-    public chartOptions: Partial<ChartOptions>;
+  public chartOptions: Partial<ChartOptions>;
 
   user: UserModel;
 
   constructor(
     public themeService: CustomizerSettingsService,
     private route: ActivatedRoute,
-    private router: Router, 
     private usersService: UsersService) {
       this.chartOptions = {
         series: [70],
@@ -68,7 +67,7 @@ export class UserViewComponent implements OnInit {
             }
         }
     };
-    }
+  }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -81,8 +80,6 @@ export class UserViewComponent implements OnInit {
       console.log(id);
     });
   }
-
- 
 
 
 

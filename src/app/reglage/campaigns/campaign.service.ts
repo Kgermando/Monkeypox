@@ -10,11 +10,11 @@ import { CampaignModel } from '../models/campaign-model';
 export class CampaignService {
   constructor(private httpClient: HttpClient) { }
 
-  getList(): Observable<CampaignModel[]> { // it returns a Employee object -> an array is needed
-    return this.httpClient.get<CampaignModel[]>(`${environment.apiURL}/campaigns`);  // backticks!, this is a GET request (REST), it interprets the body as a JSON object
+  getList(): Observable<CampaignModel[]> { 
+    return this.httpClient.get<CampaignModel[]>(`${environment.apiURL}/campaigns`);
   }
 
-  createData(data: CampaignModel): Observable<Object> {
+  createData(data: any): Observable<Object> {
     return this.httpClient.post(`${environment.apiURL}/campaigns`, data)
   }
 
@@ -22,7 +22,7 @@ export class CampaignService {
     return this.httpClient.get<CampaignModel>(`${environment.apiURL}/campaigns/${id}`);
   }
 
-  updateData(id: number, data: CampaignModel): Observable<Object> {
+  updateData(id: number, data: any): Observable<Object> {
     return this.httpClient.put(`${environment.apiURL}/campaigns/${id}`, data);
   }
 
