@@ -45,10 +45,13 @@ export class CampaignListComponent {
 
   }
 
-  ngOnInit(): void {}
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 
   editItem(id: number){
-    this.router.navigate(['/reglages/campaign-add', id]);
+    this.router.navigate(['/reglages/campaign-edit', id]);
   }
 
 

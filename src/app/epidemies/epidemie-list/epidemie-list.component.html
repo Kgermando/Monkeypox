@@ -1,1 +1,228 @@
-<p>epidemie-list works!</p>
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h4 class="mb-0">Monkeypox</h4>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/">
+                <i class="ri-home-8-line"></i>
+                Epidemie
+            </a>
+        </li> 
+        <li class="breadcrumb-item fw-semibold">Liste</li>
+    </ol>
+</div>
+
+<mat-card class="mb-25 tagus-card">
+    <mat-card-header>
+        <h5 class="mb-0"></h5> 
+        <button mat-flat-button class="default-btn tagus" routerLink="/epidemies/epidemie-add">
+            <i class="ri-add-fill"></i> Add fiche
+        </button>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="tagus-form-group">
+            <mat-form-field appearance="fill">
+                <i class="ri-search-line"></i>
+                <mat-label>Filter</mat-label>
+                <input matInput (keyup)="applyFilter($event)" #input>
+            </mat-form-field>
+        </div>
+        <!-- <div class="reports-table table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="fw-semibold main-color">N° épidemiologique</th> 
+                        <th class="fw-semibold gray-color">Semaine épi.</th>
+                        <th class="fw-semibold gray-color">Date notification</th>
+                        <th class="fw-semibold gray-color">N° patient</th>
+                        <th class="fw-semibold gray-color">Fièvre</th>
+                        <th class="fw-semibold gray-color">Eruption cutanée</th>
+                        <th class="fw-semibold gray-color">Date symptome</th>
+                        <th class="fw-semibold gray-color">Date admition</th>
+                        <th class="fw-semibold gray-color">Date diagonstic</th>
+                        <th class="fw-semibold gray-color">Structure</th>
+                        <th class="fw-semibold gray-color">A été contact patient</th>
+                        <th class="fw-semibold gray-color">Type contact</th>
+                        <th class="fw-semibold gray-color">A été hospitalisé</th>
+                        <th class="fw-semibold gray-color">Croûte</th>
+                        <th class="fw-semibold gray-color">Ecouvillon</th>
+                        <th class="fw-semibold gray-color">Prevelement sanguin</th>
+                        <th class="fw-semibold gray-color">Date prelevement</th>
+                        <th class="fw-semibold gray-color">Date expedition</th>
+                        <th class="fw-semibold gray-color">Statut</th>  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let epidemie of ELEMENT_DATA" >
+                        <td class="main-color fw-semibold">
+                            <a [routerLink]="[ '/epidemies/epidemie-view', epidemie.id ]" class="d-flex align-items-center main-color product-info">
+                                {{ epidemie.num_epi }}
+                            </a>  
+                        </td>
+                        <td class="gray-color fw-semibold">{{ epidemie.semaine_epi }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.date_notification | date: 'dd/MM/yyyy' }}</td>
+                        <td class="gray-color fw-semibold">
+                            <a [routerLink]="[ '/patients/patient-view', epidemie.patient_id ]" class="d-flex align-items-center main-color product-info">
+                                {{ epidemie.patient_id }}
+                            </a>
+                        </td>
+                        <td class="gray-color fw-semibold">{{ epidemie.fievre }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.eruption_cutanee }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.date_symptome | date: 'dd/MM/yyyy' }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.date_admition| date: 'dd/MM/yyyy' }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.date_diagonstic | date: 'dd/MM/yyyy' }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.structure }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.a_ete_contact_patient }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.type_contact }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.a_ete_hospitalise }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.croute }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.ecouvillon }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.prevelement_sanguin }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.date_prelevement | date: 'dd/MM/yyyy' }}</td>
+                        <td class="gray-color fw-semibold">{{ epidemie.date_expedition | date: 'dd/MM/yyyy' }}</td>
+                        <td class="gray-color fw-semibold">
+                            <span class="badge text-soft-primary" *ngIf="epidemie.statut == 'Cas suspect'">{{ epidemie.statut }}</span>
+                            <span class="badge text-soft-warning" *ngIf="epidemie.statut == 'Cas probable'">{{ epidemie.statut }}</span>
+                            <span class="badge text-soft-danger" *ngIf="epidemie.statut == 'Cas confirmé'">{{ epidemie.statut }}</span>
+                            <span class="badge text-soft-success" *ngIf="epidemie.statut == 'Cas non actif'">{{ epidemie.statut }}</span>
+                        </td> 
+                    </tr>
+                </tbody>
+            </table>
+        </div> -->
+
+
+        <div class="myTasksTable mat-elevation-z8 tagus-mat-table">
+            <table mat-table [dataSource]="dataSource">
+         
+                <ng-container matColumnDef="num_epi">
+                    <th mat-header-cell *matHeaderCellDef class="text-start">N° épidemiologique</th>
+                    <td mat-cell *matCellDef="let element" class="fw-semibold text-start">
+                        <a [routerLink]="[ '/epidemies/epidemie-view', element.id ]">
+                            {{element.num_epi}}
+                        </a>
+                    </td>
+                </ng-container>  
+     
+                <ng-container matColumnDef="semaine_epi">
+                    <th mat-header-cell *matHeaderCellDef>Semaine épi.</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.semaine_epi}}
+                </ng-container>
+
+                <ng-container matColumnDef="date_notification">
+                    <th mat-header-cell *matHeaderCellDef>Date notification</th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.date_notification | date: 'dd/MM/yyyy'}}
+                </ng-container>
+
+                <ng-container matColumnDef="patient_id">
+                    <th mat-header-cell *matHeaderCellDef>N° patient</th>
+                    <td mat-cell *matCellDef="let element">
+                        <a [routerLink]="[ '/patients/patient-view', element.patient_id ]" class="d-flex align-items-center main-color product-info">
+                            {{ element.patient_id }}
+                        </a>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="fievre">
+                    <th mat-header-cell *matHeaderCellDef>Fièvre</th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div *ngIf="element.fievre">OUI</div>
+                        <div *ngIf="!element.fievre">NON</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="eruption_cutanee">
+                    <th mat-header-cell *matHeaderCellDef>Eruption cutanee</th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div *ngIf="element.eruption_cutanee">OUI</div>
+                        <div *ngIf="!element.eruption_cutanee">NON</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date_symptome">
+                    <th mat-header-cell *matHeaderCellDef>Date symptôme</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_symptome | date: 'dd/MM/yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="date_admition">
+                    <th mat-header-cell *matHeaderCellDef>Date admition</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_admition | date: 'dd/MM/yyyy'}}</td>
+                </ng-container> 
+
+                <ng-container matColumnDef="date_diagonstic">
+                    <th mat-header-cell *matHeaderCellDef>Date diagonstic</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_diagonstic | date: 'dd/MM/yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="structure">
+                    <th mat-header-cell *matHeaderCellDef>Structure</th>
+                    <td mat-cell *matCellDef="let element">{{element.structure}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="a_ete_contact_patient">
+                    <th mat-header-cell *matHeaderCellDef>A été contact patient</th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <div *ngIf="element.a_ete_contact_patient">OUI</div>
+                        <div *ngIf="!element.a_ete_contact_patient">NON</div>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="type_contact">
+                    <th mat-header-cell *matHeaderCellDef>Type contact</th>
+                    <td mat-cell *matCellDef="let element">{{element.type_contact}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="a_ete_hospitalise">
+                    <th mat-header-cell *matHeaderCellDef>A été hospitalisé</th>
+                    <td mat-cell *matCellDef="let element">
+                        <div *ngIf="element.a_ete_hospitalise">OUI</div>
+                        <div *ngIf="!element.a_ete_hospitalise">NON</div>
+                    </td> 
+                </ng-container>
+
+                <ng-container matColumnDef="croute">
+                    <th mat-header-cell *matHeaderCellDef>Croûte</th>
+                    <td mat-cell *matCellDef="let element">{{element.croute}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="ecouvillon">
+                    <th mat-header-cell *matHeaderCellDef>Ecouvillon (SWAB)</th>
+                    <td mat-cell *matCellDef="let element">{{element.ecouvillon}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="prevelement_sanguin">
+                    <th mat-header-cell *matHeaderCellDef>Prevelement sanguin</th>
+                    <td mat-cell *matCellDef="let element">{{element.prevelement_sanguin}}</td>
+                </ng-container>
+                <ng-container matColumnDef="date_prelevement">
+                    <th mat-header-cell *matHeaderCellDef>Date prelevement</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_prelevement | date: 'dd/MM/yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="date_expedition">
+                    <th mat-header-cell *matHeaderCellDef>Date expedition</th>
+                    <td mat-cell *matCellDef="let element">{{element.date_expedition | date: 'dd/MM/yyyy'}}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="statut">
+                    <th mat-header-cell *matHeaderCellDef>Statut</th>
+                    <td mat-cell *matCellDef="let element">
+                        <span class="badge text-soft-primary" *ngIf="element.statut == 'Cas suspect'">{{ element.statut }}</span>
+                            <span class="badge text-soft-warning" *ngIf="element.statut == 'Cas probable'">{{ element.statut }}</span>
+                            <span class="badge text-soft-danger" *ngIf="element.statut == 'Cas confirmé'">{{ element.statut }}</span>
+                            <span class="badge text-soft-success" *ngIf="element.statut == 'Cas non actif'">{{ element.statut }}</span>
+                    </td>
+                </ng-container>  
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator
+                [pageSizeOptions]="[15, 30]"
+                showFirstLastButtons
+            >
+            </mat-paginator>
+        </div>
+    </mat-card-content>
+</mat-card>

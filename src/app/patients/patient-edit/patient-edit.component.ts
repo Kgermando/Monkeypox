@@ -6,6 +6,8 @@ import { CustomizerSettingsService } from 'src/app/common/customizer-settings/cu
 import { UserModel } from 'src/app/users/models/user-models';
 import { PatientService } from '../patient.service';
 import { PatientModel } from '../models/patient-model';
+import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
+import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
 
 @Component({
   selector: 'app-patient-edit',
@@ -20,7 +22,7 @@ export class PatientEditComponent {
 
   formGroup!: FormGroup;
 
-  currentUser: UserModel;
+  currentUser: UserModel; 
 
   fourchetteAgeList: any = [
     "Nourissons",
@@ -37,7 +39,7 @@ export class PatientEditComponent {
       private route: ActivatedRoute,
       private router: Router,
       private authService: AuthService,
-      private patientService: PatientService,
+      private patientService: PatientService, 
   ) { }
 
 
@@ -46,7 +48,7 @@ export class PatientEditComponent {
       res => {
           this.currentUser = res; 
       }
-    )
+    );
 
     let id = this.route.snapshot.paramMap.get('id');
     this.patientService.getDataById(Number(id)).subscribe(res => {
@@ -55,7 +57,7 @@ export class PatientEditComponent {
 
       console.log(this.patient);
       console.log(id);
-    });
+    });  
 
     this.formGroup = this._formBuilder.group({
       photo: ['-'],
@@ -66,8 +68,7 @@ export class PatientEditComponent {
       age_an: ['', Validators.required],
       age_mois: ['', Validators.required],
       fourchette_age: ['', Validators.required],
-      lieu_residence: ['', Validators.required],
-      aire_sante: ['', Validators.required],
+      lieu_residence: ['', Validators.required], 
       profession: ['', Validators.required],
       email: [''],
       telephone: ['', Validators.required],
@@ -89,10 +90,11 @@ export class PatientEditComponent {
         age_mois: this.formGroup.value.age_mois,
         fourchette_age: this.formGroup.value.fourchette_age,
         lieu_residence: this.formGroup.value.lieu_residence,
-        aire_sante: this.formGroup.value.aire_sante,
+        aire_sante: this.currentUser.zone_sante,
         profession: this.formGroup.value.profession,
         email: this.formGroup.value.email,
         telephone: this.formGroup.value.telephone,
+        province: this.currentUser.province,
         signature: this.currentUser.matricule,
         created: new Date(),
         update_created: new Date()

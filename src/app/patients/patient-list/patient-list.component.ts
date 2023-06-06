@@ -44,6 +44,11 @@ export class PatientListComponent implements AfterViewInit {
       })
   
     }
+
+    applyFilter(event: Event) {
+      const filterValue = (event.target as HTMLInputElement).value;
+      this.dataSource.filter = filterValue.trim().toLowerCase();
+    }
  
     editItem(id: number){
       this.router.navigate(['/patients/patient-edit', id]);

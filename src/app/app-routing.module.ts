@@ -25,7 +25,7 @@ const routes: Routes = [
   },
 
   { 
-    path: 'epidemie', loadChildren: () => import('../app/epidemies/epidemies.module').then(m => m.EpidemiesModule),
+    path: 'epidemies', loadChildren: () => import('../app/epidemies/epidemies.module').then(m => m.EpidemiesModule),
   },
 
  

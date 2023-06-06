@@ -6,6 +6,8 @@ import { CustomizerSettingsService } from 'src/app/common/customizer-settings/cu
 import { UserModel } from 'src/app/users/models/user-models';
 
 import { PatientService } from '../patient.service';
+import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
+import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
 
 @Component({
   selector: 'app-patient-add',
@@ -21,7 +23,8 @@ export class PatientAddComponent implements OnInit {
 
   formGroup!: FormGroup;
 
-  currentUser: UserModel;
+  currentUser: UserModel; 
+
 
   fourchetteAgeList: any = [
     "Nourissons",
@@ -35,7 +38,7 @@ export class PatientAddComponent implements OnInit {
       private _formBuilder: FormBuilder, 
       private router: Router,
       private authService: AuthService,
-      private patientService: PatientService,
+      private patientService: PatientService, 
   ) { }
 
 
@@ -44,7 +47,7 @@ export class PatientAddComponent implements OnInit {
       res => {
           this.currentUser = res; 
       }
-    )
+    ); 
 
     this.formGroup = this._formBuilder.group({
       photo: ['-'],
@@ -55,8 +58,7 @@ export class PatientAddComponent implements OnInit {
       age_an: ['', Validators.required],
       age_mois: ['', Validators.required],
       fourchette_age: ['', Validators.required],
-      lieu_residence: ['', Validators.required],
-      aire_sante: ['', Validators.required],
+      lieu_residence: ['', Validators.required], 
       profession: ['', Validators.required],
       email: [''],
       telephone: ['', Validators.required],
@@ -79,10 +81,11 @@ export class PatientAddComponent implements OnInit {
         age_mois: this.formGroup.value.age_mois,
         fourchette_age: this.formGroup.value.fourchette_age,
         lieu_residence: this.formGroup.value.lieu_residence,
-        aire_sante: this.formGroup.value.aire_sante,
+        aire_sante: this.currentUser.zone_sante,
         profession: this.formGroup.value.profession,
         email: this.formGroup.value.email,
         telephone: this.formGroup.value.telephone,
+        province: this.currentUser.province,
         signature: this.currentUser.matricule,
         created: new Date(),
         update_created: new Date()

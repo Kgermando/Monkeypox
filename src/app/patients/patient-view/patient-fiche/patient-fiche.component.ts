@@ -1,6 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
+import { EpidemieService } from 'src/app/epidemies/epidemie.service';
+import { EpidemieModel } from 'src/app/epidemies/models/epidemie-model';
+import { MetaModel } from 'src/app/shared/models/meta-model';
+import { PatientModel } from '../../models/patient-model';
 
 @Component({
   selector: 'app-patient-fiche',
@@ -8,173 +13,46 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./patient-fiche.component.scss']
 })
 export class PatientFicheComponent {
-  displayedColumns: string[] = ['name', 'startDate', 'deadline', 'status', 'budget'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    @Input() patient: PatientModel;
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
+    displayedColumns: string[] = ['num_epi', 'semaine_epi', 'date_notification', 'fievre', 'eruption_cutanee', 'date_symptome', 'date_admition', 'date_diagonstic', 'a_ete_contact_patient', 'type_contact', 'a_ete_hospitalise', 'croute', 'ecouvillon', 'prevelement_sanguin', 'date_prelevement', 'date_expedition', 'statut'];
 
-  ngAfterViewInit() {
-      this.dataSource.paginator = this.paginator;
-  }
+  
+    ELEMENT_DATA: EpidemieModel[] = [];
+    ELEMENT_DATA_FILTER: EpidemieModel[] = [];
+  
+    metaData: any = [];
+    
+    pageMeta: MetaModel;
 
-  active = true;
-  pending = true;
-  completed = true;
+    dataSource: MatTableDataSource<EpidemieModel>;
 
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+  
+
+    constructor(
+        private epidemieService: EpidemieService) {}
+
+
+        ngAfterViewInit() {
+          this.epidemieService.getList().subscribe(res => {
+            this.metaData = res;
+      
+            this.ELEMENT_DATA = this.metaData['data'];
+            this.pageMeta = this.metaData['meta'];
+
+            this.ELEMENT_DATA_FILTER = this.ELEMENT_DATA.filter(u => this.patient.id == u.patient_id); 
+
+            this.dataSource = new MatTableDataSource<EpidemieModel>(this.ELEMENT_DATA_FILTER);
+            this.dataSource.paginator = this.paginator;
+          })
+      
+        }   
+
+      applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+      }
+  
+    
 }
-
-export interface PeriodicElement {
-  deadline: string;
-  budget: string;
-  name: string;
-  status: any;
-  startDate: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-      name: 'Public Beta Release',
-      startDate: '10 Mar 2023',
-      deadline: '14 Mar 2023',
-      budget: '$1250',
-      status: {
-          active: 'Active'
-      }
-  },
-  {
-      name: 'Fix Platform Errors',
-      startDate: '09 Feb 2023',
-      deadline: '12 Feb 2023',
-      budget: '$999',
-      status: {
-          completed: 'Completed'
-      }
-  },
-  {
-      name: 'Launch our Mobile App',
-      startDate: '03 Mar 2023',
-      deadline: '10 Mar 2023',
-      budget: '$287',
-      status: {
-          active: 'Active'
-      }
-  },
-  {
-      name: 'Add the New Pricing Page',
-      startDate: '02 Mar 2023',
-      deadline: '08 Mar 2023',
-      budget: '$1000',
-      status: {
-          active: 'Active'
-      }
-  },
-  {
-      name: 'Redesign New Online Shop',
-      startDate: '25 Feb 2023',
-      deadline: '01 Mar 2023',
-      budget: '$132',
-      status: {
-          pending: 'Pending'
-      }
-  },
-  {
-      name: 'Material Ui Design',
-      startDate: '02 Apr 2023',
-      deadline: '03 Apr 2023',
-      budget: '$1032',
-      status: {
-          pending: 'Pending'
-      }
-  },
-  {
-      name: 'Add Progress Track',
-      startDate: '01 Feb 2023',
-      deadline: '12 Feb 2023',
-      budget: '$1321',
-      status: {
-          completed: 'Completed'
-      }
-  },
-  {
-      name: 'Project for Client',
-      startDate: '10 Mar 2023',
-      deadline: '14 Mar 2023',
-      budget: '$954',
-      status: {
-          active: 'Active'
-      }
-  },
-  {
-      name: 'Opened New Showcase',
-      startDate: '05 Feb 2023',
-      deadline: '28 Feb 2023',
-      budget: '$800',
-      status: {
-          completed: 'Completed'
-      }
-  },
-  {
-      name: 'Updated the Status',
-      startDate: '05 Mar 2023',
-      deadline: '10 Mar 2023',
-      budget: '$775',
-      status: {
-          completed: 'Completed'
-      }
-  },
-  {
-      name: 'Product UI/UX Design',
-      startDate: '05 Mar 2023',
-      deadline: '08 Mar 2023',
-      budget: '$765',
-      status: {
-          active: 'Active'
-      }
-  },
-  {
-      name: 'Product Devlopment',
-      startDate: '20 Feb 2023',
-      deadline: '28 Feb 2023',
-      budget: '$8534',
-      status: {
-          pending: 'Pending'
-      }
-  },
-  {
-      name: 'New Office Building',
-      startDate: '01 Apr 2023',
-      deadline: '03 Apr 2023',
-      budget: '$4356',
-      status: {
-          active: 'Active'
-      }
-  },
-  {
-      name: 'SEO Marketing',
-      startDate: '27 Feb 2023',
-      deadline: '01 Mar 2023',
-      budget: '$321',
-      status: {
-          pending: 'Pending'
-      }
-  },
-  {
-      name: 'Public Beta Release',
-      startDate: '10 Mar 2023',
-      deadline: '14 Mar 2023',
-      budget: '$1250',
-      status: {
-          active: 'Active'
-      }
-  },
-  {
-      name: 'Fix Platform Errors',
-      startDate: '09 Feb 2023',
-      deadline: '12 Feb 2023',
-      budget: '$999',
-      status: {
-          completed: 'Completed'
-      }
-  }
-];

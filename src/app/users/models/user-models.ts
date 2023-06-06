@@ -11,8 +11,8 @@ export interface UserModel {
     adresse: string | undefined;
     titre: string | undefined;
     pays: string | undefined;
-    province: string | undefined;
-    zone_sante: string | undefined;
+    province: string;
+    zone_sante: string;
     email: string | undefined;
     telephone: string | undefined;
     matricule: string | undefined;

@@ -1,1 +1,264 @@
-<p>epidemie-add works!</p>
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h4 class="mb-0">Nouvelle fiche épidemiologique</h4>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/users/user-list">
+                <i class="ri-home-8-line"></i>
+                Patient
+            </a>
+        </li>
+        <li class="breadcrumb-item fw-semibold">Add</li>
+    </ol>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="isLoadingData">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+</div>
+<mat-card class="mb-25 tagus-card" *ngIf="!isLoadingData">
+    <mat-card-content>
+        <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+            <div class="row">  
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Semaine épidemiologique</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Entrer la semaine épidemiologique</mat-label>
+                            <input matInput formControlName="semaine_epi" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Date notification</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date notification</mat-label>
+                            <input matInput [matDatepicker]="picker" formControlName="date_notification" required="Champs obligatoire">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">N° ordre du patient</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Entrer N° ordre du patient</mat-label>
+                            <input matInput formControlName="patient_id" type required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div> 
+                <mat-divider></mat-divider>
+
+                <h5 class="d-flex justify-content-center m-3">Symptômes et signes cliniques</h5>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Fièvre: </label>
+                        <mat-radio-group formControlName="fievre" required="Champs obligatoire">
+                            <mat-radio-button value="Oui">Oui</mat-radio-button>
+                            <mat-radio-button value="Non">Non</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Eruption cutanée: </label>
+                        <mat-radio-group formControlName="eruption_cutanee" required="Champs obligatoire">
+                            <mat-radio-button value="Oui">Oui</mat-radio-button>
+                            <mat-radio-button value="Non">Non</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Date symptôme</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date de symptome</mat-label>
+                            <input matInput [matDatepicker]="picker2" formControlName="date_symptome" required="Champs obligatoire">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Autres</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-map-pin-line"></i>
+                            <mat-label>Autres</mat-label>
+                            <input matInput formControlName="autres" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div> 
+
+                <mat-divider></mat-divider>
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Date admition</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date d'admition</mat-label>
+                            <input matInput [matDatepicker]="picker3" formControlName="date_admition" required="Champs obligatoire">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+                            <mat-datepicker #picker3></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Date diagonstic</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date de diagonstic</mat-label>
+                            <input matInput [matDatepicker]="picker4" formControlName="date_diagonstic" required="Champs obligatoire">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
+                            <mat-datepicker #picker4></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+
+                <h5 class="d-flex justify-content-center m-3">Facteurs d'expositions</h5>
+                 
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">A été en contact avec un patient: </label>
+                        <mat-radio-group formControlName="a_ete_contact_patient" required="Champs obligatoire">
+                            <mat-radio-button value="Oui">Oui</mat-radio-button>
+                            <mat-radio-button value="Non">Non</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">A été hospitalisé: </label>
+                        <mat-radio-group formControlName="a_ete_hospitalise" required="Champs obligatoire">
+                            <mat-radio-button value="Oui">Oui</mat-radio-button>
+                            <mat-radio-button value="Non">Non</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Type de contact</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Type de contact</mat-label>
+                            <mat-select formControlName="type_contact" required="Champs obligatoire">
+                                <mat-option value="A touché animal domestique">A touché animal domestique</mat-option>
+                                <mat-option value="A voyagé en dehors de chez lui">A voyagé en dehors de chez lui</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div> 
+
+                
+                <mat-divider></mat-divider>
+ 
+
+                <h5 class="d-flex justify-content-center m-3">Prélèvement d'échantillon de laboratoire</h5>
+                 
+
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Croûte</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-map-pin-line"></i>
+                            <mat-label>Entrer le croute</mat-label>
+                            <input matInput formControlName="croute" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div> 
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Ecouvillon (SWAB)</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-team-line"></i>
+                            <mat-label>Entrer ecouvillon</mat-label>
+                            <input matInput formControlName="ecouvillon" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Prevelement sanguin</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-team-line"></i>
+                            <mat-label>Entrer le prevelement sanguin</mat-label>
+                            <input matInput formControlName="prevelement_sanguin" required="Champs obligatoire">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Date prelevement</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date de prelevement</mat-label>
+                            <input matInput [matDatepicker]="picker5" formControlName="date_prelevement" required="Champs obligatoire">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
+                            <mat-datepicker #picker5></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Date expedition</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Date d'expedition'</mat-label>
+                            <input matInput [matDatepicker]="picker6" formControlName="date_expedition" required="Champs obligatoire">
+                            <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
+                            <mat-datepicker #picker6></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <mat-divider></mat-divider>
+ 
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Statut</label>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Statut</mat-label>
+                            <mat-select formControlName="statut" required="Champs obligatoire">
+                                <mat-option value="Cas suspect">Cas suspect</mat-option>
+                                <mat-option value="Cas probable">Cas probable</mat-option>
+                                <mat-option value="Cas confirmé">Cas confirmé</mat-option>
+                                <mat-option value="Cas non actif">Cas non actif</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>   
+
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="NgxEditor__Wrapper">
+                        <ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
+                        <ngx-editor [editor]="editor" formControlName="commentaire" name="commentaire" [disabled]="false" [placeholder]="'Commentaire ...'"></ngx-editor>
+                    </div>  
+                </div> 
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="tagus-form-group">
+                        <label class="d-block mb-12 fw-semibold gray-color">Campagne</label>
+                        <mat-form-field appearance="fill">
+                            <i class="ri-home-heart-line"></i>
+                            <mat-label>Entrer la Campagne</mat-label>
+                            <mat-select formControlName="campaign" required="Champs obligatoire">
+                                <mat-option *ngFor="let campaign of campaignList" [value]="campaign.nom">
+                                    {{campaign.nom}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div> 
+
+            </div>
+            <div class="d-flex justify-content-center" *ngIf="isLoading">
+                <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
+            </div>
+            <div *ngIf="!isLoading">
+                <button mat-flat-button class="tagus" matStepperSuivant >Soumettre</button>
+            </div>
+        </form>
+    </mat-card-content>
+</mat-card>

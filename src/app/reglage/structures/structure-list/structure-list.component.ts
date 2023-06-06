@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   templateUrl: './structure-list.component.html',
   styleUrls: ['./structure-list.component.scss']
 })
-export class StructureListComponent implements OnInit, AfterViewInit {
+export class StructureListComponent implements AfterViewInit {
   displayedColumns: string[] = ['nom_complet', 'single', 'manager', 'signature', 'created', 'edit', 'delete'];
 
   ELEMENT_DATA: StructureModel[] = [];
@@ -45,7 +45,11 @@ export class StructureListComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit(): void {}
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 
   editItem(id: number){
     this.router.navigate(['/reglages/structure-add', id]);

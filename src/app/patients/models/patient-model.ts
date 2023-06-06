@@ -13,6 +13,7 @@ export class PatientModel {
     profession: string | undefined;
     email: string | undefined;
     telephone: string | undefined;
+    province: string;
     signature: string | undefined; // celui qui fait le document
     created: Date | undefined;
     update_created : Date | undefined; 

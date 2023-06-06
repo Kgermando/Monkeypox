@@ -40,7 +40,7 @@
                         <a routerLink="/authentication/forgot-password" class="d-inline-block main-color fw-medium">Mot de passe oublié ?</a>
                     </div>
                     <div class="d-flex justify-content-center" *ngIf="isLoading">
-                        <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
+                        <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2"> Patientez-svp...</p>
                     </div>
                     <div *ngIf="!isLoading">
                         <button mat-flat-button class="tagus d-block fw-semibold" [disabled]="!form.valid">Se connecter</button>  

@@ -73,7 +73,7 @@ export class UserAddComponent implements OnInit {
       this.zoneSanteService.getList().subscribe(res => {
         this.metaZoneSante = res;
         this.zoneSanteList = this.metaZoneSante['data'];
-      })
+      });
 
 
       this.formGroup = this._formBuilder.group({

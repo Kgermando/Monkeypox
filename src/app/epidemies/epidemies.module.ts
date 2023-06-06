@@ -6,6 +6,7 @@ import { EpidemieListComponent } from './epidemie-list/epidemie-list.component';
 import { EpidemieAddComponent } from './epidemie-add/epidemie-add.component';
 import { EpidemieViewComponent } from './epidemie-view/epidemie-view.component';
 import { EpidemieEditComponent } from './epidemie-edit/epidemie-edit.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { EpidemieEditComponent } from './epidemie-edit/epidemie-edit.component';
   ],
   imports: [
     CommonModule,
-    EpidemiesRoutingModule
+    EpidemiesRoutingModule,
+
+    SharedModule,
   ]
 })
 export class EpidemiesModule { }

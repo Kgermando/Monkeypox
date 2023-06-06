@@ -1,5 +1,5 @@
 <div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
-    <h5 class="mb-0">Nouveau utilisateur</h5>
+    <h4 class="mb-0">Nouveau utilisateur</h4>
     <ol class="breadcrumb mb-0 ps-0">
         <li class="breadcrumb-item">
             <a routerLink="/users/user-list">
@@ -133,7 +133,7 @@
                         <label class="d-block mb-12 fw-semibold gray-color">Zone de santé</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-road-map-line"></i>
-                            <mat-label>Entrer zone sante</mat-label>
+                            <mat-label>Entrer zone de sante</mat-label>
                             <mat-select formControlName="zone_sante" required="Champs obligatoire">
                                 <mat-option *ngFor="let zoneSante of zoneSanteList" [value]="zoneSante.zone">
                                     {{zoneSante.zone}}

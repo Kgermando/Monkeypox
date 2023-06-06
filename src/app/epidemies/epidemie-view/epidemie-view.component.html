@@ -1,1 +1,240 @@
-<p>epidemie-view works!</p>
+<div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
+    <h4 class="mb-0">Fiche épidemiologique </h4>
+    <ol class="breadcrumb mb-0 ps-0">
+        <li class="breadcrumb-item">
+            <a routerLink="/">
+                <i class="ri-home-8-line"></i>
+                Epidemie
+            </a>
+        </li> 
+        <li class="breadcrumb-item fw-semibold">view</li>
+    </ol>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="isLoading">
+    <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
+</div>
+<ng-container *ngIf="!isLoading">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+                <mat-card-header class="border-bottom">
+                    <h4 class="mb-0">Numero épidemiologique </h4>
+                </mat-card-header>
+                <mat-card-content>
+                   <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold d-inline-block">N° épidemiologique:</span>
+                            <span class="gray-color"> {{ epidemie.num_epi }}</span> 
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">pays:</span>
+                            <span class="gray-color"> {{ epidemie.pays }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Province:</span>
+                            <span class="gray-color"> {{ epidemie.province }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Zone de sante:</span>
+                            <span class="gray-color"> {{ epidemie.zone_sante }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Année:</span>
+                            <span class="gray-color"> {{ epidemie.created | date: 'yy' }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">N° ordre:</span>
+                            <span class="gray-color"> {{ epidemie.id }}</span>
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+                <mat-card-header class="border-bottom">
+                    <h4 class="mb-0">Notification et ID du patient</h4>
+                </mat-card-header>
+                <mat-card-content>
+                   <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold d-inline-block">Semaine épidemiologique:</span>
+                            <span class="gray-color"> {{ epidemie.semaine_epi }}</span> 
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Date de notification:</span>
+                            <span class="gray-color"> {{ epidemie.date_notification | date: 'dd/MM/yyyy'  }}</span>
+                        </li>
+                        <li>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <span class="fw-semibold d-inline-block">N° ordre du patient:</span>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-8">
+                                    <span class="gray-color">
+                                        <a [routerLink]="[ '/patients/patient-view', epidemie.patient_id ]" class="d-flex align-items-center main-color product-info">
+                                            {{ epidemie.patient_id }}
+                                        </a> 
+                                    </span>
+                                </div>
+                            </div>
+                        </li> 
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+                <mat-card-header class="border-bottom">
+                    <h4 class="mb-0">Symptômes et signes cliniques</h4>
+                </mat-card-header>
+                <mat-card-content>
+                   <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold d-inline-block">Fièvre:</span> 
+                            <span class="gray-color" *ngIf="epidemie.fievre"> OUI</span>
+                            <span class="gray-color" *ngIf="!epidemie.fievre"> NON</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Eruption cutanée:</span> 
+                            <span class="gray-color" *ngIf="epidemie.eruption_cutanee"> OUI</span>
+                            <span class="gray-color" *ngIf="!epidemie.eruption_cutanee"> NON</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Date symptôme:</span>
+                            <span class="gray-color"> {{ epidemie.date_symptome | date: 'dd/MM/yyyy' }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Autres:</span>
+                            <span class="gray-color"> {{ epidemie.autres }}</span>
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+                <mat-card-header class="border-bottom">
+                    <h4 class="mb-0"> </h4>
+                </mat-card-header>
+                <mat-card-content>
+                   <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold d-inline-block">Date d'admition:</span>
+                            <span class="gray-color"> {{ epidemie.date_admition | date: 'dd/MM/yyyy' }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Date diagonstic:</span>
+                            <span class="gray-color"> {{ epidemie.date_diagonstic | date: 'dd/MM/yyyy' }}</span> 
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Structure:</span>
+                            <span class="gray-color"> {{ epidemie.structure }}</span>
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+                <mat-card-header class="border-bottom">
+                    <h4 class="mb-0">Facteurs d'expositions </h4>
+                </mat-card-header>
+                <mat-card-content>
+                   <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">A été contact avec le patient:</span>
+                            <span class="gray-color" *ngIf="epidemie.a_ete_contact_patient"> OUI</span>
+                            <span class="gray-color" *ngIf="!epidemie.a_ete_contact_patient"> NON</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">Type de contact:</span>
+                            <span class="gray-color"> {{ epidemie.type_contact }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">A été hospitalisé:</span> 
+                            <span class="gray-color" *ngIf="epidemie.a_ete_hospitalise"> OUI</span>
+                            <span class="gray-color" *ngIf="!epidemie.a_ete_hospitalise"> NON</span>
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+                <mat-card-header class="border-bottom">
+                    <h4 class="mb-0">Prélèvement déchatillons de laboratoire </h4>
+                </mat-card-header>
+                <mat-card-content>
+                   <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">Croûte:</span>
+                            <span class="gray-color"> {{ epidemie.croute }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">Ecouvillon (SWAB):</span>
+                            <span class="gray-color"> {{ epidemie.ecouvillon }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">Prevelement sanguin:</span>
+                            <span class="gray-color"> {{ epidemie.prevelement_sanguin }}</span>
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Date de prelevement:</span>
+                            <span class="gray-color"> {{ epidemie.date_prelevement | date: 'dd/MM/yyyy' }}</span> 
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Date d'expedition:</span>
+                            <span class="gray-color"> {{ epidemie.date_expedition | date: 'dd/MM/yyyy' }}</span> 
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
+                <mat-card-header class="border-bottom">
+                    <h4 class="mb-0">Statut et commentaire </h4>
+                </mat-card-header>
+                <mat-card-content>
+                   <ul class="list ps-0 mb-0">
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">Statut:</span>
+                            <span class="gray-color"> {{ epidemie.statut }}</span>
+                        </li>
+                        <li>
+                            <div class="fw-semibold col-lg-12 col-md-12 col-sm-12">Commentaire</div>
+                            <div  class="col-lg-12 col-md-12 col-sm-12" [innerHTML]="epidemie.commentaire"></div>  
+                        </li>
+                        
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">Campagne:</span>
+                            <span class="gray-color"> {{ epidemie.campaign }}</span>
+                        </li> 
+                        <li>
+                            <span class="fw-semibold d-inline-b lock">Signature:</span>
+                            <span class="gray-color"> {{ epidemie.signature }}</span>
+                        </li> 
+                        <li>
+                            <span class="fw-semibold d-inline-block">Crée le:</span>
+                            <span class="gray-color"> {{ epidemie.created | date: 'dd/MM/yyyy' }}</span> 
+                        </li>
+                        <li>
+                            <span class="fw-semibold d-inline-block">Mise à jour le:</span>
+                            <span class="gray-color"> {{ epidemie.update_created | date: 'dd/MM/yyyy' }}</span> 
+                        </li>
+                    </ul>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+
+
+
+    </div> 
+</ng-container>
