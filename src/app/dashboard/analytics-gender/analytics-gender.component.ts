@@ -52,7 +52,7 @@ export class AnalyticsGenderComponent {
                 }
             },
             colors: ["#00B69B"],
-            labels: ["Male & Female"]
+            labels: ["Homme & Femme"]
         };
     }
 

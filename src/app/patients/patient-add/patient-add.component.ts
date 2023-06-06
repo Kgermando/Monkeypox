@@ -27,7 +27,7 @@ export class PatientAddComponent implements OnInit {
 
 
   fourchetteAgeList: any = [
-    "Nourissons",
+    "Nourisson",
     "Enfant",
     "Adolescent(e)",
     "Adulte"

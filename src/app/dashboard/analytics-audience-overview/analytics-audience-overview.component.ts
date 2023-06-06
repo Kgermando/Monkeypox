@@ -40,16 +40,20 @@ export class AnalyticsAudienceOverviewComponent {
         this.chartOptions = {
             series: [
                 {
-                    name: "New Visitors",
+                    name: "Cas non actif",
                     data: [35, 41, 62, 42, 13, 18, 29, 37, 36, 51]
                 },
                 {
-                    name: "Unique Visitors",
+                    name: "Cas suspect",
                     data: [50, 57, 74, 99, 75, 38, 62, 47, 82, 56]
                 },
                 {
-                    name: "Previous Visitors",
+                    name: "Cas probable",
                     data: [87, 57, 62, 47, 82, 56, 74, 99, 75, 38]
+                },
+                {
+                    name: "Cas confirmé",
+                    data: [27, 25, 62, 47, 70, 80, 15, 56, 20, 65]
                 }
             ],
             chart: {
@@ -60,7 +64,7 @@ export class AnalyticsAudienceOverviewComponent {
                 }
             },
             colors: [
-                "#2DB6F5", "#F765A3", "#757FEF"
+                "#01D758", "#2DB6F5", "#F765A3", "#757FEF"
             ],
             dataLabels: {
                 enabled: false
@@ -111,6 +115,7 @@ export class AnalyticsAudienceOverviewComponent {
                     "07 Jan",
                     "08 Jan",
                     "09 Jan",
+                    "10 Jan",
                     "10 Jan",
                 ]
             },

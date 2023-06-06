@@ -35,12 +35,20 @@ export class RevenueReportComponent {
         this.chartOptions = {
             series: [
                 {
-                    name: "Earning",
+                    name: "Cas non actif",
                     data: [80, 50, 110, 80, 10, 40, 95, 90, 30, 100, 120, 60]
                 },
                 {
-                    name: "Expenses",
+                    name: "Cas suspect",
                     data: [20, 110, 90, 30, 100, 120, 60, 80, 50, 110, 80, 10]
+                },
+                {
+                    name: "Cas probable",
+                    data: [35, 100, 90, 30, 50, 150, 60, 80, 50, 85, 30, 41]
+                },
+                {
+                    name: "Cas confirmé",
+                    data: [15, 160, 90, 30, 75, 80, 30, 50, 60, 55, 12, 40]
                 }
             ],
             chart: {
@@ -51,13 +59,13 @@ export class RevenueReportComponent {
                 }
             },
             xaxis: {
-                categories: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                categories: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Decembre"]
             },
             yaxis: {
                 show: false
             },
             colors: [
-                "#757FEF", "#FF8A65"
+                "#01D758", "#165BAA", "#FF7F00", "#FF0000"
             ],
             legend: {
                 offsetY: 0,

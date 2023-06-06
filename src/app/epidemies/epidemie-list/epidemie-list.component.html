@@ -209,9 +209,9 @@
                     <th mat-header-cell *matHeaderCellDef>Statut</th>
                     <td mat-cell *matCellDef="let element">
                         <span class="badge text-soft-primary" *ngIf="element.statut == 'Cas suspect'">{{ element.statut }}</span>
-                            <span class="badge text-soft-warning" *ngIf="element.statut == 'Cas probable'">{{ element.statut }}</span>
-                            <span class="badge text-soft-danger" *ngIf="element.statut == 'Cas confirmé'">{{ element.statut }}</span>
-                            <span class="badge text-soft-success" *ngIf="element.statut == 'Cas non actif'">{{ element.statut }}</span>
+                        <span class="badge text-soft-warning" *ngIf="element.statut == 'Cas probable'">{{ element.statut }}</span>
+                        <span class="badge text-soft-danger" *ngIf="element.statut == 'Cas confirmé'">{{ element.statut }}</span>
+                        <span class="badge text-soft-success" *ngIf="element.statut == 'Cas non actif'">{{ element.statut }}</span>
                     </td>
                 </ng-container>  
 

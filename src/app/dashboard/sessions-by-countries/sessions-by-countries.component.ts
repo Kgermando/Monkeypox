@@ -43,7 +43,7 @@ export class SessionsByCountriesComponent {
         this.chartOptions = {
             series: [
                 {
-                    name: "Total Sessions:",
+                    name: "Total cas confirmé:",
                     data: [1026, 1554, 497, 1126, 908, 1512, 604, 1047, 1354, 826],
                 }
             ],
@@ -72,16 +72,16 @@ export class SessionsByCountriesComponent {
             },
             xaxis: {
                 categories: [
-                    "United State",
-                    "China",
-                    "Canada",
-                    "Indonesia",
-                    "Russia",
-                    "Japan",
-                    "Brazil",
-                    "United Kingdom",
-                    "Vietnam",
-                    "France"
+                    "Bas-Uele",	
+                    "Équateur",	
+                    "Haut-Katanga",	
+                    "Haut-Lomami",	
+                    "Haut-Uele",
+                    "Ituri",
+                    "Bunia",
+                    "Kasaï",
+                    "Tshikapa",	
+                    "Kasaï central"
                 ],
                 labels: {
                     show: true,
@@ -114,7 +114,7 @@ export class SessionsByCountriesComponent {
             tooltip: {
                 y: {
                     formatter: function(val) {
-                        return val + " hours";
+                        return val + " patients";
                     }
                 }
             },

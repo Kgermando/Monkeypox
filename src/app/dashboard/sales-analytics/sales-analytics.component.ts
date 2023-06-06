@@ -41,17 +41,22 @@ export class SalesAnalyticsComponent {
         this.chartOptions = {
             series: [
                 {
-                    name: "Cost",
+                    name: "Cas non actif",
+                    data: [50, 30, 35, 5, 15, 7, 41]
+                },
+                {
+                    name: "Cas suspect",
                     data: [30, 20, 40, 25, 18, 43, 15]
                 },
                 {
-                    name: "Sales",
+                    name: "Cas probable",
                     data: [20, 10, 20, 20, 12, 27, 28]
                 },
                 {
-                    name: "Revenue",
+                    name: "Cas confirmé",
                     data: [10, 10, 15, 15, 15, 14, 15]
                 }
+                
             ],
             chart: {
                 type: "bar",
@@ -91,7 +96,7 @@ export class SalesAnalyticsComponent {
                 }
             },
             colors: [
-                "#165BAA", "#A155B9", "#F765A3"
+                "#01D758", "#165BAA", "#FF7F00", "#FF0000"
             ],
             legend: {
                 offsetY: 0,

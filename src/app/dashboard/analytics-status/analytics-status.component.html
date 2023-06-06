@@ -1,64 +1,28 @@
-<mat-card
-    class="mb-25 tagus-card"
-    [class.component-dark-theme]="themeService.isDark()"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
->
+<mat-card class="mb-25 tagus-card active-courses-box">
+    <mat-card-header class="border-bottom">
+        <h5 class="mb-0">Tranches d'âge</h5>
+        <button type="button" mat-button class="position-relative dot-btn p-0 bg-transparent border-none" [matMenuTriggerFor]="monthMenu">
+            <i class="ri-more-fill"></i>
+        </button>
+        <mat-menu #monthMenu="matMenu" class="monthMenu" xPosition="before">
+            <button mat-menu-item type="button" class="bg-transparent border-none">Today</button>
+            <button mat-menu-item type="button" class="bg-transparent border-none">Last Month</button>
+            <button mat-menu-item type="button" class="bg-transparent border-none">Last Year</button>
+            <button mat-menu-item type="button" class="bg-transparent border-none">All Time</button>
+        </mat-menu>
+    </mat-card-header>
     <mat-card-content>
-        <div class="date-btn main-color fw-semibold position-relative">
-            <i class="flaticon-calendar"></i> {{ formattedDate }}
-        </div>
-        <div class="status-item position-relative">
-            <div class="d-flex align-items-center">
-                <div class="icon position-relative">
-                    <i class="flaticon-pie-chart-3"></i>
-                </div>
-                <div class="title">
-                    <span class="d-block gray-color">Visits By Day</span>
-                    <h4>1,802</h4>
-                </div>
-            </div>
-            <div class="chart">
-                <apx-chart
-                    [series]="chartOptions.series!"
-                    [chart]="chartOptions.chart!"
-                    [dataLabels]="chartOptions.dataLabels!"
-                    [plotOptions]="chartOptions.plotOptions!"
-                    [yaxis]="chartOptions.yaxis!"
-                    [grid]="chartOptions.grid!"
-                    [xaxis]="chartOptions.xaxis!"
-                    [colors]="chartOptions.colors!"
-                    [legend]="chartOptions.legend!"
-                    [fill]="chartOptions.fill!"
-                    [title]="chartOptions.title!"
-                ></apx-chart>
-            </div>
-        </div>
-        <div class="status-item position-relative">
-            <div class="d-flex align-items-center">
-                <div class="icon position-relative">
-                    <i class="flaticon-pie-chart-1"></i>
-                </div>
-                <div class="title">
-                    <span class="d-block gray-color">Net Income</span>
-                    <h4>$438.5K</h4>
-                </div>
-            </div>
-            <div class="chart">
-                <apx-chart
-                    [series]="chartOptions.series2!"
-                    [chart]="chartOptions.chart!"
-                    [dataLabels]="chartOptions.dataLabels!"
-                    [plotOptions]="chartOptions.plotOptions!"
-                    [yaxis]="chartOptions.yaxis!"
-                    [grid]="chartOptions.grid!"
-                    [xaxis]="chartOptions.xaxis!"
-                    [tooltip]="chartOptions.tooltip!"
-                    [colors]="chartOptions.colors!"
-                    [legend]="chartOptions.legend!"
-                    [fill]="chartOptions.fill!"
-                    [title]="chartOptions.title!"
-                ></apx-chart>
-            </div>
+        <div class="chart activeCoursesChart">
+            <apx-chart
+                [series]="chartOptions.series!"
+                [chart]="chartOptions.chart!"
+                [colors]="chartOptions.colors!"
+                [tooltip]="chartOptions.tooltip!"
+                [stroke]="chartOptions.stroke!"
+                [dataLabels]="chartOptions.dataLabels!"
+                [legend]="chartOptions.legend!"
+                [labels]="chartOptions.labels!"
+            ></apx-chart>
         </div>
     </mat-card-content>
 </mat-card>

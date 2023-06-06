@@ -51,7 +51,7 @@ export class VisitorsAgeComponent {
                     }
                 }
             },
-            colors: ["#F765A3"],
+            colors: ["#F765A3", "#F765A3", "#F765A3", "#F765A3"],
             labels: ["Under 30 & Over 30"]
         };
     }

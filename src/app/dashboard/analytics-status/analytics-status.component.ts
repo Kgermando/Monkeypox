@@ -1,35 +1,23 @@
-import { Component, ViewChild } from "@angular/core";
-import { DatePipe } from '@angular/common'; 
-import {
-    ApexAxisChartSeries,
+import { Component, ViewChild } from "@angular/core"; 
+import { 
     ApexChart,
     ChartComponent,
-    ApexDataLabels,
-    ApexPlotOptions,
-    ApexYAxis,
+    ApexDataLabels, 
     ApexLegend,
     ApexTooltip,
-    ApexGrid,
-    ApexTitleSubtitle,
-    ApexXAxis,
-    ApexFill
+    ApexNonAxisChartSeries,
+    ApexStroke, 
 } from "ng-apexcharts";
-import { CustomizerSettingsService } from "src/app/common/customizer-settings/customizer-settings.service";
 
 export type ChartOptions = {
-    series: ApexAxisChartSeries;
-    series2: ApexAxisChartSeries;
+    series: ApexNonAxisChartSeries;
+    stroke: ApexStroke;
     chart: ApexChart;
-    dataLabels: ApexDataLabels;
-    plotOptions: ApexPlotOptions;
     tooltip: ApexTooltip;
-    yaxis: ApexYAxis;
-    grid: ApexGrid;
+    dataLabels: ApexDataLabels;
+    labels: any;
     legend: ApexLegend;
     colors: any;
-    xaxis: ApexXAxis;
-    fill: ApexFill;
-    title: ApexTitleSubtitle;
 };
 
 @Component({
@@ -39,98 +27,54 @@ export type ChartOptions = {
 })
 export class AnalyticsStatusComponent {
 
-    @ViewChild("chart") chart: ChartComponent | undefined;
+    @ViewChild("chart") chart: ChartComponent;
     public chartOptions: Partial<ChartOptions>;
-
-    toggleTheme() {
-        this.themeService.toggleTheme();
-    }
-
-    toggleRTLEnabledTheme() {
-        this.themeService.toggleRTLEnabledTheme();
-    }
-
-    constructor(
-        private datePipe: DatePipe,
-        public themeService: CustomizerSettingsService
-    ) {
+  
+    constructor() {
         this.chartOptions = {
-            series: [
-                {
-                    name: "Visited",
-                    data: [2400, 1398, 5405, 3910, 4398, 3321, 2000]
-                }
-            ],
-            series2: [
-                {
-                    name: "Net Income",
-                    data: [24, 13, 30, 35, 40, 22, 15]
-                }
-            ],
+            series: [59.5, 25, 15.5, 35.5],
             chart: {
-                height: 90,
-                width: 180,
-                type: "bar",
-                toolbar: {
-                    show: false
-                }
+                height: 315,
+                type: "pie"
             },
-            plotOptions: {
-                bar: {
-                    columnWidth: "15%",
-                    distributed: true,
-                },
-            },
-            dataLabels: {
-                enabled: false
-            },
-            colors: [
-                "#FFBA69", "#757FEF"
-            ],
-            xaxis: {
-                categories: [
-                    "Sat",
-                    "Sun",
-                    "Mon",
-                    "Tue",
-                    "Wed",
-                    "Thu",
-                    "Fri"
-                ],
-                axisBorder: {
-                    show: false
-                },
-                axisTicks: {
-                    show: false
-                },
-                labels: {
-                    show: false
-                }
-            },
-            yaxis: {
-                labels: {
-                    show: false
-                }
-            },
-            grid: {
-                borderColor: "#f2f2f2",
-                strokeDashArray: 2,
+            stroke: {
+                width: 0,
                 show: true
             },
-            legend: {
-                show: false
+            colors: ["#757fef", "#ee368c", "#2db6f5", "#FF7F00"],
+            dataLabels: {
+                enabled: true,
+                style: {
+                    fontSize: '14px',
+                },
+                dropShadow: {
+                    enabled: false
+                }
             },
             tooltip: {
+                style: {
+                    fontSize: '14px',
+                },
                 y: {
-                    formatter: function(val) {
-                        return "$" + val + "K";
+                    formatter: function(val:any) {
+                        return val + "%";
                     }
                 }
-            }
+            },
+            legend: {
+                offsetY: 5,
+                position: "bottom",
+                fontSize: "14px",
+                labels: {
+                    colors: '#5B5B98',
+                },
+            },
+            labels: [
+                "Nourisson",
+                "Enfant",
+                "Adolescent(e)",
+                "Adulte"
+            ]
         };
     }
-
-    currentDate: Date = new Date();
-    formattedDate: any = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
-
 }
