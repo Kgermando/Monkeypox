@@ -2,7 +2,7 @@ FROM node:latest as build
 
 WORKDIR /usr/local/app
 
-COPY package*.json ./
+# COPY package*.json ./
 
 COPY ./ /usr/local/app/
 
