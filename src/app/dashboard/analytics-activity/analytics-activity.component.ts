@@ -18,8 +18,7 @@ export class AnalyticsActivityComponent implements AfterViewInit {
 
     constructor(
         public themeService: CustomizerSettingsService,
-        private epidemieService: EpidemieService,
-        private router: Router
+        private epidemieService: EpidemieService
     ) {}
  
     ngAfterViewInit() {
@@ -27,10 +26,9 @@ export class AnalyticsActivityComponent implements AfterViewInit {
         this.metaData = res;
     
         this.ELEMENT_DATA = this.metaData['data'];
-        this.pageMeta = this.metaData['meta']; 
+        this.pageMeta = this.metaData['meta'];  
         })
-    
-    }   
+    }
 
     toggleTheme() {
         this.themeService.toggleTheme();

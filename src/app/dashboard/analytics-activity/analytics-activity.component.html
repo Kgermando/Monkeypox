@@ -8,7 +8,7 @@
     </mat-card-header>
     <mat-card-content>
         <ul class="m-0 p-0">
-            <li class="position-relative" *ngFor="let fiche of ELEMENT_DATA">
+            <li class="position-relative" *ngFor="let fiche of ELEMENT_DATA | slice:0:6">
                 <img src="assets/img/icon/avatar.png" alt="avatar">
                 <h5 class="fw-semibold">{{ fiche.province }}</h5>
                 <p class="fw-semibold">{{ fiche.num_epi }}</p>

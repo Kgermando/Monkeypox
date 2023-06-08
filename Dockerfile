@@ -1,26 +1,13 @@
-FROM node:latest as node
+FROM node:latest as build
 
-WORKDIR /usr/src/app 
+WORKDIR /usr/local/app
 
-COPY package*.json ./
-
-COPY . .
+COPY ./ /usr/local/app/
 
 RUN npm install --force
-RUN npm run build --prod
 
-# FROM nginx:alpine
-# COPY --from=node /usr/src/app/dist/monkeypox /usr/share/nginx/html
+RUN npm run build
 
-# FROM node:18-alpine as builder
-
-# COPY . /app
-
-# WORKDIR /app 
-
-# RUN npm install --force
-# RUN npm run build --prod
-
-# FROM nginx:alpine
-# EXPOSE 80
-# COPY --from=builder /app/dist/monkeypox /usr/share/nginx/html
+FROM nginx:latest
+COPY --from=build /usr/local/app/dist/monkeypox /usr/share/nginx/html
+EXPOSE 80

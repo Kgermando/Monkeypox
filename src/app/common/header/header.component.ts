@@ -105,5 +105,4 @@ export class HeaderComponent implements OnInit {
 
     currentDate: Date = new Date();
     formattedDate: any = this.datePipe.transform(this.currentDate, 'dd MMMM yyyy');
-
 }
