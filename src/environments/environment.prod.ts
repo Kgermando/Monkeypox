@@ -1,5 +1,5 @@
 export const environment = {
     production: true,
     title: 'Production Environment Heading',
-    apiURL: 'http://monkeypox.eventdrc.tech:8000/api'
+    apiURL: 'https://mpox.eventdrc.tech/api'
   };
