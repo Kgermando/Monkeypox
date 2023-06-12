@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host 0.0.0.0 --port 4200 --disable-host-check",
-    "build": "ng build --watch",
+    "build": "ng build",
+    "firebase": "ng build && firebase deploy",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

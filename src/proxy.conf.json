@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "https://mpox.eventdrc.tech/",
+        "secure": false
+    }
+}
