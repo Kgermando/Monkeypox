@@ -13,19 +13,15 @@ import { MatPaginator } from '@angular/material/paginator';
   styleUrls: ['./epidemie-list.component.scss']
 })
 export class EpidemieListComponent implements AfterViewInit {
-  displayedColumns: string[] = ['num_epi', 'semaine_epi', 'date_notification', 'patient_id', 'fievre', 'eruption_cutanee', 'date_symptome', 'date_admition', 'date_diagonstic', 'a_ete_contact_patient', 'type_contact', 'a_ete_hospitalise', 'croute', 'ecouvillon', 'prevelement_sanguin', 'date_prelevement', 'date_expedition', 'statut'];
+  displayedColumns: string[] = ['statut', 'num_epi', 'semaine_epi', 'date_notification', 'patient_id', 'fievre', 'eruption_cutanee', 'date_symptome', 'date_admition', 'date_diagonstic', 'a_ete_contact_patient', 'type_contact', 'a_ete_hospitalise', 'croute', 'ecouvillon', 'prevelement_sanguin', 'date_prelevement', 'date_expedition'];
 
   
-    ELEMENT_DATA: EpidemieModel[] = [];
-  
-    metaData: any = [];
-    
-    pageMeta: MetaModel;
-
+    ELEMENT_DATA: EpidemieModel[] = []; 
     dataSource: MatTableDataSource<EpidemieModel>;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-  
+    @ViewChild(MatPaginator) paginator: MatPaginator; 
+
+    isLoading = false; 
 
     constructor(
         private epidemieService: EpidemieService,
@@ -33,19 +29,22 @@ export class EpidemieListComponent implements AfterViewInit {
 
 
         ngAfterViewInit() {
-          this.epidemieService.getList().subscribe(res => {
-            this.metaData = res;
+          this.isLoading = true;
+          this.epidemieService.all().subscribe({
+            next: res => {
+              this.ELEMENT_DATA = res; 
+              this.dataSource = new MatTableDataSource<EpidemieModel>(this.ELEMENT_DATA);
+              this.dataSource.paginator = this.paginator;
+              this.isLoading = false;
+            },
+            error: err => {
+              this.isLoading = false;
+              console.log(err);
+            }
+          });
+          this.isLoading = false;
       
-            this.ELEMENT_DATA = this.metaData['data'];
-            this.pageMeta = this.metaData['meta'];
-      
-            console.log(this.pageMeta);
-            console.log(this.ELEMENT_DATA); 
-            this.dataSource = new MatTableDataSource<EpidemieModel>(this.ELEMENT_DATA);
-            this.dataSource.paginator = this.paginator;
-          })
-      
-        }   
+        }
 
       applyFilter(event: Event) {
         const filterValue = (event.target as HTMLInputElement).value;
@@ -58,7 +57,7 @@ export class EpidemieListComponent implements AfterViewInit {
     
     
       removeItem(id: number){
-        this.epidemieService.deleteData(id);
+        this.epidemieService.delete(id);
       }
     
 }

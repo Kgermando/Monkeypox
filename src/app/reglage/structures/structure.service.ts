@@ -3,34 +3,36 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StructureModel } from '../models/structure-model';
+import { RestService } from 'src/app/shared/services/rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StructureService {
-  constructor(private httpClient: HttpClient) { }
+export class StructureService extends RestService {
+  endpoint: string = `${environment.apiURL}/structures`;
+  // constructor(private httpClient: HttpClient) { }
 
-  getList(): Observable<any[]> { 
-    return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures`);
-  }
-
-  // getList(page: number): Observable<StructureModel[]> { 
-  //   return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures?page=${page}`);
+  // all(): Observable<any[]> { 
+  //   return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures`);
   // }
 
-  createData(data: any): Observable<Object> {
-    return this.httpClient.post(`${environment.apiURL}/structures`, data)
-  }
+  // // all(page: number): Observable<StructureModel[]> { 
+  // //   return this.httpClient.get<StructureModel[]>(`${environment.apiURL}/structures?page=${page}`);
+  // // }
 
-  getDataById(id: number): Observable<StructureModel> {
-    return this.httpClient.get<StructureModel>(`${environment.apiURL}/structures/${id}`);
-  }
+  // create(data: any): Observable<Object> {
+  //   return this.httpClient.post(`${environment.apiURL}/structures`, data)
+  // }
 
-  updateData(id: number, data: any): Observable<Object> {
-    return this.httpClient.put(`${environment.apiURL}/structures/${id}`, data);
-  }
+  // get(id: number): Observable<StructureModel> {
+  //   return this.httpClient.get<StructureModel>(`${environment.apiURL}/structures/${id}`);
+  // }
 
-  deleteData(id: number): Observable<Object> {
-    return this.httpClient.delete(`${environment.apiURL}/structures/${id}`);
-  }
+  // update(id: number, data: any): Observable<Object> {
+  //   return this.httpClient.put(`${environment.apiURL}/structures/${id}`, data);
+  // }
+
+  // delete(id: number): Observable<Object> {
+  //   return this.httpClient.delete(`${environment.apiURL}/structures/${id}`);
+  // }
 }

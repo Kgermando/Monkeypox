@@ -1,32 +1,32 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { EpidemieModel } from './models/epidemie-model';
 import { environment } from 'src/environments/environment';
+import { RestService } from '../shared/services/rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class EpidemieService {
-  constructor(private httpClient: HttpClient) { }
+export class EpidemieService extends RestService {
+  endpoint: string = `${environment.apiURL}/epidemies`;
 
-  getList(): Observable<EpidemieModel[]> {
-    return this.httpClient.get<EpidemieModel[]>(`${environment.apiURL}/epidemies`);
-  }
+  // constructor(private httpClient: HttpClient) { }
 
-  createData(data: any): Observable<Object> {
-    return this.httpClient.post(`${environment.apiURL}/epidemies`, data)
-  }
+  // all(): Observable<EpidemieModel[]> {
+  //   return this.httpClient.get<EpidemieModel[]>(`${environment.apiURL}/epidemies`);
+  // }
 
-  getDataById(id: number): Observable<EpidemieModel> {
-    return this.httpClient.get<EpidemieModel>(`${environment.apiURL}/epidemies/${id}`);
-  }
+  // create(data: any): Observable<Object> {
+  //   return this.httpClient.post(`${environment.apiURL}/epidemies`, data)
+  // }
 
-  updateData(id: number, data: EpidemieModel): Observable<Object> {
-    return this.httpClient.put(`${environment.apiURL}/epidemies/${id}`, data);
-  } 
+  // get(id: number): Observable<EpidemieModel> {
+  //   return this.httpClient.get<EpidemieModel>(`${environment.apiURL}/epidemies/${id}`);
+  // }
 
-  deleteData(id: number): Observable<Object> {
-    return this.httpClient.delete(`${environment.apiURL}/epidemies/${id}`);
-  }
+  // update(id: number, data: EpidemieModel): Observable<Object> {
+  //   return this.httpClient.put(`${environment.apiURL}/epidemies/${id}`, data);
+  // } 
+
+  // delete(id: number): Observable<Object> {
+  //   return this.httpClient.delete(`${environment.apiURL}/epidemies/${id}`);
+  // }
 }

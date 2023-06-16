@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserModel } from 'src/app/users/models/user-models';
 import { CampaignModel } from '../../models/campaign-model';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-campaign-add',
@@ -16,23 +17,46 @@ export class CampaignAddComponent implements OnInit {
   isLoading: boolean = false;
   structure: CampaignModel = new CampaignModel();
 
-  currentUser: UserModel;
+  currentUser: UserModel = {
+    id: 0,
+    structure: '-',
+    photo: '-',
+    nom: '-',
+    postnom: '-',
+    prenom: '-',
+    sexe: '-',
+    nationalite: '-',
+    etat_civile: '-',
+    adresse: '-',
+    titre: '-',
+    pays: '-',
+    province: '-',
+    zone_sante: '-',
+    email: '-',
+    telephone: '-',
+    matricule: '-',
+    password: '-',
+    signature: '-',
+    created: new Date,
+    update_created: new Date
+};
 
   formGroup!: FormGroup;
 
   constructor(
     private _formBuilder: FormBuilder,
     private authService: AuthService,
+    private localStore: LocalService,
     private campaignService: CampaignService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.user().subscribe(
-      res => {
-          console.log(res);
-          this.currentUser = res; 
-      }
-    )
+    var userId: any = this.localStore.getData('auth')
+      this.authService.user(parseInt(userId)).subscribe(
+        res => {
+            this.currentUser = res; 
+        }
+      );
     this.formGroup = this._formBuilder.group({
       nom: ['', Validators.required],
       date_debut: ['', Validators.required],
@@ -65,7 +89,7 @@ export class CampaignAddComponent implements OnInit {
         update_created: new Date()
       };
       console.log(body);
-      this.campaignService.createData(body).subscribe(() => {
+      this.campaignService.create(body).subscribe(() => {
           this.isLoading = false;
           this.goList();
       }); 

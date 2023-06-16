@@ -2,7 +2,7 @@ export interface UserModel {
     id: number | undefined;
     structure: string | undefined;
     photo: string | undefined;
-    nom: string | undefined; 
+    nom: string | undefined;
     postnom: string | undefined;
     prenom: string | undefined;
     sexe: string | undefined;

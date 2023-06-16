@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CustomizerSettingsService } from "src/app/common/customizer-settings/customizer-settings.service";
 import { AuthService } from '../auth.service';
 import { Validators } from 'ngx-editor';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-login',
@@ -15,13 +16,16 @@ export class LoginComponent implements OnInit {
 
   isLoading = false;
 
+  isLoggIn = false;
+
   form : FormGroup | any
 
   constructor(
       public themeService: CustomizerSettingsService,
       private formBuilder: FormBuilder,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
+    private localStore: LocalService
   ) {}
 
 
@@ -35,14 +39,30 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.isLoading = true;
-    this.authService.login(this.form.getRawValue()).subscribe(res => {
-        console.log(res);
-        this.isLoading = false;
-        this.router.navigate(['/dashboard']);
-    });
-   
-  }
+    this.authService.login(this.form.getRawValue()).subscribe({
+        next: (res) => {
+          // console.log(res);
+          this.localStore.saveData('auth', JSON.stringify(res));
+          this.isLoading = false;
+          this.router.navigate(['/dashboard']);
+        },
+        error: (e) => {
+          this.isLoading = false;
+          // console.error(e);
+          this.isLoggIn = true; 
+          this.router.navigate(['/authentification/login']);
+        },
+        complete: () => {
+          this.isLoading = false;
+        }
+      }
+    )
 
+  } 
+
+  dismissAlert() {
+    this.isLoggIn = false;
+  }
 
   toggleTheme() {
       this.themeService.toggleTheme();

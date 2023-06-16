@@ -15,13 +15,9 @@ export class StructureListComponent implements AfterViewInit {
   displayedColumns: string[] = ['nom_complet', 'single', 'manager', 'signature', 'created', 'edit', 'delete'];
 
   ELEMENT_DATA: StructureModel[] = [];
-
-  metaData: any = [];
-
-  pageMeta: MetaModel;
-
-
-  // dataSource = new MatTableDataSource<StructureModel>(this.ELEMENT_DATA);
+  
+  isLoading = false;
+ 
   dataSource: MatTableDataSource<StructureModel>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,17 +27,20 @@ export class StructureListComponent implements AfterViewInit {
     private router: Router) {}
 
   ngAfterViewInit() {
-    this.structureService.getList().subscribe(res => {
-      this.metaData = res;
-
-      this.ELEMENT_DATA = this.metaData['data'];
-      this.pageMeta = this.metaData['meta'];
-
-      console.log(this.pageMeta);
-      console.log(this.ELEMENT_DATA); 
-      this.dataSource = new MatTableDataSource<StructureModel>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-    })
+    this.isLoading = true;
+    this.structureService.all().subscribe({
+      next: res => { 
+        this.ELEMENT_DATA = res;
+        this.dataSource = new MatTableDataSource<StructureModel>(this.ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+      }
+    });
+    this.isLoading = false;
 
   }
 
@@ -57,7 +56,7 @@ export class StructureListComponent implements AfterViewInit {
 
 
   removeItem(id: number){
-    this.structureService.deleteData(id);
+    this.structureService.delete(id);
   }
 
 

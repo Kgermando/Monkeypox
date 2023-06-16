@@ -72,7 +72,7 @@ export class UserViewComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     let id = this.route.snapshot.paramMap.get('id');
-    this.usersService.getDataById(Number(id)).subscribe(res => {
+    this.usersService.get(Number(id)).subscribe(res => {
       this.user = res;
       this.isLoading = false;
 

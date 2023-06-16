@@ -16,7 +16,7 @@
                 <span class="middle-bar"></span>
                 <span class="bottom-bar"></span>
             </div>
-            <button mat-icon-button [matMenuTriggerFor]="appsMenu" class="menu-btn rounded-circle p-0 border-none position-relative">
+            <!-- <button mat-icon-button [matMenuTriggerFor]="appsMenu" class="menu-btn rounded-circle p-0 border-none position-relative">
                 <i class="flaticon-menu-1"></i>
             </button>
             <mat-menu class="menu-dropdown" #appsMenu="matMenu" xPosition="after">
@@ -64,7 +64,7 @@
                 <div class="menu-footer">
                     <a routerLink="/dashboard" class="fw-medium position-relative">View All <i class="flaticon-chevron"></i></a>
                 </div>
-            </mat-menu>
+            </mat-menu> -->
         </div>
         <ul class="header-right-side d-flex align-items-center mt-0 mb-0">
             <!-- <li>
@@ -78,13 +78,13 @@
                                 <img src="assets/img/flag/spain.png" alt="spain">
                                 Spanish
                             </button>
-                        </li> 
+                        </li>
                         <li>
                             <button type="button" class="d-flex align-items-center border-none">
                                 <img src="assets/img/flag/usa.png" alt="usa">
                                 English
                             </button>
-                        </li> 
+                        </li>
                     </ul>
                 </mat-menu>
             </li> -->
@@ -205,10 +205,10 @@
             <li class="d-none d-lg-block" *ngIf="loading">
                 <mat-card class="mb-10 tagus-card">
                     <mat-card-content>
-                        <mat-spinner [diameter]="30"></mat-spinner>
+                        <mat-spinner [diameter]="20"></mat-spinner>
                     </mat-card-content>
                 </mat-card>
-            </li> 
+            </li>
             <li *ngIf="!loading">
                 <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
                     <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
@@ -228,7 +228,7 @@
                             </a>
                         </li>
                         <li>
-                            <a routerLink="/authentication/logout">
+                            <a routerLink="/authentication/logout" (click)="logOut()">
                                 <i class="ri-shut-down-line"></i> Logout
                             </a>
                         </li>

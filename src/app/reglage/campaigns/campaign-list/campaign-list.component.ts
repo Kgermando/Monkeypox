@@ -16,12 +16,8 @@ export class CampaignListComponent {
 
   ELEMENT_DATA: CampaignModel[] = [];
 
-  metaData: any = [];
+  isLoading = false;
 
-  pageMeta: MetaModel;
-
-
-  // dataSource = new MatTableDataSource<StructureModel>(this.ELEMENT_DATA);
   dataSource: MatTableDataSource<CampaignModel>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -31,17 +27,21 @@ export class CampaignListComponent {
     private router: Router) {}
 
   ngAfterViewInit() {
-    this.campaignService.getList().subscribe(res => {
-      this.metaData = res;
+    this.isLoading = true;
+    this.campaignService.all().subscribe({
+      next: res => {
+        this.ELEMENT_DATA = res;
 
-      this.ELEMENT_DATA = this.metaData['data'];
-      this.pageMeta = this.metaData['meta'];
-
-      console.log(this.pageMeta);
-      console.log(this.ELEMENT_DATA); 
-      this.dataSource = new MatTableDataSource<CampaignModel>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-    })
+        this.dataSource = new MatTableDataSource<CampaignModel>(this.ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.isLoading = false;
+      },
+      error: err => {
+        this.isLoading = false;
+        console.log(err);
+      }
+    });
+    this.isLoading = false;
 
   }
 
@@ -56,6 +56,6 @@ export class CampaignListComponent {
 
 
   removeItem(id: number){
-    this.campaignService.deleteData(id);
+    this.campaignService.delete(id);
   }
 }

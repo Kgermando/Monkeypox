@@ -22,7 +22,7 @@ export class AnalyticsActivityComponent implements AfterViewInit {
     ) {}
  
     ngAfterViewInit() {
-        this.epidemieService.getList().subscribe(res => {
+        this.epidemieService.all().subscribe(res => {
         this.metaData = res;
     
         this.ELEMENT_DATA = this.metaData['data'];

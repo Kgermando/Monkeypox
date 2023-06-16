@@ -16,35 +16,37 @@ export class UserListComponent implements AfterViewInit {
     displayedColumns: string[] = ['id', 'structure', 'nom', 'postnom', 'prenom', 'sexe', 'titre', 'zone_sante', 'created'];
 
     ELEMENT_DATA: UserModel[] = [];
-  
-    metaData: any = [];
-  
-    pageMeta: MetaModel;
-  
-  
-    // dataSource = new MatTableDataSource<StructureModel>(this.ELEMENT_DATA);
+   
     dataSource: MatTableDataSource<UserModel>;
   
     @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    isLoading = false;
+
+    err: any;
 
 
     constructor(
         private usersService: UsersService,
         private router: Router) {}
     
-      ngAfterViewInit() {
-        this.usersService.getList().subscribe(res => {
-          this.metaData = res;
-    
-          this.ELEMENT_DATA = this.metaData['data'];
-          this.pageMeta = this.metaData['meta'];
-    
-          console.log(this.pageMeta);
-          console.log(this.ELEMENT_DATA); 
-          this.dataSource = new MatTableDataSource<UserModel>(this.ELEMENT_DATA);
-          this.dataSource.paginator = this.paginator;
-        })
-    
+      ngAfterViewInit() { 
+        this.isLoading = true;
+        this.usersService.all().subscribe({
+          next: res => {
+            this.ELEMENT_DATA = res;
+  
+            this.dataSource = new MatTableDataSource<UserModel>(this.ELEMENT_DATA);
+            this.dataSource.paginator = this.paginator;
+  
+            this.isLoading = false;
+          },
+          error: (err) => {
+            this.isLoading = false;
+            console.log(err);
+          }
+        });
+        this.isLoading = false;
       }
     
       applyFilter(event: Event) {
@@ -58,7 +60,7 @@ export class UserListComponent implements AfterViewInit {
     
     
       removeItem(id: number){
-        this.usersService.deleteData(id);
+        this.usersService.delete(id);
       }
     
     

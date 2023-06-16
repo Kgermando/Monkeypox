@@ -8,6 +8,7 @@ import { PatientService } from '../patient.service';
 import { PatientModel } from '../models/patient-model';
 import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
 import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-patient-edit',
@@ -22,7 +23,29 @@ export class PatientEditComponent {
 
   formGroup!: FormGroup;
 
-  currentUser: UserModel; 
+  currentUser: UserModel = {
+    id: 0,
+    structure: '-',
+    photo: '-',
+    nom: '-',
+    postnom: '-',
+    prenom: '-',
+    sexe: '-',
+    nationalite: '-',
+    etat_civile: '-',
+    adresse: '-',
+    titre: '-',
+    pays: '-',
+    province: '-',
+    zone_sante: '-',
+    email: '-',
+    telephone: '-',
+    matricule: '-',
+    password: '-',
+    signature: '-',
+    created: new Date,
+    update_created: new Date
+};
 
   fourchetteAgeList: any = [
     "Nourissons",
@@ -39,19 +62,21 @@ export class PatientEditComponent {
       private route: ActivatedRoute,
       private router: Router,
       private authService: AuthService,
+      private localStore: LocalService,
       private patientService: PatientService, 
   ) { }
 
 
   ngOnInit(): void {
-    this.authService.user().subscribe(
+    var userId: any = this.localStore.getData('auth')
+    this.authService.user(parseInt(userId)).subscribe(
       res => {
           this.currentUser = res; 
       }
     );
 
     let id = this.route.snapshot.paramMap.get('id');
-    this.patientService.getDataById(Number(id)).subscribe(res => {
+    this.patientService.get(Number(id)).subscribe(res => {
       this.patient = res;
       this.isLoading = false;
 
@@ -100,7 +125,7 @@ export class PatientEditComponent {
         update_created: new Date()
       };
       console.log(body);
-      this.patientService.createData(body).subscribe(() => {
+      this.patientService.create(body).subscribe(() => {
           this.isLoading = false;
           this.formGroup.reset();
           this.router.navigate(['/patients/patient-list']);

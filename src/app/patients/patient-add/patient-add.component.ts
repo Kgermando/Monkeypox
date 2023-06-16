@@ -8,6 +8,7 @@ import { UserModel } from 'src/app/users/models/user-models';
 import { PatientService } from '../patient.service';
 import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
 import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-patient-add',
@@ -23,7 +24,29 @@ export class PatientAddComponent implements OnInit {
 
   formGroup!: FormGroup;
 
-  currentUser: UserModel; 
+  currentUser: UserModel = {
+    id: 0,
+    structure: '-',
+    photo: '-',
+    nom: '-',
+    postnom: '-',
+    prenom: '-',
+    sexe: '-',
+    nationalite: '-',
+    etat_civile: '-',
+    adresse: '-',
+    titre: '-',
+    pays: '-',
+    province: '-',
+    zone_sante: '-',
+    email: '-',
+    telephone: '-',
+    matricule: '-',
+    password: '-',
+    signature: '-',
+    created: new Date,
+    update_created: new Date
+};
 
 
   fourchetteAgeList: any = [
@@ -38,12 +61,14 @@ export class PatientAddComponent implements OnInit {
       private _formBuilder: FormBuilder, 
       private router: Router,
       private authService: AuthService,
+      private localStore: LocalService,
       private patientService: PatientService, 
   ) { }
 
 
   ngOnInit(): void {
-    this.authService.user().subscribe(
+    var userId: any = this.localStore.getData('auth')
+    this.authService.user(parseInt(userId)).subscribe(
       res => {
           this.currentUser = res; 
       }
@@ -91,7 +116,7 @@ export class PatientAddComponent implements OnInit {
         update_created: new Date()
       };
       console.log(body);
-      this.patientService.createData(body).subscribe(() => {
+      this.patientService.create(body).subscribe(() => {
           this.isLoading = false;
           this.formGroup.reset();
           this.router.navigate(['/patients/patient-list']);

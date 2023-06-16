@@ -52,11 +52,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { PaginatorComponent } from './components/paginator/paginator.component';
+import { InternalErrorComponent } from './components/internal-error/internal-error.component';
  
 
 @NgModule({
   declarations: [
-    FileUploadComponent
+    FileUploadComponent,
+    PaginatorComponent,
+    InternalErrorComponent,
   ],
   imports: [
     CommonModule,
@@ -165,7 +169,13 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
     NgChartsModule,
     NgxMatTimepickerModule, 
     NgxDropzoneModule,
-    ColorPickerModule
+    ColorPickerModule,
+
+
+
+    // Export components
+    PaginatorComponent,
+    InternalErrorComponent,
   ]
 })
 export class SharedModule { }

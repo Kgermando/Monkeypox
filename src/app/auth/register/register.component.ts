@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 
 
     ngOnInit(): void {
-        // this.structureService.getList().subscribe(res => {
+        // this.structureService.all().subscribe(res => {
         //     this.structureList = res;
         // });
         this.formGroup = this._formBuilder.group({

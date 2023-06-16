@@ -25,7 +25,7 @@ export class PatientViewComponent implements OnInit {
     ngOnInit(): void {
       this.isLoading = true;
       let id = this.route.snapshot.paramMap.get('id');
-      this.patientService.getDataById(Number(id)).subscribe(res => {
+      this.patientService.get(Number(id)).subscribe(res => {
         this.patient = res;
         this.isLoading = false;
   

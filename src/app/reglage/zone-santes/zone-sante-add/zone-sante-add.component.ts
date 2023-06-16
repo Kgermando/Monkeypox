@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 import { ZoneSanteService } from '../zone-sante.service';
 import { Router } from '@angular/router';
 import { provinces } from 'src/app/shared/utils/province';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-zone-sante-add',
@@ -16,7 +17,29 @@ export class ZoneSanteAddComponent implements OnInit {
   isLoading: boolean = false;
   zoneSante: ZoneSanteModel = new ZoneSanteModel();
 
-  currentUser: UserModel;
+  currentUser: UserModel = {
+    id: 0,
+    structure: '-',
+    photo: '-',
+    nom: '-',
+    postnom: '-',
+    prenom: '-',
+    sexe: '-',
+    nationalite: '-',
+    etat_civile: '-',
+    adresse: '-',
+    titre: '-',
+    pays: '-',
+    province: '-',
+    zone_sante: '-',
+    email: '-',
+    telephone: '-',
+    matricule: '-',
+    password: '-',
+    signature: '-',
+    created: new Date,
+    update_created: new Date
+};
 
   formGroup!: FormGroup;
 
@@ -25,16 +48,17 @@ export class ZoneSanteAddComponent implements OnInit {
   constructor(
     private _formBuilder: FormBuilder,
     private authService: AuthService,
+    private localStore: LocalService,
     private zoneSanteService: ZoneSanteService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.user().subscribe(
+    var userId: any = this.localStore.getData('auth')
+    this.authService.user(parseInt(userId)).subscribe(
       res => {
-          console.log(res);
           this.currentUser = res; 
       }
-    )
+    );
     this.formGroup = this._formBuilder.group({
       zone: ['', Validators.required],
       province: ['', Validators.required],
@@ -63,7 +87,7 @@ export class ZoneSanteAddComponent implements OnInit {
         update_created: new Date()
       };
       console.log(body);
-      this.zoneSanteService.createData(body).subscribe(() => {
+      this.zoneSanteService.create(body).subscribe(() => {
           this.isLoading = false;
           this.goList();
       }); 

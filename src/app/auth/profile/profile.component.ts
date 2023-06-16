@@ -7,8 +7,9 @@ import {
   ApexChart,
   ApexFill,
   ChartComponent
-} from "ng-apexcharts"; 
+} from "ng-apexcharts";
 import { UserModel } from 'src/app/users/models/user-models';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -31,11 +32,8 @@ export class ProfileComponent implements OnInit {
     public chartOptions: Partial<ChartOptions>;
 
 
-    loading = false;
- 
-    // public currentUser: Observable<UserModel | null>;
+    loading = false; 
 
- 
     currentUser: UserModel = {
         id: 0,
         structure: '-',
@@ -62,7 +60,8 @@ export class ProfileComponent implements OnInit {
 
     constructor(
         public themeService: CustomizerSettingsService,
-        private authService: AuthService
+        private authService: AuthService,
+        private localStore: LocalService
     ) {
         this.chartOptions = {
             series: [50],
@@ -93,43 +92,30 @@ export class ProfileComponent implements OnInit {
                 }
             }
         };
- 
+
     }
 
 
-   ngOnInit(): void {
-    // this.getUser()
-    this.authService.user().subscribe(
-            res => {
-                console.log(res);
-                this.currentUser = res; 
-            }
-        )
-    }
+  ngOnInit(): void {
+    var userId: any = this.localStore.getData('auth')
+    this.getUser(parseInt(userId));
+    console.log(userId);
+  }
 
 
-    getUser(): void {
+    getUser(userId: number): void {
         this.loading = true;
-        this.authService.user().subscribe(
+        this.authService.user(userId).subscribe(
             res => {
                 console.log(res);
-                this.currentUser = res; 
+                this.currentUser = res;
                 this.loading = false;
             }
         )
-        this.loading = false;  
-      }
 
+      } 
 
-
-
-
-
-
-
-
-
-
+      
     toggleTheme() {
         this.themeService.toggleTheme();
     }

@@ -31,6 +31,7 @@ export class EpidemieModel {
     statut: string | undefined;
     commentaire: string | undefined;
     campaign: string | undefined;
+    epidemie: string | undefined;
     signature: string | undefined;
     created: Date | undefined;
     update_created: Date | undefined;

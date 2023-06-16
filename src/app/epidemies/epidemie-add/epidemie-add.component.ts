@@ -10,6 +10,7 @@ import { Editor, Toolbar } from 'ngx-editor';
 import { CampaignModel } from 'src/app/reglage/models/campaign-model';
 import { CampaignService } from 'src/app/reglage/campaigns/campaign.service';
 import { formatDate } from '@angular/common';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-epidemie-add',
@@ -22,7 +23,29 @@ export class EpidemieAddComponent implements OnInit {
 
   errorMessage: string =' '; 
   
-  currentUser: UserModel;
+  currentUser: UserModel = {
+    id: 0,
+    structure: '-',
+    photo: '-',
+    nom: '-',
+    postnom: '-',
+    prenom: '-',
+    sexe: '-',
+    nationalite: '-',
+    etat_civile: '-',
+    adresse: '-',
+    titre: '-',
+    pays: '-',
+    province: '-',
+    zone_sante: '-',
+    email: '-',
+    telephone: '-',
+    matricule: '-',
+    password: '-',
+    signature: '-',
+    created: new Date,
+    update_created: new Date
+};
 
   formGroup!: FormGroup;
 
@@ -55,17 +78,19 @@ export class EpidemieAddComponent implements OnInit {
     private authService: AuthService,
     private epidemieService: EpidemieService,
     private campaignService: CampaignService,
+    private localStore: LocalService,
     private router: Router) { }
 
 
     ngOnInit(): void {
-      this.authService.user().subscribe(
+      var userId: any = this.localStore.getData('auth')
+      this.authService.user(parseInt(userId)).subscribe(
         res => {
             this.currentUser = res; 
         }
       );
       this.isLoadingData = true;
-      this.epidemieService.getList().subscribe(res => {
+      this.epidemieService.all().subscribe(res => {
         this.metaData = res; 
         this.epidemieList = this.metaData['data']; 
         this.epidemieID = this.epidemieList.map(e => e.id);
@@ -74,7 +99,7 @@ export class EpidemieAddComponent implements OnInit {
         this.isLoadingData = false;
       });
 
-      this.campaignService.getList().subscribe(res => {
+      this.campaignService.all().subscribe(res => {
         this.metaCampaign = res; 
         this.campaignList = this.metaCampaign['data'];   
       });
@@ -140,13 +165,14 @@ export class EpidemieAddComponent implements OnInit {
           date_expedition: this.formGroup.value.date_expedition,
           statut: this.formGroup.value.statut,
           commentaire: this.formGroup.value.commentaire,
-          campaign: this.formGroup.value.campaign, 
+          campaign: this.formGroup.value.campaign,
+          epidemie: 'Monkeypox',
           signature: this.currentUser.matricule, // User
           created: new Date(),
           update_created: new Date()
         };
         console.log(body);
-        this.epidemieService.createData(body).subscribe(() => {
+        this.epidemieService.create(body).subscribe(() => {
             this.isLoading = false;
             this.formGroup.reset();
             this.router.navigate(['/epidemies/epidemie-list']);

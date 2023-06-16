@@ -3,35 +3,31 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UserModel } from './models/user-models';
 import { environment } from 'src/environments/environment';
+import { RestService } from '../shared/services/rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService { 
+export class UsersService extends RestService { 
 
-  constructor(private httpClient: HttpClient) { }
+  endpoint: string = `${environment.apiURL}/users`;
 
-  getList(): Observable<UserModel[]> { // it returns a Employee object -> an array is needed
-    return this.httpClient.get<UserModel[]>(`${environment.apiURL}/users`);  // backticks!, this is a GET request (REST), it interprets the body as a JSON object
-  }
+  // constructor(private httpClient: HttpClient) { }
 
-  createData(data: any): Observable<Object> {
-    return this.httpClient.post(`${environment.apiURL}/users`, data)
-  }
+  // all(): Observable<UserModel[]> {  
+  //   return this.httpClient.get<UserModel[]>(`${environment.apiURL}/users`);  // backticks!, this is a GET request (REST), it interprets the body as a JSON object
+  // }
 
-  getDataById(id: number): Observable<UserModel> {
-    return this.httpClient.get<UserModel>(`${environment.apiURL}/users/${id}`);
-  }
+  // create(data: any): Observable<Object> {
+  //   return this.httpClient.post(`${environment.apiURL}/users`, data)
+  // }
 
-  updateData(id: number, data: UserModel): Observable<Object> {
-    return this.httpClient.put(`${environment.apiURL}/users/info/${id}`, data);
-  }
+  // get(id: number): Observable<UserModel> {
+  //   return this.httpClient.get<UserModel>(`${environment.apiURL}/users/${id}`);
+  // }
+ 
 
-  updatePassword(id: number, data: UserModel): Observable<Object> {
-    return this.httpClient.put(`${environment.apiURL}/users/password/${id}`, data);
-  }
-
-  deleteData(id: number): Observable<Object> {
-    return this.httpClient.delete(`${environment.apiURL}/users/${id}`);
-  }
+  // delete(id: number): Observable<Object> {
+  //   return this.httpClient.delete(`${environment.apiURL}/users/${id}`);
+  // }
 }

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserModel } from 'src/app/users/models/user-models';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 @Component({
   selector: 'app-structure-add',
@@ -16,23 +17,46 @@ export class StructureAddComponent implements OnInit {
   isLoading: boolean = false;
   structure: StructureModel = new StructureModel();
 
-  currentUser: UserModel;
+  currentUser: UserModel = {
+    id: 0,
+    structure: '-',
+    photo: '-',
+    nom: '-',
+    postnom: '-',
+    prenom: '-',
+    sexe: '-',
+    nationalite: '-',
+    etat_civile: '-',
+    adresse: '-',
+    titre: '-',
+    pays: '-',
+    province: '-',
+    zone_sante: '-',
+    email: '-',
+    telephone: '-',
+    matricule: '-',
+    password: '-',
+    signature: '-',
+    created: new Date,
+    update_created: new Date
+};
 
   formGroup!: FormGroup;
 
   constructor(
     private _formBuilder: FormBuilder,
     private authService: AuthService,
+    private localStore: LocalService,
     private structureService: StructureService,
     private router: Router) { }
 
   ngOnInit(): void {
-    this.authService.user().subscribe(
-      res => {
-          console.log(res);
-          this.currentUser = res; 
-      }
-    )
+    var userId: any = this.localStore.getData('auth')
+      this.authService.user(parseInt(userId)).subscribe(
+        res => {
+            this.currentUser = res; 
+        }
+      );
     this.formGroup = this._formBuilder.group({
         nom_complet: ['', Validators.required],
         single: ['', Validators.required],
@@ -61,7 +85,7 @@ export class StructureAddComponent implements OnInit {
         update_created: new Date()
       };
       console.log(body);
-      this.structureService.createData(body).subscribe(() => {
+      this.structureService.create(body).subscribe(() => {
           this.isLoading = false;
           this.goList();
       }); 

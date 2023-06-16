@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -12,14 +12,15 @@ import { CustomizerSettingsComponent } from './common/customizer-settings/custom
 import { FooterComponent } from './common/footer/footer.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { NotFoundComponent } from './common/not-found/not-found.component';
-import { InternalErrorComponent } from './common/internal-error/internal-error.component';
-import { UsersModule } from './users/users.module';
+
 import { AuthModule } from './auth/auth.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { DatePipe } from '@angular/common';
 import { ReglageModule } from './reglage/reglage.module';
 import { PatientsModule } from './patients/patients.module';
 import { EpidemiesModule } from './epidemies/epidemies.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { UsersModule } from './users/users.module';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,9 @@ import { EpidemiesModule } from './epidemies/epidemies.module';
     CustomizerSettingsComponent,
     FooterComponent,
     SidebarComponent,
-    NotFoundComponent,
-    InternalErrorComponent,
+    NotFoundComponent, 
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -49,6 +50,12 @@ import { EpidemiesModule } from './epidemies/epidemies.module';
         echarts: () => import('echarts')
     }),
     QuillModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
   ],
   providers: [
     DatePipe

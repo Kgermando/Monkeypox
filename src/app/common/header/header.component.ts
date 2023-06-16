@@ -1,9 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { ToggleService } from './toggle.service'; 
+import { ToggleService } from './toggle.service';
 import { DatePipe } from '@angular/common';
 import { CustomizerSettingsService } from '../customizer-settings/customizer-settings.service';
 import { AuthService } from 'src/app/auth/auth.service';
 import { UserModel } from 'src/app/users/models/user-models';
+import { LocalService } from 'src/app/shared/services/local.service';
+import { Router } from '@angular/router';
+import { Auth } from 'src/app/shared/classes/auth';
 
 @Component({
   selector: 'app-header',
@@ -24,37 +27,18 @@ export class HeaderComponent implements OnInit {
 
     isToggled = false;
 
-    loading = false;
-    currentUser: UserModel = {
-        id: 0,
-        structure: '-',
-        photo: '-',
-        nom: '-',
-        postnom: '-',
-        prenom: '-',
-        sexe: '-',
-        nationalite: '-',
-        etat_civile: '-',
-        adresse: '-',
-        titre: '-',
-        pays: '-',
-        province: '-',
-        zone_sante: '-',
-        email: '-',
-        telephone: '-',
-        matricule: '-',
-        password: '-',
-        signature: '-',
-        created: new Date,
-        update_created: new Date
-    };
-
     
+
+    loading = false;
+    currentUser: UserModel;
+
+
     constructor(
         private toggleService: ToggleService,
         private datePipe: DatePipe,
         public themeService: CustomizerSettingsService,
-        private authService: AuthService
+        private authService: AuthService,
+        private localStore: LocalService,
     ) {
         this.toggleService.isToggled$.subscribe(isToggled => {
             this.isToggled = isToggled;
@@ -63,13 +47,35 @@ export class HeaderComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.authService.user().subscribe(
-            res => {
-                console.log(res);
-                this.currentUser = res; 
-            }
-        )
+      this.loading = true;
+      var userId: string = this.localStore.getData('auth')
+      if (userId) {
+        this.authService.user(parseInt(userId)).subscribe(
+          res => {
+            this.currentUser = res;
+            this.loading = false;
+          }
+        ) 
+      }
     }
+
+    logOut() {
+      try {
+        this.loading = true;
+        this.localStore.clearData();
+        this.loading = false; 
+      } catch (error) {
+        alert("Quelque chose c'est mal passé! Reessayer.")
+      }
+
+ 
+    }
+
+
+
+
+
+
 
     toggleTheme() {
         this.themeService.toggleTheme();

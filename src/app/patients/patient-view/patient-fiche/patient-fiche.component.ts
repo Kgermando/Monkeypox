@@ -15,37 +15,40 @@ import { PatientModel } from '../../models/patient-model';
 export class PatientFicheComponent {
     @Input() patient: PatientModel;
 
-    displayedColumns: string[] = ['num_epi', 'semaine_epi', 'date_notification', 'fievre', 'eruption_cutanee', 'date_symptome', 'date_admition', 'date_diagonstic', 'a_ete_contact_patient', 'type_contact', 'a_ete_hospitalise', 'croute', 'ecouvillon', 'prevelement_sanguin', 'date_prelevement', 'date_expedition', 'statut'];
+    displayedColumns: string[] = ['statut', 'num_epi', 'semaine_epi', 'date_notification', 'fievre', 'eruption_cutanee', 'date_symptome', 'date_admition', 'date_diagonstic', 'a_ete_contact_patient', 'type_contact', 'a_ete_hospitalise', 'croute', 'ecouvillon', 'prevelement_sanguin', 'date_prelevement', 'date_expedition'];
 
   
     ELEMENT_DATA: EpidemieModel[] = [];
     ELEMENT_DATA_FILTER: EpidemieModel[] = [];
-  
-    metaData: any = [];
-    
-    pageMeta: MetaModel;
-
+   
     dataSource: MatTableDataSource<EpidemieModel>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
-  
 
+    isLoading = false;
+  
     constructor(
         private epidemieService: EpidemieService) {}
 
 
         ngAfterViewInit() {
-          this.epidemieService.getList().subscribe(res => {
-            this.metaData = res;
-      
-            this.ELEMENT_DATA = this.metaData['data'];
-            this.pageMeta = this.metaData['meta'];
-
-            this.ELEMENT_DATA_FILTER = this.ELEMENT_DATA.filter(u => this.patient.id == u.patient_id); 
-
-            this.dataSource = new MatTableDataSource<EpidemieModel>(this.ELEMENT_DATA_FILTER);
-            this.dataSource.paginator = this.paginator;
-          })
+          this.isLoading = true;
+          this.epidemieService.all().subscribe({
+            next: res => {
+              this.ELEMENT_DATA = res;
+  
+              this.ELEMENT_DATA_FILTER = this.ELEMENT_DATA.filter(u => this.patient.id == u.patient_id); 
+  
+              this.dataSource = new MatTableDataSource<EpidemieModel>(this.ELEMENT_DATA_FILTER);
+              this.dataSource.paginator = this.paginator;
+              this.isLoading = false;
+            },
+            error: err => {
+              this.isLoading = false;
+              console.log(err);
+            }
+          });
+          this.isLoading = false;
       
         }   
 

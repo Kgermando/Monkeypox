@@ -25,25 +25,30 @@ export class ZoneSanteListComponent {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-
   dataSource: MatTableDataSource<ZoneSanteModel>;
+
+  isLoading = false;
 
   constructor(
     private zoneSanteService: ZoneSanteService,
     private router: Router) {}
 
   ngAfterViewInit() {
-    this.zoneSanteService.getList().subscribe(res => {
-      this.metaData = res;
-
-      this.ELEMENT_DATA = this.metaData['data'];
-      this.pageMeta = this.metaData['meta'];
-
-      console.log(this.pageMeta);
-      console.log(this.ELEMENT_DATA); 
-      this.dataSource = new MatTableDataSource<ZoneSanteModel>(this.ELEMENT_DATA);
-      this.dataSource.paginator = this.paginator;
-    })
+    this.isLoading = true;
+    this.zoneSanteService.all().subscribe({
+      next: res => {
+        this.ELEMENT_DATA = res;
+        this.dataSource = new MatTableDataSource<ZoneSanteModel>(this.ELEMENT_DATA);
+        this.dataSource.paginator = this.paginator;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
+      }
+      
+    });
+    this.isLoading = false;
 
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-internal-error',
@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./internal-error.component.scss']
 })
 export class InternalErrorComponent {
-
+  @Input('err') err: any;
 }

@@ -16,10 +16,7 @@ export class PatientListComponent implements AfterViewInit {
   displayedColumns: string[] = ['id','nom', 'postnom', 'prenom', 'sexe', 'age_mois', 'age_an', 'aire_sante', 'created'];
 
   ELEMENT_DATA: PatientModel[] = [];
-
-  metaData: any = [];
-
-  pageMeta: MetaModel;
+  isLoading = false;
 
   dataSource: MatTableDataSource<PatientModel>;
 
@@ -31,17 +28,20 @@ export class PatientListComponent implements AfterViewInit {
       private router: Router) {}
   
     ngAfterViewInit() {
-      this.patientService.getList().subscribe(res => {
-        this.metaData = res;
-  
-        this.ELEMENT_DATA = this.metaData['data'];
-        this.pageMeta = this.metaData['meta'];
-  
-        console.log(this.pageMeta);
-        console.log(this.ELEMENT_DATA); 
-        this.dataSource = new MatTableDataSource<PatientModel>(this.ELEMENT_DATA);
-        this.dataSource.paginator = this.paginator;
-      })
+      this.isLoading = true;
+      this.patientService.all().subscribe({
+        next: res => { 
+          this.ELEMENT_DATA = res;
+          this.dataSource = new MatTableDataSource<PatientModel>(this.ELEMENT_DATA);
+          this.dataSource.paginator = this.paginator;
+          this.isLoading = false;
+        },
+        error: err => {
+          this.isLoading = false;
+          console.log(err);
+        }
+      });
+      this.isLoading = false;
   
     }
 
@@ -56,7 +56,7 @@ export class PatientListComponent implements AfterViewInit {
   
   
     removeItem(id: number){
-      this.patientService.deleteData(id);
+      this.patientService.delete(id);
     }
   
 }

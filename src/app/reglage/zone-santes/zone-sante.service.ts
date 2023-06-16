@@ -3,30 +3,33 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ZoneSanteModel } from '../models/zone-sante-model';
+import { RestService } from 'src/app/shared/services/rest.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ZoneSanteService {
-  constructor(private httpClient: HttpClient) { }
+export class ZoneSanteService extends RestService {
+  endpoint: string = `${environment.apiURL}/zone-santes`;
 
-  getList(): Observable<ZoneSanteModel[]> { // it returns a Employee object -> an array is needed
-    return this.httpClient.get<ZoneSanteModel[]>(`${environment.apiURL}/zone-santes`);  // backticks!, this is a GET request (REST), it interprets the body as a JSON object
-  }
+  // constructor(private httpClient: HttpClient) { }
 
-  createData(data: any): Observable<Object> {
-    return this.httpClient.post(`${environment.apiURL}/zone-santes`, data)
-  }
+  // all(): Observable<ZoneSanteModel[]> {
+  //   return this.httpClient.get<ZoneSanteModel[]>(`${environment.apiURL}/zone-santes`);
+  // }
 
-  getDataById(id: number): Observable<ZoneSanteModel> {
-    return this.httpClient.get<ZoneSanteModel>(`${environment.apiURL}/zone-santes/${id}`);
-  }
+  // create(data: any): Observable<Object> {
+  //   return this.httpClient.post(`${environment.apiURL}/zone-santes`, data)
+  // }
 
-  updateData(id: number, data: any): Observable<Object> {
-    return this.httpClient.put(`${environment.apiURL}/zone-santes/${id}`, data);
-  }
+  // get(id: number): Observable<ZoneSanteModel> {
+  //   return this.httpClient.get<ZoneSanteModel>(`${environment.apiURL}/zone-santes/${id}`);
+  // }
 
-  deleteData(id: number): Observable<Object> {
-    return this.httpClient.delete(`${environment.apiURL}/zone-santes/${id}`);
-  }
+  // update(id: number, data: any): Observable<Object> {
+  //   return this.httpClient.put(`${environment.apiURL}/zone-santes/${id}`, data);
+  // }
+
+  // delete(id: number): Observable<Object> {
+  //   return this.httpClient.delete(`${environment.apiURL}/zone-santes/${id}`);
+  // }
 }

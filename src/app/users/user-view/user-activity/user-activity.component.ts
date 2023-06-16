@@ -24,9 +24,7 @@ export class UserActivityComponent implements AfterViewInit {
   ELEMENT_DATA: PatientModel[] = [];
   ELEMENT_DATA_FILTER: PatientModel[] = [];
 
-  metaData: any = [];
-
-  pageMeta: MetaModel;
+  isLoading = false;
 
   dataSource: MatTableDataSource<PatientModel>;
 
@@ -35,19 +33,21 @@ export class UserActivityComponent implements AfterViewInit {
     private router: Router) {}
 
   ngAfterViewInit() {
-    this.patientService.getList().subscribe(res => {
-        this.metaData = res;
-  
-        this.ELEMENT_DATA = this.metaData['data'];
-        this.pageMeta = this.metaData['meta'];
-
+    this.isLoading = true;
+    this.patientService.all().subscribe({
+      next:  res => {
+        this.ELEMENT_DATA = res; 
         this.ELEMENT_DATA_FILTER = this.ELEMENT_DATA.filter(u => this.user.matricule == u.signature);
-
-        console.log(this.pageMeta);
-        console.log(this.ELEMENT_DATA); 
+ 
         this.dataSource = new MatTableDataSource<PatientModel>(this.ELEMENT_DATA_FILTER);
         this.dataSource.paginator = this.paginator;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        this.isLoading = false;
+        console.log(err);
       }
+    } 
     )
   }
 

@@ -12,6 +12,7 @@ import { StructureService } from 'src/app/reglage/structures/structure.service';
 import { provinces } from 'src/app/shared/utils/province';
 import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
 import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
+import { LocalService } from 'src/app/shared/services/local.service';
 
 interface Sexe {
   value: string;
@@ -46,13 +47,36 @@ export class UserAddComponent implements OnInit {
   
     formGroup!: FormGroup;
 
-    currentUser: UserModel;
+    currentUser: UserModel = {
+      id: 0,
+      structure: '-',
+      photo: '-',
+      nom: '-',
+      postnom: '-',
+      prenom: '-',
+      sexe: '-',
+      nationalite: '-',
+      etat_civile: '-',
+      adresse: '-',
+      titre: '-',
+      pays: '-',
+      province: '-',
+      zone_sante: '-',
+      email: '-',
+      telephone: '-',
+      matricule: '-',
+      password: '-',
+      signature: '-',
+      created: new Date,
+      update_created: new Date
+  };
 
     constructor(
         public themeService: CustomizerSettingsService,
         private _formBuilder: FormBuilder, 
         private router: Router,
         private authService: AuthService,
+        private localStore: LocalService,
         private usersService: UsersService,
         private structureService: StructureService,
         private zoneSanteService: ZoneSanteService,
@@ -60,17 +84,18 @@ export class UserAddComponent implements OnInit {
 
 
     ngOnInit(): void {
-      this.authService.user().subscribe(
+      var userId: any = this.localStore.getData('auth')
+      this.authService.user(parseInt(userId)).subscribe(
         res => {
             this.currentUser = res; 
         }
       );
-      this.structureService.getList().subscribe(res => {
+      this.structureService.all().subscribe(res => {
         this.metaStructure = res;
         this.structureList = this.metaStructure['data'];
       });
 
-      this.zoneSanteService.getList().subscribe(res => {
+      this.zoneSanteService.all().subscribe(res => {
         this.metaZoneSante = res;
         this.zoneSanteList = this.metaZoneSante['data'];
       });
@@ -123,7 +148,7 @@ export class UserAddComponent implements OnInit {
         update_created: new Date()
       };
       console.log(body);
-      this.usersService.createData(body).subscribe(() => {
+      this.usersService.create(body).subscribe(() => {
           this.isLoading = false;
           this.formGroup.reset();
           this.router.navigate(['/users/user-list']);

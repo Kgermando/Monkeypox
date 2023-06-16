@@ -45,18 +45,18 @@ export class UserEditComponent {
 
 
   ngOnInit(): void {
-    this.authService.user().subscribe(
-      res => {
-          this.currentUser = res; 
-      }
-    )
+    // this.authService.user().subscribe(
+    //   res => {
+    //       this.currentUser = res; 
+    //   }
+    // )
 
     let id = this.route.snapshot.paramMap.get('id');
-    this.usersService.getDataById(Number(id)).subscribe(res => {
+    this.usersService.get(Number(id)).subscribe(res => {
       this.user = res;
     });
 
-    this.structureService.getList().subscribe(res => {
+    this.structureService.all().subscribe(res => {
       this.metaStructure = res;
       this.structureList = this.metaStructure['data'];
     })
@@ -108,7 +108,7 @@ onSubmit() {
       update_created: new Date()
     };
     console.log(body);
-    this.usersService.createData(body).subscribe(() => {
+    this.usersService.create(body).subscribe(() => {
         this.isLoading = false;
         this.router.navigate(['/users/user-list']);
     });

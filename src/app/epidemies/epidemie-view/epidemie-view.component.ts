@@ -24,7 +24,7 @@ export class EpidemieViewComponent implements OnInit {
     ngOnInit(): void {
       this.isLoading = true;
       let id = this.route.snapshot.paramMap.get('id');
-      this.epidemieService.getDataById(Number(id)).subscribe(res => {
+      this.epidemieService.get(Number(id)).subscribe(res => {
         this.epidemie = res;
         this.isLoading = false;
   
