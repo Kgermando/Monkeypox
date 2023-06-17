@@ -41,6 +41,7 @@ export class EpidemieAddComponent implements OnInit {
     email: '-',
     telephone: '-',
     matricule: '-',
+    role: 'User',
     password: '-',
     signature: '-',
     created: new Date,
@@ -52,13 +53,11 @@ export class EpidemieAddComponent implements OnInit {
   provinceList: String[] = provinces; 
 
 
-  epidemieList: EpidemieModel[] = []; 
-  metaData: any = [];
+  epidemieList: EpidemieModel[] = [];  
 
-  epidemieID: number[] = [];
+  epidemieID: number[] = []; // List ID
 
-  campaignList: CampaignModel[] = [];
-  metaCampaign: any = [];
+  campaignList: CampaignModel[] = []; 
 
   editor: Editor;
   toolbar: Toolbar = [
@@ -91,8 +90,7 @@ export class EpidemieAddComponent implements OnInit {
       );
       this.isLoadingData = true;
       this.epidemieService.all().subscribe(res => {
-        this.metaData = res; 
-        this.epidemieList = this.metaData['data']; 
+        this.epidemieList = res;  
         this.epidemieID = this.epidemieList.map(e => e.id);
 
         console.log(this.epidemieID)
@@ -100,8 +98,7 @@ export class EpidemieAddComponent implements OnInit {
       });
 
       this.campaignService.all().subscribe(res => {
-        this.metaCampaign = res; 
-        this.campaignList = this.metaCampaign['data'];   
+        this.campaignList = res;  
       });
 
       this.editor = new Editor();

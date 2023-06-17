@@ -14,7 +14,7 @@
 <mat-card class="mb-25 tagus-card">
     <mat-card-header>
         <h5 class="mb-0"></h5> 
-        <button mat-flat-button class="default-btn tagus" routerLink="/users/user-add">
+        <button mat-flat-button class="default-btn tagus" routerLink="/layouts/users/user-add">
             <i class="ri-add-fill"></i> Add user
         </button>
     </mat-card-header>
@@ -47,7 +47,7 @@
                 <ng-container matColumnDef="nom">
                     <th mat-header-cell *matHeaderCellDef>Nom</th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="[ '/users/user-view', element.id ]">
+                        <a [routerLink]="['/layouts/users', element.id, 'view']">
                             {{element.nom}}
                         </a>
                 </ng-container>
@@ -56,7 +56,7 @@
                 <ng-container matColumnDef="postnom">
                     <th mat-header-cell *matHeaderCellDef>Postnom</th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="[ '/users/user-view', element.id ]">
+                        <a [routerLink]="['/layouts/users', element.id, 'view']">
                             {{element.postnom}}
                         </a>
                 </ng-container>
@@ -65,7 +65,7 @@
                 <ng-container matColumnDef="prenom">
                     <th mat-header-cell *matHeaderCellDef>Prenom</th>
                     <td mat-cell *matCellDef="let element">
-                        <a [routerLink]="[ '/users/user-view', element.id ]">
+                        <a [routerLink]="['/layouts/users', element.id, 'view']">
                             {{element.prenom}}
                         </a>
                 </ng-container>

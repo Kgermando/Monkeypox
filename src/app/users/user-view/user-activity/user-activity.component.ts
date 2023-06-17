@@ -47,8 +47,8 @@ export class UserActivityComponent implements AfterViewInit {
         this.isLoading = false;
         console.log(err);
       }
-    } 
-    )
+    } ); 
+    this.isLoading = false;
   }
 
   applyFilter(event: Event) {

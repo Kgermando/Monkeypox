@@ -6,7 +6,7 @@
     [class.hide-sidebar]="themeService.isHideSidebar()"
 >
     <div class="logo bg-white">
-        <a routerLink="/dashboard" class="d-flex align-items-center">
+        <a routerLink="/layouts/dashboard" class="d-flex align-items-center">
             <img src="assets/img/logo-icon.png" alt="logo">
             <span>OPCA</span>
         </a>
@@ -20,7 +20,7 @@
         <div class="sidebar-inner">
             <div class="sidebar-menu">
                 <mat-accordion> 
-                    <a routerLink="/dashboard" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a routerLink="/layouts/dashboard" class="sidebar-menu-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <i class="flaticon-menu-1"></i>
                         <span class="title">Dashboard</span> 
                     </a> 
@@ -34,7 +34,7 @@
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
-                                <a routerLink="/epidemies/epidemie-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/layouts/epidemies/epidemie-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Monkeypox
                                 </a>
                             </li> 
@@ -49,7 +49,7 @@
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
-                                <a routerLink="/patients/patient-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/layouts/patients/patient-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     EQUATEUR
                                 </a>
                             </li>
@@ -64,7 +64,7 @@
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
-                                <a routerLink="/users/user-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/layouts/users/user-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     OPCA
                                 </a>
                             </li>
@@ -79,17 +79,17 @@
                         </mat-expansion-panel-header>
                         <ul class="sidebar-sub-menu">
                             <li class="sidemenu-item">
-                                <a routerLink="/reglages/campaign-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/layouts/reglages/campaign-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Campagnes
                                 </a>
                             </li>
                             <li class="sidemenu-item">
-                                <a routerLink="/reglages/structure-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/layouts/reglages/structure-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Structures
                                 </a>
                             </li>
                             <li class="sidemenu-item">
-                                <a routerLink="/reglages/zone-sante-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
+                                <a routerLink="/layouts/reglages/zone-sante-list" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="sidemenu-link">
                                     Zones de santés
                                 </a>
                             </li>

@@ -13,6 +13,7 @@ import { provinces } from 'src/app/shared/utils/province';
 import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
 import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
 import { LocalService } from 'src/app/shared/services/local.service';
+import { formatDate } from '@angular/common';
 
 interface Sexe {
   value: string;
@@ -27,18 +28,16 @@ interface Sexe {
 export class UserAddComponent implements OnInit {
     hide = true;
 
-    isLoading: boolean = false;
-    errorMessage: string =' ';
-
-    countries: Countries[] = countries;
-
-    metaStructure: any = [];
+    isLoading: boolean = false; 
+ 
     structureList: StructureModel[] = [];
-
-    metaZoneSante: any = [];
+ 
     zoneSanteList: ZoneSanteModel[] = [];
 
     provinceList: String[] = provinces;
+
+    userList: UserModel[] = []; 
+    userID: number[] = []; // List ID
 
     sexes: Sexe[] = [
         { value: 'Femme', viewValue: 'Femme' },
@@ -65,6 +64,7 @@ export class UserAddComponent implements OnInit {
       email: '-',
       telephone: '-',
       matricule: '-',
+      role: 'User',
       password: '-',
       signature: '-',
       created: new Date,
@@ -91,19 +91,23 @@ export class UserAddComponent implements OnInit {
         }
       );
       this.structureService.all().subscribe(res => {
-        this.metaStructure = res;
-        this.structureList = this.metaStructure['data'];
+        this.structureList = res; 
       });
 
       this.zoneSanteService.all().subscribe(res => {
-        this.metaZoneSante = res;
-        this.zoneSanteList = this.metaZoneSante['data'];
+        this.zoneSanteList = res; 
       });
+
+      this.usersService.all().subscribe(res => {
+        this.userList = res;
+        this.userID = this.userList.map(e => e.id);
+      });
+
 
 
       this.formGroup = this._formBuilder.group({
         structure: ['', Validators.required],
-        // photo: ['-'],
+        // photo: [''],
         nom: ['', Validators.required],
         postnom: ['', Validators.required],
         prenom: ['', Validators.required],
@@ -116,7 +120,6 @@ export class UserAddComponent implements OnInit {
         zone_sante: ['', Validators.required],
         email: [''],
         telephone: ['', Validators.required],
-        matricule: ['', Validators.required],
       });
       
     }
@@ -126,6 +129,12 @@ export class UserAddComponent implements OnInit {
       console.log(this.formGroup); 
       console.log(this.currentUser.matricule); 
       this.isLoading = true;
+      var structure = this.currentUser.structure.slice(0,3);
+      var year = formatDate(new Date(), 'yy', 'en'); 
+      var numID = 0;
+      if (this.userID.length !== 0) {
+        numID = Math.max(...this.userID);
+      }
       var body = {
         structure: this.formGroup.value.structure,
         photo: '-',
@@ -142,17 +151,24 @@ export class UserAddComponent implements OnInit {
         zone_sante: this.formGroup.value.zone_sante,
         email: this.formGroup.value.email,
         telephone: this.formGroup.value.telephone,
-        matricule: this.formGroup.value.matricule,
+        matricule: `${structure}-${year}-${numID + 1}`,
         signature: this.currentUser.matricule,
         created: new Date(),
         update_created: new Date()
       };
       console.log(body);
-      this.usersService.create(body).subscribe(() => {
+      this.usersService.create(body).subscribe({
+        next: () => {
           this.isLoading = false;
           this.formGroup.reset();
-          this.router.navigate(['/users/user-list']);
+          this.router.navigate(['/layouts/users/user-list']);
+        },
+        error: (err) => {
+          this.isLoading = false;
+          console.log(err);
+        }
       });
+      this.isLoading = false;
     } catch (error) {
       this.isLoading = false;
       console.log(error);

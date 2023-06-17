@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -54,6 +54,9 @@ import { WelcomeDashboardComponent } from './welcome-dashboard/welcome-dashboard
     DashboardRoutingModule,
 
     SharedModule
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class DashboardModule { }

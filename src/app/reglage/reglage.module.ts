@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { ReglageRoutingModule } from './reglage-routing.module';
 import { StructureListComponent } from './structures/structure-list/structure-list.component';
@@ -37,6 +37,9 @@ import { SharedModule } from '../shared/shared.module';
     ReglageRoutingModule,
 
     SharedModule
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class ReglageModule { }

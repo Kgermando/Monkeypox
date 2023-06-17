@@ -41,6 +41,7 @@ export class PatientEditComponent {
     email: '-',
     telephone: '-',
     matricule: '-',
+    role: 'User',
     password: '-',
     signature: '-',
     created: new Date,

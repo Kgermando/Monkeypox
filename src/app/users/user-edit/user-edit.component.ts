@@ -9,6 +9,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../users.service';
 import { StructureService } from 'src/app/reglage/structures/structure.service';
 import { countries } from 'src/app/shared/utils/countries';
+import { LocalService } from 'src/app/shared/services/local.service';
+import { provinces } from 'src/app/shared/utils/province';
+import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
+import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
+
+interface Sexe {
+  value: string;
+  viewValue: string;
+}
 
 @Component({
   selector: 'app-user-edit',
@@ -20,11 +29,16 @@ export class UserEditComponent {
 
   isLoading: boolean = false;
   errorMessage: string =' ';
-
-  countries: Countries[] = countries;
-
-  metaStructure: any = [];
+ 
+  provinceList: String[] = provinces;
+ 
   structureList: StructureModel[] = [];
+  zoneSanteList: ZoneSanteModel[] = [];
+
+  sexes: Sexe[] = [
+    { value: 'Femme', viewValue: 'Femme' },
+    { value: 'Homme', viewValue: 'Homme' },
+];
 
 
   formGroup!: FormGroup;
@@ -33,89 +47,102 @@ export class UserEditComponent {
 
   user: UserModel;
 
+  id: number;
+
   constructor(
       public themeService: CustomizerSettingsService,
       private _formBuilder: FormBuilder, 
       private route: ActivatedRoute,
-      private router: Router,
-      private authService: AuthService,
+      private router: Router, 
       private usersService: UsersService,
+      private authService: AuthService,
+      private localStore: LocalService,
       private structureService: StructureService,
+      private zoneSanteService: ZoneSanteService,
   ) { }
 
 
   ngOnInit(): void {
-    // this.authService.user().subscribe(
-    //   res => {
-    //       this.currentUser = res; 
-    //   }
-    // )
-
-    let id = this.route.snapshot.paramMap.get('id');
-    this.usersService.get(Number(id)).subscribe(res => {
-      this.user = res;
-    });
-
+    var userId: any = this.localStore.getData('auth')
+    this.authService.user(parseInt(userId)).subscribe(
+      res => {
+          this.currentUser = res; 
+      }
+    );
     this.structureService.all().subscribe(res => {
-      this.metaStructure = res;
-      this.structureList = this.metaStructure['data'];
-    })
+      this.structureList = res; 
+    });
+    this.zoneSanteService.all().subscribe(res => {
+      this.zoneSanteList = res; 
+    });
 
     this.formGroup = this._formBuilder.group({
-      structure: ['', Validators.required],
-      // photo: ['-'],
-      nom: ['', Validators.required],
-      postnom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      sexe: ['', Validators.required],
-      nationalite: ['', Validators.required],
-      etat_civile: ['', Validators.required],
-      adresse: ['', Validators.required],
-      titre: ['', Validators.required],
-      province: ['', Validators.required],
-      zone_sante: ['', Validators.required],
+      structure: [''],
+      // photo: [''],
+      nom: [''],
+      postnom: [''],
+      prenom: [''],
+      sexe: [''],
+      nationalite: [''],
+      etat_civile: [''],
+      adresse: [''],
+      titre: [''],
+      province: [''],
+      zone_sante: [''],
       email: [''],
-      telephone: ['', Validators.required],
-      matricule: ['', Validators.required],
+      telephone: [''],
     });
-    
+ 
+     
+  
+
+    this.id = this.route.snapshot.params['id'];
+    this.usersService.get(this.id).subscribe(user => {
+        this.formGroup.patchValue({ // load data to form
+          structure: user.structure,
+          photo: user.photo,
+          nom: user.nom,
+          postnom: user.postnom,
+          prenom: user.prenom,
+          sexe: user.sexe,
+          nationalite: user.nationalite,
+          etat_civile: user.etat_civile,
+          adresse: user.adresse,
+          titre: user.titre,
+          pays: user.pays,
+          province: user.province,
+          zone_sante: user.zone_sante,
+          email: user.email,
+          telephone: user.telephone,
+          matricule: user.matricule,
+          signature: this.currentUser.matricule,
+          created: user.created,
+          update_created: new Date()
+        });
+      }
+    ); 
   }
 
-onSubmit() {
-  try {
-    console.log(this.formGroup); 
-    console.log(this.currentUser.matricule); 
-    this.isLoading = true;
-    var body = {
-      structure: this.formGroup.value.structure,
-      photo: '-',
-      nom: this.formGroup.value.nom,
-      postnom: this.formGroup.value.postnom,
-      prenom: this.formGroup.value.prenom,
-      sexe: this.formGroup.value.sexe,
-      nationalite: this.formGroup.value.nationalite,
-      etat_civile: this.formGroup.value.etat_civile,
-      adresse: this.formGroup.value.adresse,
-      titre: this.formGroup.value.titre,
-      pays: this.user.pays,
-      province: this.formGroup.value.province,
-      zone_sante: this.formGroup.value.zone_sante,
-      email: this.formGroup.value.email,
-      telephone: this.formGroup.value.telephone,
-      matricule: this.formGroup.value.matricule,
-      signature: this.currentUser.matricule,
-      created: this.user.created,
-      update_created: new Date()
-    };
-    console.log(body);
-    this.usersService.create(body).subscribe(() => {
-        this.isLoading = false;
-        this.router.navigate(['/users/user-list']);
-    });
-  } catch (error) {
-    this.isLoading = false;
-    console.log(error);
+ 
+
+  onSubmit() {
+    try {
+      this.isLoading = true;
+      this.usersService.update(this.id, this.formGroup.getRawValue())
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/layouts/users/user-list']);
+        },
+        error: err => {
+          console.log(err);
+        }
+      });
+
+      this.isLoading = false;
+    } catch (error) {
+      this.isLoading = false;
+      console.log(error);
+    }
   }
-}
 
 }

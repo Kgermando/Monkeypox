@@ -16,78 +16,10 @@
                 <span class="middle-bar"></span>
                 <span class="bottom-bar"></span>
             </div>
-            <!-- <button mat-icon-button [matMenuTriggerFor]="appsMenu" class="menu-btn rounded-circle p-0 border-none position-relative">
-                <i class="flaticon-menu-1"></i>
-            </button>
-            <mat-menu class="menu-dropdown" #appsMenu="matMenu" xPosition="after">
-                <div class="menu-header d-flex align-items-center justify-content-space-between">
-                    <h5 class="m-0">Web Apps</h5>
-                    <button type="button" class="bg-transparent p-0 border-none">Edit</button>
-                </div>
-                <div class="menu-body">
-                    <div class="d-flex flex-wrap align-items-center">
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/account.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">Account</span>
-                        </a>
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/google.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">Search</span>
-                        </a>
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/map.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">Maps</span>
-                        </a>
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/youtube.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">YouTube</span>
-                        </a>
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/playstore.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">Play</span>
-                        </a>
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/gmail.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">Gmail</span>
-                        </a>
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/drive.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">Drive</span>
-                        </a>
-                        <a href="#" class="dropdown-item" target="_blank">
-                            <img src="assets/img/web-apps/calendar.png" alt="image">
-                            <span class="d-block mb-0 fw-medium">Calendar</span>
-                        </a>
-                    </div>
-
-                </div>
-                <div class="menu-footer">
-                    <a routerLink="/dashboard" class="fw-medium position-relative">View All <i class="flaticon-chevron"></i></a>
-                </div>
-            </mat-menu> -->
+            
         </div>
         <ul class="header-right-side d-flex align-items-center mt-0 mb-0">
-            <!-- <li>
-                <button mat-icon-button [matMenuTriggerFor]="languageMenu" class="btn p-0 border-none rounded-circle position-relative">
-                    <img src="assets/img/flag/usa.png" alt="usa">
-                </button>
-                <mat-menu class="language-menu-dropdown" #languageMenu="matMenu" xPosition="after">
-                    <ul class="m-0">
-                        <li>
-                            <button type="button" class="d-fle align-items-center border-none">
-                                <img src="assets/img/flag/spain.png" alt="spain">
-                                Spanish
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button" class="d-flex align-items-center border-none">
-                                <img src="assets/img/flag/usa.png" alt="usa">
-                                English
-                            </button>
-                        </li>
-                    </ul>
-                </mat-menu>
-            </li> -->
+ 
             <li>
                 <button mat-icon-button [matMenuTriggerFor]="emailMenu" class="btn p-0 border-none rounded-circle position-relative">
                     <i class="flaticon-envelope"></i>
@@ -210,30 +142,32 @@
                 </mat-card>
             </li>
             <li *ngIf="!loading">
-                <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
-                    <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
-                    {{currentUser.titre}}
-                    <span class="fw-semibold">{{currentUser.prenom}} {{currentUser.nom}}</span>
-                </button>
-                <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">
-                    <ul class="m-0">
-                        <li>
-                            <a routerLink="/authentication/profile">
-                                <i class="ri-user-3-line"></i> Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a routerLink="/account">
-                                <i class="ri-settings-3-line"></i> Settings
-                            </a>
-                        </li>
-                        <li>
-                            <a routerLink="/authentication/logout" (click)="logOut()">
-                                <i class="ri-shut-down-line"></i> Logout
-                            </a>
-                        </li>
-                    </ul>
-                </mat-menu>
+                <div *ngIf="currentUser">
+                    <button mat-icon-button [matMenuTriggerFor]="profileMenu" class="profile-btn main-color border-none bg-transparent position-relative">
+                        <img src="assets/img/admin.jpg" class="rounded-circle" alt="admin">
+                        {{currentUser.titre}}
+                        <span class="fw-semibold">{{currentUser.prenom}} {{currentUser.nom}}</span>
+                    </button>
+                    <mat-menu class="profile-menu-dropdown" #profileMenu="matMenu" xPosition="before">
+                        <ul class="m-0">
+                            <li>
+                                <a routerLink="/layouts/users/profile">
+                                    <i class="ri-user-3-line"></i> Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="/account">
+                                    <i class="ri-settings-3-line"></i> Settings
+                                </a>
+                            </li>
+                            <li>
+                                <a routerLink="/authentication/logout" (click)="logOut()">
+                                    <i class="ri-shut-down-line"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </mat-menu>
+                </div> 
             </li>
         </ul>
     </div>

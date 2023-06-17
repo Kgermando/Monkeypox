@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService } from '../auth.service';
 import { CustomizerSettingsService } from 'src/app/common/customizer-settings/customizer-settings.service';
 import {
   ApexNonAxisChartSeries,
@@ -10,6 +9,7 @@ import {
 } from "ng-apexcharts";
 import { UserModel } from 'src/app/users/models/user-models';
 import { LocalService } from 'src/app/shared/services/local.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
     public chartOptions: Partial<ChartOptions>;
 
 
-    loading = false; 
+    isLoading = false; 
 
     currentUser: UserModel = {
         id: 0,
@@ -52,6 +52,7 @@ export class ProfileComponent implements OnInit {
         email: '-',
         telephone: '-',
         matricule: '-',
+        role: 'User',
         password: '-',
         signature: '-',
         created: new Date,
@@ -104,16 +105,16 @@ export class ProfileComponent implements OnInit {
 
 
     getUser(userId: number): void {
-        this.loading = true;
+        this.isLoading = true;
         this.authService.user(userId).subscribe(
             res => {
                 console.log(res);
                 this.currentUser = res;
-                this.loading = false;
+                this.isLoading = false;
             }
-        )
-
-      } 
+        );
+        this.isLoading = false; 
+    }
 
       
     toggleTheme() {

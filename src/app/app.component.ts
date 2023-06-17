@@ -11,39 +11,5 @@ import { CustomizerSettingsService } from './common/customizer-settings/customiz
 export class AppComponent {
   title = 'monkeypox'; 
 
-  isToggled = false;
-
-    constructor(
-        public router: Router,
-        private toggleService: ToggleService,
-        public themeService: CustomizerSettingsService
-    ) {
-        this.toggleService.isToggled$.subscribe(isToggled => {
-            this.isToggled = isToggled;
-        });
-    }
-
-    toggleRightSidebarTheme() {
-        this.themeService.toggleRightSidebarTheme();
-    }
-
-    toggleHideSidebarTheme() {
-        this.themeService.toggleHideSidebarTheme();
-    }
-
-    toggleCardBorderTheme() {
-        this.themeService.toggleCardBorderTheme();
-    }
-
-    toggleTheme() {
-        this.themeService.toggleTheme();
-    }
-
-    toggleCardBorderRadiusTheme() {
-        this.themeService.toggleCardBorderRadiusTheme();
-    }
-
-    toggleRTLEnabledTheme() {
-        this.themeService.toggleRTLEnabledTheme();
-    }
+  
 }

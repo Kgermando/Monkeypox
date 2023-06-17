@@ -21,6 +21,7 @@ import { PatientsModule } from './patients/patients.module';
 import { EpidemiesModule } from './epidemies/epidemies.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { UsersModule } from './users/users.module';
+import { LayoutsComponent } from './layouts/layouts.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UsersModule } from './users/users.module';
     CustomizerSettingsComponent,
     FooterComponent,
     SidebarComponent,
-    NotFoundComponent, 
+    NotFoundComponent,
+    LayoutsComponent, 
   ],
   
   imports: [

@@ -1,85 +1,77 @@
 <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
     <mat-card-header class="border-bottom">
-        <h5 class="mb-0">Information Personel</h5>
-        <div>
-            <button mat-icon-button color="accent" [routerLink]="['/layouts/users', user.id, 'edit']">
-                <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button color="warn">  
-                <mat-icon>delete</mat-icon>
-            </button>
-        </div> 
+        <h5 class="mb-0">Information Personel</h5> 
     </mat-card-header>
     <mat-card-content>
        <ul class="list ps-0 mb-0">
             <li>
                 <span class="fw-semibold d-inline-block">Nom:</span>
-                <span class="gray-color">{{ user.nom }}</span>
+                <span class="gray-color">{{ currentUser.nom }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Postnom:</span>
-                <span class="gray-color">{{ user.postnom }}</span>
+                <span class="gray-color">{{ currentUser.postnom }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Prenom:</span>
-                <span class="gray-color">{{ user.prenom }}</span>
+                <span class="gray-color">{{ currentUser.prenom }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Sexe:</span>
-                <span class="gray-color">{{ user.sexe }}</span>
+                <span class="gray-color">{{ currentUser.sexe }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Nationalite:</span>
-                <span class="gray-color">{{ user.nationalite }}</span>
+                <span class="gray-color">{{ currentUser.nationalite }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Etat civile:</span>
-                <span class="gray-color">{{ user.etat_civile }}</span>
+                <span class="gray-color">{{ currentUser.etat_civile }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Adresse:</span>
-                <span class="gray-color">{{ user.adresse }}</span>
+                <span class="gray-color">{{ currentUser.adresse }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Titre:</span>
-                <span class="gray-color">{{ user.titre }}</span>
+                <span class="gray-color">{{ currentUser.titre }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Pays:</span>
-                <span class="gray-color">{{ user.pays }}</span>
+                <span class="gray-color">{{ currentUser.pays }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Province:</span>
-                <span class="gray-color">{{ user.province }}</span>
+                <span class="gray-color">{{ currentUser.province }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Zone sante:</span>
-                <span class="gray-color">{{ user.zone_sante }}</span>
+                <span class="gray-color">{{ currentUser.zone_sante }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Email:</span>
-                <span class="gray-color">{{ user.email }}</span>
+                <span class="gray-color">{{ currentUser.email }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Telephone:</span>
-                <span class="gray-color">{{ user.telephone }}</span>
+                <span class="gray-color">{{ currentUser.telephone }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Matricule:</span>
-                <span class="gray-color">{{ user.matricule }}</span>
+                <span class="gray-color">{{ currentUser.matricule }}</span>
             </li>
 
             <li>
                 <span class="fw-semibold d-inline-block">Signature:</span>
-                <span class="gray-color">{{ user.signature }}</span>
+                <span class="gray-color">{{ currentUser.signature }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Créé le:</span>
-                <span class="gray-color">{{ user.created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+                <span class="gray-color">{{ currentUser.created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
             </li>
             <li>
                 <span class="fw-semibold d-inline-block">Mis à jour le:</span>
-                <span class="gray-color">{{ user.update_created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
+                <span class="gray-color">{{ currentUser.update_created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
             </li>
         </ul>
     </mat-card-content>

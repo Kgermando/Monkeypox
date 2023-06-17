@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { PatientsRoutingModule } from './patients-routing.module';
 import { PatientListComponent } from './patient-list/patient-list.component';
@@ -25,6 +25,9 @@ import { PatientFicheComponent } from './patient-view/patient-fiche/patient-fich
     PatientsRoutingModule,
 
     SharedModule
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class PatientsModule { }

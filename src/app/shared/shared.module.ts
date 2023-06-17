@@ -176,6 +176,7 @@ import { InternalErrorComponent } from './components/internal-error/internal-err
     // Export components
     PaginatorComponent,
     InternalErrorComponent,
+    FileUploadComponent,
   ]
 })
 export class SharedModule { }

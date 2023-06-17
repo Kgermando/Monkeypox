@@ -4,8 +4,12 @@ import { UserListComponent } from './user-list/user-list.component';
 import { UserAddComponent } from './user-add/user-add.component';
 import { UserViewComponent } from './user-view/user-view.component';
 import { UserEditComponent } from './user-edit/user-edit.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
+  {
+    path: 'profile', component: ProfileComponent,
+  },
   {
     path: 'user-list', component: UserListComponent
   },
@@ -13,10 +17,10 @@ const routes: Routes = [
     path: 'user-add', component: UserAddComponent
   },
   {
-    path: 'user-view/:id', component: UserViewComponent
+    path: ':id/view', component: UserViewComponent
   },
   {
-    path: 'user-edit/:id', component: UserEditComponent
+    path: ':id/edit', component: UserEditComponent
   },
   { path: '', redirectTo: 'user-list', pathMatch: 'full'},
 ];

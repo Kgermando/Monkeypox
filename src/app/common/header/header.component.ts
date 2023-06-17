@@ -56,7 +56,8 @@ export class HeaderComponent implements OnInit {
             this.loading = false;
           }
         ) 
-      }
+      };
+      this.loading = false;
     }
 
     logOut() {

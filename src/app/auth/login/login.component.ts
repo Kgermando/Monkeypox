@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
           // console.log(res);
           this.localStore.saveData('auth', JSON.stringify(res));
           this.isLoading = false;
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/layouts/dashboard']);
         },
         error: (e) => {
           this.isLoading = false;
@@ -56,8 +56,8 @@ export class LoginComponent implements OnInit {
           this.isLoading = false;
         }
       }
-    )
-
+    );
+    this.isLoading = false; 
   } 
 
   dismissAlert() {

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { EpidemiesRoutingModule } from './epidemies-routing.module';
 import { EpidemieListComponent } from './epidemie-list/epidemie-list.component';
@@ -21,6 +21,9 @@ import { SharedModule } from '../shared/shared.module';
     EpidemiesRoutingModule,
 
     SharedModule,
+  ],
+  providers: [
+    DatePipe
   ]
 })
 export class EpidemiesModule { }

@@ -30,6 +30,13 @@
                         </mat-form-field>
                     </div>
                 </div>
+                <!-- <div class="col-lg-6 col-md-6">
+                    <div class="tagus-form-group ms-20">
+                        <label class="d-block mb-12 fw-semibold gray-color">Upload Image</label>
+                        <input formControlName="photo" class="form-control" hidden name="photo"> 
+                        <app-file-upload (uploadedUrl)="formGroup.patchValue({'photo': $event})"></app-file-upload> 
+                    </div> 
+                </div>  -->
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Nom</label>
@@ -74,22 +81,18 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Nationalite</label>
+                        <label class="d-block mb-12 fw-semibold gray-color">Nationalité</label>
                         <mat-form-field appearance="fill">
-                            <i class="ri-road-map-line"></i>
-                            <mat-label>Nationalite</mat-label>
-                            <mat-select formControlName="nationalite" required="Champs obligatoire">
-                                <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
-                                    {{countrie.name}}
-                                </mat-option>
-                            </mat-select>
+                            <i class="ri-user-3-line"></i>
+                            <mat-label>Entrer la Nationalité</mat-label>
+                            <input matInput formControlName="nationalite" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
-                </div>
+                </div> 
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
-                        <mat-form-field appearance="fill">
-                            <i class="ri-user-heart-line"></i>
+                        <label class="d-block mb-12 fw-semibold gray-color">Etat civil</label>
+                        <mat-form-field appearance="fill"> 
                             <mat-label>Etat civil</mat-label>
                             <mat-select formControlName="etat_civile" required="Champs obligatoire">
                                 <mat-option value="CELIBATAIRE">Célibataire</mat-option>
@@ -113,7 +116,7 @@
                         <label class="d-block mb-12 fw-semibold gray-color">Titre</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-team-line"></i>
-                            <mat-label>Entrer titre</mat-label>
+                            <mat-label>Entrer le titre</mat-label>
                             <input matInput formControlName="titre" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
@@ -123,10 +126,10 @@
                         <label class="d-block mb-12 fw-semibold gray-color">Province</label>
                         <mat-form-field appearance="fill">
                             <i class="ri-road-map-line"></i>
-                            <mat-label>Entrer province</mat-label>
+                            <mat-label>Entrer la province</mat-label>
                             <mat-select formControlName="province" required="Champs obligatoire">
-                                <mat-option *ngFor="let countrie of countries" [value]="countrie.code">
-                                    {{countrie.name}}
+                                <mat-option *ngFor="let province of provinceList" [value]="province">
+                                    {{province}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -136,12 +139,16 @@
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Zone de santé</label>
                         <mat-form-field appearance="fill">
-                            <i class="ri-team-line"></i>
-                            <mat-label>Entrer zone sante</mat-label>
-                            <input matInput formControlName="zone_sante" required="Champs obligatoire">
+                            <i class="ri-road-map-line"></i>
+                            <mat-label>Entrer la zone de santé</mat-label>
+                            <mat-select formControlName="zone_sante" required="Champs obligatoire">
+                                <mat-option *ngFor="let zoneSante of zoneSanteList" [value]="zoneSante.zone">
+                                    {{zoneSante.zone}}
+                                </mat-option>
+                            </mat-select>
                         </mat-form-field>
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Email</label>
@@ -161,17 +168,7 @@
                             <input matInput type="tel" formControlName="telephone" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Matricule</label>
-                        <mat-form-field appearance="fill">
-                            <i class="ri-team-line"></i>
-                            <mat-label>Entrer matricule</mat-label>
-                            <input matInput formControlName="matricule" required="Champs obligatoire">
-                        </mat-form-field>
-                    </div>
-                </div>
+                </div> 
 
             </div>
             <div class="d-flex justify-content-center" *ngIf="isLoading">
