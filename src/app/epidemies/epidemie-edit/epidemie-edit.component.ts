@@ -11,6 +11,8 @@ import { CampaignModel } from 'src/app/reglage/models/campaign-model';
 import { CampaignService } from 'src/app/reglage/campaigns/campaign.service';
 import { formatDate } from '@angular/common';
 import { LocalService } from 'src/app/shared/services/local.service';
+import { PatientModel } from 'src/app/patients/models/patient-model';
+import { PatientService } from 'src/app/patients/patient.service';
 
 @Component({
   selector: 'app-epidemie-edit',
@@ -59,6 +61,26 @@ export class EpidemieEditComponent implements OnInit, OnDestroy {
 
   campaignList: CampaignModel[] = []; 
 
+  patientList: PatientModel[] = []; 
+  patient: PatientModel = {
+    id: 0,
+    photo: '',
+    fullname: '',
+    sexe: '',
+    age_an: 0,
+    age_mois: 0,
+    fourchette_age: '',
+    lieu_residence: '',
+    aire_sante: '',
+    profession: '',
+    email: '',
+    telephone: '',
+    province: '',
+    signature: '',
+    created: new Date,
+    update_created: new Date
+  };
+
   editor: Editor;
   toolbar: Toolbar = [
     // default value
@@ -79,6 +101,7 @@ id: number;
     private authService: AuthService,
     private epidemieService: EpidemieService,
     private campaignService: CampaignService,
+    private patientService: PatientService,
     private localStore: LocalService,
     private route: ActivatedRoute,
     private router: Router) { }
@@ -157,8 +180,24 @@ id: number;
           update_created: new Date()
           });
         }
-      ); 
+      );
+
+      this.patientService.all().subscribe((res: any) => {
+        this.patientList = res;
+      });
     }
+
+    onKeyUpEvent(event: any){
+      console.log(event.target.value);
+      console.log(this.patientList);
+      this.patient = this.patientList.filter(
+        (c) => c.id == event.target.value
+      )[0];
+      if (this.patient === null) {
+        console.log(this.patient);
+        alert("Ce numero ordre n'existe pas dans le système!")
+      }
+    } 
 
     onSubmit() {
       try {

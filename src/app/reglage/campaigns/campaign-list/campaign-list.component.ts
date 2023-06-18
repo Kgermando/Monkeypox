@@ -12,7 +12,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./campaign-list.component.scss']
 })
 export class CampaignListComponent {
-  displayedColumns: string[] = ['nom', 'date_debut', 'date_fin', 'aire_sante', 'nbre_agent', 'signature', 'created', 'edit', 'delete'];
+  displayedColumns: string[] = ['nom', 'date_debut', 'date_fin', 'nbre_agent', 'signature', 'created', 'edit', 'delete'];
 
   ELEMENT_DATA: CampaignModel[] = [];
 

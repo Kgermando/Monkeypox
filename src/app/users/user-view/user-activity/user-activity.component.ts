@@ -15,7 +15,7 @@ import { UserModel } from '../../models/user-models';
 export class UserActivityComponent implements AfterViewInit {
     @Input() user: UserModel;
 
-    displayedColumns: string[] = ['id', 'sexe', 'age_mois', 'age_an', 'aire_sante', 'created'];
+    displayedColumns: string[] = ['id', 'fullname', 'sexe', 'fourchette_age', 'aire_sante', 'created'];
 
 
   @ViewChild(MatPaginator)

@@ -13,7 +13,7 @@ import { PatientModel } from '../models/patient-model';
 })
 export class PatientListComponent implements AfterViewInit {
 
-  displayedColumns: string[] = ['id','nom', 'postnom', 'prenom', 'sexe', 'age_mois', 'age_an', 'aire_sante', 'created'];
+  displayedColumns: string[] = ['id','fullname', 'sexe', 'age_mois', 'age_an', 'aire_sante', 'created'];
 
   ELEMENT_DATA: PatientModel[] = [];
   isLoading = false;

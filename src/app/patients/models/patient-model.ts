@@ -1,9 +1,7 @@
 export class PatientModel {
     id: number;
     photo: string;
-    nom: string;
-    postnom: string;
-    prenom: string;
+    fullname: string; 
     sexe: string;
     age_an: number;
     age_mois: number;

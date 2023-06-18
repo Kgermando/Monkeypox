@@ -15,7 +15,7 @@ import { PatientModel } from '../../models/patient-model';
 export class PatientFicheComponent {
     @Input() patient: PatientModel;
 
-    displayedColumns: string[] = ['statut', 'num_epi', 'semaine_epi', 'date_notification', 'fievre', 'eruption_cutanee', 'date_symptome', 'date_admition', 'date_diagonstic', 'a_ete_contact_patient', 'type_contact', 'a_ete_hospitalise', 'croute', 'ecouvillon', 'prevelement_sanguin', 'date_prelevement', 'date_expedition'];
+    displayedColumns: string[] = ['statut', 'num_epi', 'semaine_epi', 'date_notification'];
 
   
     ELEMENT_DATA: EpidemieModel[] = [];

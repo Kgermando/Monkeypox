@@ -61,7 +61,6 @@ export class CampaignAddComponent implements OnInit {
       nom: ['', Validators.required],
       date_debut: ['', Validators.required],
       date_fin: ['', Validators.required],
-      aire_sante: ['', Validators.required],
       nbre_agent: ['', Validators.required]
     });
     
@@ -76,7 +75,7 @@ export class CampaignAddComponent implements OnInit {
         nom: this.formGroup.value.nom,
         date_debut: this.formGroup.value.date_debut,
         date_fin: this.formGroup.value.date_fin,
-        aire_sante: this.formGroup.value.aire_sante,
+        aire_sante: '-',
         nbre_agent: this.formGroup.value.nbre_agent,
         signature: this.currentUser.matricule,
         created: new Date(),

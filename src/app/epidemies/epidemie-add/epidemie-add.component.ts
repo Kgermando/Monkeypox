@@ -11,6 +11,9 @@ import { CampaignModel } from 'src/app/reglage/models/campaign-model';
 import { CampaignService } from 'src/app/reglage/campaigns/campaign.service';
 import { formatDate } from '@angular/common';
 import { LocalService } from 'src/app/shared/services/local.service';
+import { PatientService } from 'src/app/patients/patient.service';
+import { PatientModel } from 'src/app/patients/models/patient-model';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-epidemie-add',
@@ -53,7 +56,26 @@ export class EpidemieAddComponent implements OnInit, OnDestroy {
   provinceList: String[] = provinces; 
 
 
-  epidemieList: EpidemieModel[] = [];  
+  epidemieList: EpidemieModel[] = []; 
+  patientList: PatientModel[] = []; 
+  patient: PatientModel = {
+    id: 0,
+    photo: '',
+    fullname: '',
+    sexe: '',
+    age_an: 0,
+    age_mois: 0,
+    fourchette_age: '',
+    lieu_residence: '',
+    aire_sante: '',
+    profession: '',
+    email: '',
+    telephone: '',
+    province: '',
+    signature: '',
+    created: new Date,
+    update_created: new Date
+  }; 
 
   epidemieID: number[] = []; // List ID
 
@@ -76,6 +98,7 @@ export class EpidemieAddComponent implements OnInit, OnDestroy {
     private _formBuilder: FormBuilder,
     private authService: AuthService,
     private epidemieService: EpidemieService,
+    private patientService: PatientService,
     private campaignService: CampaignService,
     private localStore: LocalService,
     private router: Router) { }
@@ -96,6 +119,8 @@ export class EpidemieAddComponent implements OnInit, OnDestroy {
         console.log(this.epidemieID)
         this.isLoadingData = false;
       });
+
+      
 
       this.campaignService.all().subscribe(res => {
         this.campaignList = res;  
@@ -125,7 +150,26 @@ export class EpidemieAddComponent implements OnInit, OnDestroy {
         commentaire: ['', Validators.required],
         campaign: ['', Validators.required],
       });
+
+      this.patientService.all().subscribe((res: any) => {
+        this.patientList = res;
+      });
+
+      
     }
+
+    onKeyUpEvent(event: any){
+      console.log(event.target.value);
+      console.log(this.patientList);
+      this.patient = this.patientList.filter(
+        (c) => c.id == event.target.value
+      )[0];
+      if (this.patient === null) {
+        console.log(this.patient);
+        alert("Ce numero ordre n'existe pas dans le système!")
+      }
+    } 
+
   
     onSubmit() {
       try { 

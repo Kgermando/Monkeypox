@@ -52,10 +52,10 @@ export class PatientAddComponent implements OnInit {
 
 
   fourchetteAgeList: any = [
-    "Nourisson",
-    "Enfant",
-    "Adolescent(e)",
-    "Adulte"
+    "0 - 11 MOIS",
+    "12 - 59 MOIS",
+    "5 - 15 ANS",
+    "Plus de 15 ANS"
   ]
 
   public isNourrison = false;
@@ -80,9 +80,7 @@ export class PatientAddComponent implements OnInit {
 
     this.formGroup = this._formBuilder.group({
       photo: ['-'],
-      nom: ['', Validators.required],
-      postnom: ['', Validators.required],
-      prenom: ['', Validators.required],
+      fullname: ['', Validators.required], 
       sexe: ['', Validators.required],
       age_an: ['0', Validators.required],
       age_mois: ['0', Validators.required],
@@ -107,9 +105,7 @@ export class PatientAddComponent implements OnInit {
       this.isLoading = true;
       var body = {
         photo: this.formGroup.value.photo,
-        nom: this.formGroup.value.nom,
-        postnom: this.formGroup.value.postnom,
-        prenom: this.formGroup.value.prenom,
+        fullname: this.formGroup.value.fullname, 
         sexe: this.formGroup.value.sexe,
         age_an: this.formGroup.value.age_an,
         age_mois: this.formGroup.value.age_mois,

@@ -62,7 +62,7 @@ export class CampaignEditComponent {
       nom: [''],
       date_debut: [''],
       date_fin: [''],
-      aire_sante: [''],
+      // aire_sante: [''],
       nbre_agent: ['']
     });
 

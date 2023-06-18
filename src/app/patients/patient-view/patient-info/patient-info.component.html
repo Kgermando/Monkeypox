@@ -13,72 +13,64 @@
     <mat-card-content>
        <ul class="list ps-0 mb-0">
             <li>
-                <span class="fw-semibold d-inline-block">N° ordre:</span>
+                <span class="fw-semibold d-inline-block">N° ordre: </span>
                 <span class="gray-color">{{ patient.id }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Nom:</span>
-                <span class="gray-color">{{ patient.nom }}</span>
-            </li>
+                <span class="fw-semibold d-inline-block">Nom compplet: </span>
+                <span class="gray-color">{{ patient.fullname }}</span>
+            </li> 
             <li>
-                <span class="fw-semibold d-inline-block">Postnom:</span>
-                <span class="gray-color">{{ patient.postnom }}</span>
-            </li>
-            <li>
-                <span class="fw-semibold d-inline-block">Prenom:</span>
-                <span class="gray-color">{{ patient.prenom }}</span>
-            </li>
-            <li>
-                <span class="fw-semibold d-inline-block">Sexe:</span>
+                <span class="fw-semibold d-inline-block">Sexe: </span>
                 <span class="gray-color">{{ patient.sexe }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Age par AN:</span>
+                <span class="fw-semibold d-inline-block">Age par AN: </span>
                 <span class="gray-color">{{ patient.age_an }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Age par MOIS:</span>
+                <span class="fw-semibold d-inline-block">Age par MOIS: </span>
                 <span class="gray-color">{{ patient.age_mois }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Fourchette d'age:</span>
+                <span class="fw-semibold d-inline-block">Fourchette d'age: </span>
                 <span class="gray-color">{{ patient.fourchette_age }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Lieu residence:</span>
+                <span class="fw-semibold d-inline-block">Lieu residence: </span>
                 <span class="gray-color">{{ patient.lieu_residence }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Aire sante:</span>
+                <span class="fw-semibold d-inline-block">Aire sante: </span>
                 <span class="gray-color">{{ patient.aire_sante }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Profession:</span>
+                <span class="fw-semibold d-inline-block">Profession: </span>
                 <span class="gray-color">{{ patient.profession }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Email:</span>
+                <span class="fw-semibold d-inline-block">Email: </span>
                 <span class="gray-color">{{ patient.email }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Telephone:</span>
+                <span class="fw-semibold d-inline-block">Telephone: </span>
                 <span class="gray-color">{{ patient.telephone }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Province:</span>
+                <span class="fw-semibold d-inline-block">Province: </span>
                 <span class="gray-color">{{ patient.province }}</span>
             </li> 
 
             <li>
-                <span class="fw-semibold d-inline-block">Signature:</span>
+                <span class="fw-semibold d-inline-block">Signature: </span>
                 <span class="gray-color">{{ patient.signature }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Créé le:</span>
+                <span class="fw-semibold d-inline-block">Créé le: </span>
                 <span class="gray-color">{{ patient.created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
             </li>
             <li>
-                <span class="fw-semibold d-inline-block">Mis à jour le:</span>
+                <span class="fw-semibold d-inline-block">Mis à jour le: </span>
                 <span class="gray-color">{{ patient.update_created | date: 'dd/MM/yyyy HH:mm:ss' }}</span>
             </li>
         </ul>

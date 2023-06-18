@@ -45,7 +45,7 @@ export class UserAddComponent implements OnInit {
     { value: 'Homme', viewValue: 'Homme' },
   ];
 
-  public nationaliteList: string[] = [];
+  public nationaliteList: any[] = [];
   public placeholder: string = 'Enter the Country Name';
   public keyword = 'name';
   public historyHeading: string = 'Recently selected';
@@ -107,11 +107,11 @@ export class UserAddComponent implements OnInit {
     this.usersService.all().subscribe(res => {
       this.userList = res;
       this.userID = this.userList.map(e => e.id);
-      this.nationaliteList = this.userList.map(user => user.nationalite);
+      this.nationaliteList = this.userList.map(user => user.nationalite); 
 
-      console.log(this.nationaliteList);
+      
     });
-
+    console.log(this.userList);
 
 
 

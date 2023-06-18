@@ -88,9 +88,7 @@ export class PatientEditComponent {
     });  
 
     this.formGroup = this._formBuilder.group({
-      nom: [''],
-      postnom: [''],
-      prenom: [''],
+      fullname: [''],
       sexe: [''],
       age_an: [''],
       age_mois: [''],
@@ -104,9 +102,7 @@ export class PatientEditComponent {
     this.id = this.route.snapshot.params['id'];
     this.patientService.get(this.id).subscribe(res => {
         this.formGroup.patchValue({ // load data to form
-          nom: res.nom,
-          postnom: res.postnom,
-          prenom: res.prenom,
+          fullname: res.fullname, 
           sexe: res.sexe,
           age_an: res.age_an,
           age_mois: res.age_mois,
