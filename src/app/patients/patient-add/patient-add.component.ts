@@ -9,6 +9,7 @@ import { PatientService } from '../patient.service';
 import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
 import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
 import { LocalService } from 'src/app/shared/services/local.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-patient-add',
@@ -57,6 +58,8 @@ export class PatientAddComponent implements OnInit {
     "Adulte"
   ]
 
+  public isNourrison = false;
+
   constructor(
       public themeService: CustomizerSettingsService,
       private _formBuilder: FormBuilder, 
@@ -81,15 +84,20 @@ export class PatientAddComponent implements OnInit {
       postnom: ['', Validators.required],
       prenom: ['', Validators.required],
       sexe: ['', Validators.required],
-      age_an: ['', Validators.required],
-      age_mois: ['', Validators.required],
+      age_an: ['0', Validators.required],
+      age_mois: ['0', Validators.required],
       fourchette_age: ['', Validators.required],
       lieu_residence: ['', Validators.required], 
       profession: ['', Validators.required],
-      email: [''],
+      email: ['conctat@opca-rdc.org'],
       telephone: ['', Validators.required],
     });
     
+  }
+
+  public toggle(event: MatSlideToggleChange) {
+    console.log('toggle', event.checked);
+      this.isNourrison = event.checked;
   }
 
   onSubmit() {
@@ -120,8 +128,9 @@ export class PatientAddComponent implements OnInit {
       this.patientService.create(body).subscribe(() => {
           this.isLoading = false;
           this.formGroup.reset();
-          this.router.navigate(['/patients/patient-list']);
+          this.router.navigate(['/layouts/patients/patient-list']);
       });
+      this.isLoading = false;
     } catch (error) {
       this.isLoading = false;
       console.log(error);

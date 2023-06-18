@@ -18,7 +18,6 @@ export class PatientViewComponent implements OnInit {
   constructor(
     public themeService: CustomizerSettingsService,
     private route: ActivatedRoute,
-    private router: Router, 
     private patientService: PatientService) {}
 
 

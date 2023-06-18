@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CustomizerSettingsService } from '../customizer-settings/customizer-settings.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-footer',
@@ -7,9 +8,13 @@ import { CustomizerSettingsService } from '../customizer-settings/customizer-set
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent {
+  year : string;
+
     constructor(
       public themeService: CustomizerSettingsService
-  ) {}
+  ) {
+    this.year = formatDate(new Date(), 'yyyy', 'en'); 
+  }
 
   toggleCardBorderTheme() {
       this.themeService.toggleCardBorderTheme();

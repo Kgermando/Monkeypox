@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/auth.service'; 
@@ -17,7 +17,7 @@ import { LocalService } from 'src/app/shared/services/local.service';
   templateUrl: './epidemie-add.component.html',
   styleUrls: ['./epidemie-add.component.scss']
 })
-export class EpidemieAddComponent implements OnInit {
+export class EpidemieAddComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   isLoadingData: boolean = false;
 
@@ -172,8 +172,9 @@ export class EpidemieAddComponent implements OnInit {
         this.epidemieService.create(body).subscribe(() => {
             this.isLoading = false;
             this.formGroup.reset();
-            this.router.navigate(['/epidemies/epidemie-list']);
+            this.router.navigate(['/layouts/epidemies/epidemie-list']);
         });
+        this.isLoading = false;
       } catch (error) {
         this.isLoading = false;
         console.log(error);

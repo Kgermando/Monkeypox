@@ -1,38 +1,38 @@
 export class EpidemieModel {
     id: number;
-    pays: string | undefined;
-    province: string | undefined;
-    zone_sante: string | undefined;
-    num_epi: string | undefined;
+    pays: string;
+    province: string;
+    zone_sante: string;
+    num_epi: string;
     
-    semaine_epi: number | undefined;
-    date_notification: Date | undefined;
-    patient_id: number | undefined; 
+    semaine_epi: number;
+    date_notification: Date;
+    patient_id: number;
     
-    fievre: boolean | undefined;
-    eruption_cutanee: boolean | undefined;
-    date_symptome: Date | undefined;
-    autres: string | undefined;
+    fievre: string;
+    eruption_cutanee: string;
+    date_symptome: Date;
+    autres: string;
     
-    date_admition: Date | undefined;
-    date_diagonstic: Date | undefined;
-    structure: string | undefined;
+    date_admition: Date;
+    date_diagonstic: Date;
+    structure: string;
     
-    a_ete_contact_patient: boolean | undefined;
-    type_contact: string | undefined;
-    a_ete_hospitalise: boolean | undefined;
+    a_ete_contact_patient: string;
+    type_contact: string;
+    a_ete_hospitalise: string;
     
-    croute: string | undefined;
-    ecouvillon: string | undefined;
-    prevelement_sanguin: string | undefined;
-    date_prelevement: Date | undefined;
-    date_expedition: Date | undefined;
+    croute: string;
+    ecouvillon: string;
+    prevelement_sanguin: string;
+    date_prelevement: Date;
+    date_expedition: Date;
     
-    statut: string | undefined;
-    commentaire: string | undefined;
-    campaign: string | undefined;
-    epidemie: string | undefined;
-    signature: string | undefined;
-    created: Date | undefined;
-    update_created: Date | undefined;
+    statut: string;
+    commentaire: string;
+    campaign: string;
+    epidemie: string;
+    signature: string;
+    created: Date;
+    update_created: Date;
 }

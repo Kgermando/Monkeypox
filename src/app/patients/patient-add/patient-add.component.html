@@ -72,22 +72,27 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6">
+                            <mat-slide-toggle
+                                [checked]="isNourrison" (change)="toggle($event)"
+                            >Cocher pour les nourrisons</mat-slide-toggle>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="isNourrison">
                             <div class="tagus-form-group">
                                 <label class="d-block mb-12 fw-semibold gray-color">Age par Mois</label>
                                 <mat-form-field appearance="fill">
                                     <i class="ri-user-3-line"></i>
-                                    <mat-label>Entrer age par mois</mat-label>
-                                    <input matInput formControlName="age_mois" input="number" required="Champs obligatoire">
+                                    <mat-label>Entrer le nombre de mois</mat-label>
+                                    <input matInput formControlName="age_mois" input="number" ng-pattern="onlyNumbers" required="Champs obligatoire">
                                 </mat-form-field> 
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="!isNourrison">
                             <div class="tagus-form-group">
                                 <label class="d-block mb-12 fw-semibold gray-color">Age par AN</label>
                                 <mat-form-field appearance="fill">
                                     <i class="ri-user-3-line"></i>
-                                    <mat-label>Entrer age AN</mat-label>
-                                    <input matInput formControlName="age_an" input="number" required="Champs obligatoire">
+                                    <mat-label>Entrer l'âge</mat-label>
+                                    <input matInput formControlName="age_an" input="number" ng-pattern="onlyNumbers" required="Champs obligatoire">
                                 </mat-form-field>
                             </div>
                         </div>

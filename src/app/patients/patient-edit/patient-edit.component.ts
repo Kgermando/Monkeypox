@@ -57,6 +57,8 @@ export class PatientEditComponent {
 
   patient: PatientModel;
 
+  id: number;
+
   constructor(
       public themeService: CustomizerSettingsService,
       private _formBuilder: FormBuilder,
@@ -86,51 +88,57 @@ export class PatientEditComponent {
     });  
 
     this.formGroup = this._formBuilder.group({
-      photo: ['-'],
-      nom: ['', Validators.required],
-      postnom: ['', Validators.required],
-      prenom: ['', Validators.required],
-      sexe: ['', Validators.required],
-      age_an: ['', Validators.required],
-      age_mois: ['', Validators.required],
-      fourchette_age: ['', Validators.required],
-      lieu_residence: ['', Validators.required], 
-      profession: ['', Validators.required],
-      email: [''],
-      telephone: ['', Validators.required],
+      nom: [''],
+      postnom: [''],
+      prenom: [''],
+      sexe: [''],
+      age_an: [''],
+      age_mois: [''],
+      fourchette_age: [''],
+      lieu_residence: [''], 
+      profession: [''],
+      email: ['conctat@opca-rdc.org'],
+      telephone: [''],
     });
+
+    this.id = this.route.snapshot.params['id'];
+    this.patientService.get(this.id).subscribe(res => {
+        this.formGroup.patchValue({ // load data to form
+          nom: res.nom,
+          postnom: res.postnom,
+          prenom: res.prenom,
+          sexe: res.sexe,
+          age_an: res.age_an,
+          age_mois: res.age_mois,
+          fourchette_age: res.fourchette_age,
+          lieu_residence: res.lieu_residence,
+          profession: res.profession,
+          email: res.email,
+          telephone: res.telephone,
+          signature: this.currentUser.matricule,
+          created: res.created,
+          update_created: new Date()
+        });
+      }
+    ); 
   }
 
   onSubmit() {
     try {
-      console.log(this.formGroup);
-      console.log(this.currentUser.matricule);
       this.isLoading = true;
-      var body = {
-        photo: this.formGroup.value.photo,
-        nom: this.formGroup.value.nom,
-        postnom: this.formGroup.value.postnom,
-        prenom: this.formGroup.value.prenom,
-        sexe: this.formGroup.value.sexe,
-        age_an: this.formGroup.value.age_an,
-        age_mois: this.formGroup.value.age_mois,
-        fourchette_age: this.formGroup.value.fourchette_age,
-        lieu_residence: this.formGroup.value.lieu_residence,
-        aire_sante: this.currentUser.zone_sante,
-        profession: this.formGroup.value.profession,
-        email: this.formGroup.value.email,
-        telephone: this.formGroup.value.telephone,
-        province: this.currentUser.province,
-        signature: this.currentUser.matricule,
-        created: new Date(),
-        update_created: new Date()
-      };
-      console.log(body);
-      this.patientService.create(body).subscribe(() => {
+      this.patientService.update(this.id, this.formGroup.getRawValue())
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/layouts/patients/patient-list']);
           this.isLoading = false;
-          this.formGroup.reset();
-          this.router.navigate(['/patients/patient-list']);
+        },
+        error: err => {
+          console.log(err);
+          this.isLoading = false;
+        }
       });
+
+      this.isLoading = false;
     } catch (error) {
       this.isLoading = false;
       console.log(error);

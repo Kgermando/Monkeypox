@@ -1,21 +1,21 @@
 export class PatientModel {
-    id: number | undefined;
-    photo: string | undefined;
-    nom: string | undefined;
-    postnom: string | undefined;
-    prenom: string | undefined;
-    sexe: string | undefined;
-    age_an: number | undefined;
-    age_mois: number | undefined;
-    fourchette_age: string | undefined;
-    lieu_residence: string | undefined;  // Village ou quartier
-    aire_sante: string | undefined;
-    profession: string | undefined;
-    email: string | undefined;
-    telephone: string | undefined;
+    id: number;
+    photo: string;
+    nom: string;
+    postnom: string;
+    prenom: string;
+    sexe: string;
+    age_an: number;
+    age_mois: number;
+    fourchette_age: string;
+    lieu_residence: string;  // Village ou quartier
+    aire_sante: string;
+    profession: string;
+    email: string;
+    telephone: string;
     province: string;
-    signature: string | undefined; // celui qui fait le document
-    created: Date | undefined;
-    update_created : Date | undefined; 
+    signature: string; // celui qui fait le document
+    created: Date;
+    update_created : Date; 
 
 }

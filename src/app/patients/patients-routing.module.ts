@@ -8,8 +8,8 @@ import { PatientViewComponent } from './patient-view/patient-view.component';
 const routes: Routes = [
   { path: 'patient-list', component: PatientListComponent },
   { path: 'patient-add', component: PatientAddComponent },
-  { path: 'patient-edit/:id', component: PatientEditComponent },
-  { path: 'patient-view/:id', component: PatientViewComponent },
+  { path: ':id/patient-edit', component: PatientEditComponent },
+  { path: ':id/patient-view', component: PatientViewComponent },
 
   { path: '', redirectTo: 'patient-list', pathMatch: 'full'}
 ];

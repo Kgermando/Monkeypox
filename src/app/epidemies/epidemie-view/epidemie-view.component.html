@@ -20,13 +20,21 @@
             <mat-card class="mb-25 personal-info-card tagus-card" [class.component-dark-theme]="themeService.isDark()">
                 <mat-card-header class="border-bottom">
                     <h4 class="mb-0">Numero épidemiologique </h4>
+                    <div>
+                        <button mat-icon-button color="accent" [routerLink]="['/layouts/epidemies', epidemie.id, 'epidemie-edit']">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                        <button mat-icon-button color="warn" (click)="delete(epidemie.id)">
+                            <mat-icon>delete</mat-icon>
+                        </button> 
+                    </div>
                 </mat-card-header>
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
                         <li>
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4">
-                                    <span class="fw-semibold d-inline-block">N° épidemiologique:</span>
+                                    <span class="fw-semibold d-inline-block">N° épidemiologique: </span>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                     <span class="gray-color"> {{ epidemie.num_epi }}</span> 
@@ -34,19 +42,19 @@
                             </div>
                         </li> 
                         <li>
-                            <span class="fw-semibold d-inline-block">pays:</span>
+                            <span class="fw-semibold d-inline-block">pays: </span>
                             <span class="gray-color"> {{ epidemie.pays }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Province:</span>
+                            <span class="fw-semibold d-inline-block">Province: </span>
                             <span class="gray-color"> {{ epidemie.province }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Zone de sante:</span>
+                            <span class="fw-semibold d-inline-block">Zone de sante: </span>
                             <span class="gray-color"> {{ epidemie.zone_sante }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Année:</span>
+                            <span class="fw-semibold d-inline-block">Année: </span>
                             <span class="gray-color"> {{ epidemie.created | date: 'yy' }}</span>
                         </li>
                         <li>
@@ -67,7 +75,7 @@
                         <li>
                             <div class="row">
                                 <div class="col-lg-4 col-md-4 col-sm-4">
-                                    <span class="fw-semibold d-inline-block">Semaine épidemiologique:</span>
+                                    <span class="fw-semibold d-inline-block">Semaine épidemiologique: </span>
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                     <span class="gray-color"> {{ epidemie.semaine_epi }}</span> 
@@ -104,21 +112,21 @@
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
                         <li>
-                            <span class="fw-semibold d-inline-block">Fièvre:</span> 
+                            <span class="fw-semibold d-inline-block">Fièvre: </span> 
                             <span class="gray-color" *ngIf="epidemie.fievre"> OUI</span>
                             <span class="gray-color" *ngIf="!epidemie.fievre"> NON</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Eruption cutanée:</span> 
+                            <span class="fw-semibold d-inline-block">Eruption cutanée: </span> 
                             <span class="gray-color" *ngIf="epidemie.eruption_cutanee"> OUI</span>
                             <span class="gray-color" *ngIf="!epidemie.eruption_cutanee"> NON</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Date symptôme:</span>
+                            <span class="fw-semibold d-inline-block">Date symptôme: </span>
                             <span class="gray-color"> {{ epidemie.date_symptome | date: 'dd/MM/yyyy' }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Autres:</span>
+                            <span class="fw-semibold d-inline-block">Autres: </span>
                             <span class="gray-color"> {{ epidemie.autres }}</span>
                         </li>
                     </ul>
@@ -134,11 +142,11 @@
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
                         <li>
-                            <span class="fw-semibold d-inline-block">Date d'admition:</span>
+                            <span class="fw-semibold d-inline-block">Date d'admition: </span>
                             <span class="gray-color"> {{ epidemie.date_admition | date: 'dd/MM/yyyy' }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Date diagonstic:</span>
+                            <span class="fw-semibold d-inline-block">Date diagonstic: </span>
                             <span class="gray-color"> {{ epidemie.date_diagonstic | date: 'dd/MM/yyyy' }}</span> 
                         </li>
                         <li>
@@ -157,17 +165,17 @@
                 </mat-card-header>
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
-                        <li>
-                            <span class="fw-semibold d-inline-b lock">A été contact avec le patient:</span>
+                        <li> 
+                            <span class="fw-semibold d-inline-b lock">A été contact avec le patient: </span>
                             <span class="gray-color" *ngIf="epidemie.a_ete_contact_patient"> OUI</span>
                             <span class="gray-color" *ngIf="!epidemie.a_ete_contact_patient"> NON</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-b lock">Type de contact:</span>
+                            <span class="fw-semibold d-inline-b lock">Type de contact: </span>
                             <span class="gray-color"> {{ epidemie.type_contact }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-b lock">A été hospitalisé:</span> 
+                            <span class="fw-semibold d-inline-b lock">A été hospitalisé: </span> 
                             <span class="gray-color" *ngIf="epidemie.a_ete_hospitalise"> OUI</span>
                             <span class="gray-color" *ngIf="!epidemie.a_ete_hospitalise"> NON</span>
                         </li>
@@ -184,23 +192,23 @@
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
                         <li>
-                            <span class="fw-semibold d-inline-b lock">Croûte:</span>
+                            <span class="fw-semibold d-inline-b lock">Croûte: </span>
                             <span class="gray-color"> {{ epidemie.croute }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-b lock">Ecouvillon (SWAB):</span>
+                            <span class="fw-semibold d-inline-b lock">Ecouvillon (SWAB): </span>
                             <span class="gray-color"> {{ epidemie.ecouvillon }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-b lock">Prevelement sanguin:</span>
+                            <span class="fw-semibold d-inline-b lock">Prevelement sanguin: </span>
                             <span class="gray-color"> {{ epidemie.prevelement_sanguin }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Date de prelevement:</span>
+                            <span class="fw-semibold d-inline-block">Date de prelevement: </span>
                             <span class="gray-color"> {{ epidemie.date_prelevement | date: 'dd/MM/yyyy' }}</span> 
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Date d'expedition:</span>
+                            <span class="fw-semibold d-inline-block">Date d'expedition: </span>
                             <span class="gray-color"> {{ epidemie.date_expedition | date: 'dd/MM/yyyy' }}</span> 
                         </li>
                     </ul>
@@ -216,8 +224,11 @@
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
                         <li>
-                            <span class="fw-semibold d-inline-b lock">Statut:</span>
-                            <span class="gray-color"> {{ epidemie.statut }}</span>
+                            <span class="fw-semibold d-inline-b lock">Statut: </span> 
+                            <span class="badge text-soft-primary" *ngIf="epidemie.statut == 'Cas suspect'">{{ epidemie.statut }}</span>
+                            <span class="badge text-soft-warning" *ngIf="epidemie.statut == 'Cas probable'">{{ epidemie.statut }}</span>
+                            <span class="badge text-soft-danger" *ngIf="epidemie.statut == 'Cas confirmé'">{{ epidemie.statut }}</span>
+                            <span class="badge text-soft-success" *ngIf="epidemie.statut == 'Cas non actif'">{{ epidemie.statut }}</span>
                         </li>
                         <li>
                             <div class="fw-semibold col-lg-12 col-md-12 col-sm-12">Commentaire</div>
@@ -225,19 +236,19 @@
                         </li>
                         
                         <li>
-                            <span class="fw-semibold d-inline-b lock">Campagne:</span>
+                            <span class="fw-semibold d-inline-b lock">Campagne: </span>
                             <span class="gray-color"> {{ epidemie.campaign }}</span>
                         </li> 
                         <li>
-                            <span class="fw-semibold d-inline-b lock">Signature:</span>
+                            <span class="fw-semibold d-inline-b lock">Signature: </span>
                             <span class="gray-color"> {{ epidemie.signature }}</span>
                         </li> 
                         <li>
-                            <span class="fw-semibold d-inline-block">Crée le:</span>
+                            <span class="fw-semibold d-inline-block">Crée le: </span>
                             <span class="gray-color"> {{ epidemie.created | date: 'dd/MM/yyyy' }}</span> 
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Mise à jour le:</span>
+                            <span class="fw-semibold d-inline-block">Mise à jour le: </span>
                             <span class="gray-color"> {{ epidemie.update_created | date: 'dd/MM/yyyy' }}</span> 
                         </li>
                     </ul>

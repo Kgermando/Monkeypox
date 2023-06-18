@@ -55,9 +55,5 @@ export class PatientListComponent implements AfterViewInit {
     }
   
   
-    removeItem(id: number){
-      this.patientService.delete(id);
-    }
-  
 }
  

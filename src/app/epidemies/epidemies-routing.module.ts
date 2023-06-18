@@ -8,8 +8,8 @@ import { EpidemieViewComponent } from './epidemie-view/epidemie-view.component';
 const routes: Routes = [
   { path: 'epidemie-list', component: EpidemieListComponent },
   { path: 'epidemie-add', component: EpidemieAddComponent },
-  { path: 'epidemie-edit/:id', component: EpidemieEditComponent },
-  { path: 'epidemie-view/:id', component: EpidemieViewComponent },
+  { path: ':id/epidemie-edit', component: EpidemieEditComponent },
+  { path: ':id/epidemie-view', component: EpidemieViewComponent },
 
   { path: '', redirectTo: 'epidemie-list', pathMatch: 'full'}
 ];
