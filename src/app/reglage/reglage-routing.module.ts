@@ -16,18 +16,18 @@ import { ZoneSanteViewComponent } from './zone-santes/zone-sante-view/zone-sante
 const routes: Routes = [
   { path: 'campaign-list', component: CampaignListComponent }, 
   { path: 'campaign-add', component: CampaignAddComponent },
-  { path: 'campaign-edit/:id', component: CampaignEditComponent },
-  { path: 'campaign-view/:id', component: CampaignViewComponent },
+  { path: ':id/campaign-edit', component: CampaignEditComponent },
+  { path: ':id/campaign-view', component: CampaignViewComponent },
 
   { path: 'structure-list', component: StructureListComponent },
   { path: 'structure-add', component: StructureAddComponent },
-  { path: 'struture-edit/:id', component: StructureEditComponent },
-  { path: 'structure-view/:id', component: StructureViewComponent },
+  { path: ':id/structure-edit', component: StructureEditComponent },
+  { path: ':id/structure-view', component: StructureViewComponent },
 
   { path: 'zone-sante-list', component: ZoneSanteListComponent },
   { path: 'zone-sante-add', component: ZoneSanteAddComponent },
-  { path: 'zone-sante-edit/:id', component: ZoneSanteEditComponent },
-  { path: 'zone-sante-view/:id', component: ZoneSanteViewComponent },
+  { path: ':id/zone-sante-edit', component: ZoneSanteEditComponent },
+  { path: ':id/zone-sante-view', component: ZoneSanteViewComponent },
 
   { path: '', redirectTo: 'campaign-list', pathMatch: 'full'}
 ];

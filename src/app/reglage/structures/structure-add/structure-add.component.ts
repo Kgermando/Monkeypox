@@ -14,8 +14,7 @@ import { LocalService } from 'src/app/shared/services/local.service';
 })
 export class StructureAddComponent implements OnInit {
 
-  isLoading: boolean = false;
-  structure: StructureModel = new StructureModel();
+  isLoading: boolean = false; 
 
   currentUser: UserModel = {
     id: 0,
@@ -88,7 +87,7 @@ export class StructureAddComponent implements OnInit {
       console.log(body);
       this.structureService.create(body).subscribe(() => {
           this.isLoading = false;
-          this.goList();
+          this.router.navigate(['/layouts/reglages/structure-list']);
       }); 
     } catch (error) {
       console.log(error);

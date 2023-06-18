@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { CampaignModel } from '../../models/campaign-model';
-import { MetaModel } from 'src/app/shared/models/meta-model';
+import { CampaignModel } from '../../models/campaign-model'; 
 import { CampaignService } from '../campaign.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-campaign-list',
@@ -24,7 +24,8 @@ export class CampaignListComponent {
 
   constructor(
     private campaignService: CampaignService,
-    private router: Router) {}
+    private router: Router,
+    private _snackBar: MatSnackBar) {}
 
   ngAfterViewInit() {
     this.isLoading = true;
@@ -50,12 +51,15 @@ export class CampaignListComponent {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  editItem(id: number){
-    this.router.navigate(['/reglages/campaign-edit', id]);
-  }
+ 
 
 
-  removeItem(id: number){
-    this.campaignService.delete(id);
+  delete(id: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cet element ?')) {
+      this.campaignService.delete(id).subscribe(() => {  
+        this.router.navigate(['/layouts/reglages/campaign-list']); 
+        this._snackBar.open("Cet élement a été supprimé!", "ok");
+      });
+    }
   }
 }

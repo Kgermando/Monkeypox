@@ -5,6 +5,7 @@ import { StructureModel } from '../../models/structure-model';
 import { StructureService } from '../structure.service';
 import { MetaModel } from 'src/app/shared/models/meta-model';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-structure-list',
@@ -24,7 +25,8 @@ export class StructureListComponent implements AfterViewInit {
 
   constructor(
     private structureService: StructureService,
-    private router: Router) {}
+    private router: Router,
+    private _snackBar: MatSnackBar) {}
 
   ngAfterViewInit() {
     this.isLoading = true;
@@ -49,14 +51,15 @@ export class StructureListComponent implements AfterViewInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+ 
 
-  editItem(id: number){
-    this.router.navigate(['/reglages/structure-add', id]);
-  }
-
-
-  removeItem(id: number){
-    this.structureService.delete(id);
+  delete(id: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cet element ?')) {
+      this.structureService.delete(id).subscribe(() => {  
+        this.router.navigate(['/layouts/reglages/structure-list']); 
+        this._snackBar.open("Cet élement a été supprimé!", "ok");
+      });
+    }
   }
 
 

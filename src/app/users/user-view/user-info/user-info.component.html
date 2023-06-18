@@ -5,7 +5,7 @@
             <button mat-icon-button color="accent" [routerLink]="['/layouts/users', user.id, 'edit']">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn">  
+            <button mat-icon-button color="warn" (click)="delete(user.id)">  
                 <mat-icon>delete</mat-icon>
             </button>
         </div> 

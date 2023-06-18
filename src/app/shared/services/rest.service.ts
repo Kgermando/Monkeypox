@@ -29,7 +29,7 @@ export abstract class RestService {
   }
 
   update(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.endpoint}/info/${id}`, data);
+    return this.http.put(`${this.endpoint}/${id}`, data);
   }
 
   delete(id: number): Observable<void> {

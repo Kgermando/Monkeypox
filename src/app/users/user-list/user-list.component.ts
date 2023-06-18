@@ -1,10 +1,9 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { UserModel } from '../models/user-models';
-import { MetaModel } from 'src/app/shared/models/meta-model';
+import { UserModel } from '../models/user-models'; 
 import { UsersService } from '../users.service';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-user-list',
@@ -27,8 +26,7 @@ export class UserListComponent implements AfterViewInit {
 
 
     constructor(
-        private usersService: UsersService,
-        private router: Router) {}
+        private usersService: UsersService ) {}
     
       ngAfterViewInit() { 
         this.isLoading = true;
@@ -53,15 +51,5 @@ export class UserListComponent implements AfterViewInit {
         const filterValue = (event.target as HTMLInputElement).value;
         this.dataSource.filter = filterValue.trim().toLowerCase();
       }
-    
-      editItem(id: number){
-        this.router.navigate(['/users/user-edit', id]);
-      }
-    
-    
-      removeItem(id: number){
-        this.usersService.delete(id);
-      }
-    
-    
+     
 }

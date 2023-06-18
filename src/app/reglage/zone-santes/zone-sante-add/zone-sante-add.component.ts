@@ -66,12 +66,7 @@ export class ZoneSanteAddComponent implements OnInit {
       territoire: ['', Validators.required]
     });
     
-  }
-
-
-  goList() {
-    this.router.navigate(['/reglages/zone-sante-list'])
-  }
+  } 
 
   
   onSubmit() {
@@ -90,7 +85,7 @@ export class ZoneSanteAddComponent implements OnInit {
       console.log(body);
       this.zoneSanteService.create(body).subscribe(() => {
           this.isLoading = false;
-          this.goList();
+          this.router.navigate(['/layouts/reglages/zone-sante-list']);
       }); 
     } catch (error) {
       console.log(error);

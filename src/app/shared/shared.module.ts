@@ -55,6 +55,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { PaginatorComponent } from './components/paginator/paginator.component';
 import { InternalErrorComponent } from './components/internal-error/internal-error.component';
  
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 
 @NgModule({
   declarations: [
@@ -115,7 +116,9 @@ import { InternalErrorComponent } from './components/internal-error/internal-err
     NgChartsModule,
     NgxMatTimepickerModule, 
     NgxDropzoneModule,
-    ColorPickerModule
+    ColorPickerModule,
+
+    AutocompleteLibModule,
   ],
   exports: [
     MatMenuModule,
@@ -177,6 +180,9 @@ import { InternalErrorComponent } from './components/internal-error/internal-err
     PaginatorComponent,
     InternalErrorComponent,
     FileUploadComponent,
+
+    // Externe Modules
+    AutocompleteLibModule,
   ]
 })
 export class SharedModule { }

@@ -14,8 +14,7 @@ import { LocalService } from 'src/app/shared/services/local.service';
   styleUrls: ['./campaign-add.component.scss']
 })
 export class CampaignAddComponent implements OnInit {
-  isLoading: boolean = false;
-  structure: CampaignModel = new CampaignModel();
+  isLoading: boolean = false; 
 
   currentUser: UserModel = {
     id: 0,
@@ -67,12 +66,6 @@ export class CampaignAddComponent implements OnInit {
     });
     
   }
-
-
-  goList() {
-    this.router.navigate(['/reglages/campaign-list'])
-  }
-
   
   onSubmit() {
     try {
@@ -92,8 +85,9 @@ export class CampaignAddComponent implements OnInit {
       console.log(body);
       this.campaignService.create(body).subscribe(() => {
           this.isLoading = false;
-          this.goList();
-      }); 
+          this.router.navigate(['layouts//reglages/campaign-list']);
+      });
+      this.isLoading = false;
     } catch (error) {
       console.log(error);
     }

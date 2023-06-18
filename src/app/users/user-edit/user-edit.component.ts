@@ -132,9 +132,11 @@ export class UserEditComponent {
       .subscribe({
         next: () => {
           this.router.navigate(['/layouts/users/user-list']);
+          this.isLoading = false;
         },
         error: err => {
           console.log(err);
+          this.isLoading = false;
         }
       });
 

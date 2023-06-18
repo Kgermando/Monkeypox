@@ -6,6 +6,7 @@ import { MetaModel } from 'src/app/shared/models/meta-model';
 import { ZoneSanteService } from '../zone-sante.service';
 import { Router } from '@angular/router';
 import { provinces } from 'src/app/shared/utils/province';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-zone-sante-list',
@@ -31,7 +32,8 @@ export class ZoneSanteListComponent {
 
   constructor(
     private zoneSanteService: ZoneSanteService,
-    private router: Router) {}
+    private router: Router,
+    private _snackBar: MatSnackBar) {}
 
   ngAfterViewInit() {
     this.isLoading = true;
@@ -55,6 +57,15 @@ export class ZoneSanteListComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  delete(id: number): void {
+    if (confirm('Voulez-vous vraiment supprimer cet element ?')) {
+      this.zoneSanteService.delete(id).subscribe(() => {  
+        this.router.navigate(['/layouts/reglages/zone-sante-list']); 
+        this._snackBar.open("Cet élement a été supprimé!", "ok");
+      });
+    }
   }
 
 }

@@ -81,15 +81,27 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="tagus-form-group">
+                    <div class="tagus-form-group"> 
                         <label class="d-block mb-12 fw-semibold gray-color">Nationalité</label>
-                        <mat-form-field appearance="fill">
-                            <i class="ri-user-3-line"></i>
-                            <mat-label>Entrer la Nationalité</mat-label>
-                            <input matInput formControlName="nationalite" required="Champs obligatoire">
-                        </mat-form-field>
+                        <ng-autocomplete #ngAutoCompleteReactive
+                            [data]="nationaliteList"
+                            formControlName="nationalite"
+                            [initialValue]=""
+                            [placeholder]="placeholder"
+                            [searchKeyword]="keyword"
+                            historyIdentifier="countriesReactiveList"
+                            [historyHeading]="historyHeading"
+                            notFoundText="Aucune suggestion..." 
+                            [notFoundTemplate]="notFoundTemplate">
+                        </ng-autocomplete>
+                        <ng-template #itemTemplate let-item>
+                            <a [innerHTML]="item"></a>
+                          </ng-template>
+                          <ng-template #notFoundTemplate let-notFound>
+                            <div [innerHTML]="notFound"></div>
+                          </ng-template>
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Etat civil</label>

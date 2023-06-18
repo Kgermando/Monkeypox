@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomizerSettingsService } from "src/app/common/customizer-settings/customizer-settings.service";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router'; 
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Countries } from 'src/app/shared/models/country.model';
 import { countries } from 'src/app/shared/utils/countries';
 import { UsersService } from '../users.service';
@@ -14,6 +14,7 @@ import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
 import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
 import { LocalService } from 'src/app/shared/services/local.service';
 import { formatDate } from '@angular/common';
+import { Observable, map, startWith } from 'rxjs';
 
 interface Sexe {
   value: string;
@@ -26,111 +27,119 @@ interface Sexe {
   styleUrls: ['./user-add.component.scss']
 })
 export class UserAddComponent implements OnInit {
-    hide = true;
+  hide = true;
 
-    isLoading: boolean = false; 
- 
-    structureList: StructureModel[] = [];
- 
-    zoneSanteList: ZoneSanteModel[] = [];
+  isLoading: boolean = false;
 
-    provinceList: String[] = provinces;
+  structureList: StructureModel[] = [];
 
-    userList: UserModel[] = []; 
-    userID: number[] = []; // List ID
+  zoneSanteList: ZoneSanteModel[] = [];
 
-    sexes: Sexe[] = [
-        { value: 'Femme', viewValue: 'Femme' },
-        { value: 'Homme', viewValue: 'Homme' },
-    ];
-  
-    formGroup!: FormGroup;
+  provinceList: String[] = provinces;
 
-    currentUser: UserModel = {
-      id: 0,
-      structure: '-',
-      photo: '-',
-      nom: '-',
-      postnom: '-',
-      prenom: '-',
-      sexe: '-',
-      nationalite: '-',
-      etat_civile: '-',
-      adresse: '-',
-      titre: '-',
-      pays: '-',
-      province: '-',
-      zone_sante: '-',
-      email: '-',
-      telephone: '-',
-      matricule: '-',
-      role: 'User',
-      password: '-',
-      signature: '-',
-      created: new Date,
-      update_created: new Date
+  userList: UserModel[] = [];
+  userID: number[] = []; // List ID
+
+  sexes: Sexe[] = [
+    { value: 'Femme', viewValue: 'Femme' },
+    { value: 'Homme', viewValue: 'Homme' },
+  ];
+
+  public nationaliteList: string[] = [];
+  public placeholder: string = 'Enter the Country Name';
+  public keyword = 'name';
+  public historyHeading: string = 'Recently selected';
+
+  formGroup!: FormGroup;
+
+  currentUser: UserModel = {
+    id: 0,
+    structure: '-',
+    photo: '-',
+    nom: '-',
+    postnom: '-',
+    prenom: '-',
+    sexe: '-',
+    nationalite: '-',
+    etat_civile: '-',
+    adresse: '-',
+    titre: '-',
+    pays: '-',
+    province: '-',
+    zone_sante: '-',
+    email: '-',
+    telephone: '-',
+    matricule: '-',
+    role: 'User',
+    password: '-',
+    signature: '-',
+    created: new Date,
+    update_created: new Date
   };
 
-    constructor(
-        public themeService: CustomizerSettingsService,
-        private _formBuilder: FormBuilder, 
-        private router: Router,
-        private authService: AuthService,
-        private localStore: LocalService,
-        private usersService: UsersService,
-        private structureService: StructureService,
-        private zoneSanteService: ZoneSanteService,
-    ) { }
+  constructor(
+    public themeService: CustomizerSettingsService,
+    private _formBuilder: FormBuilder,
+    private router: Router,
+    private authService: AuthService,
+    private localStore: LocalService,
+    private usersService: UsersService,
+    private structureService: StructureService,
+    private zoneSanteService: ZoneSanteService,
+  ) { }
 
 
-    ngOnInit(): void {
-      var userId: any = this.localStore.getData('auth')
-      this.authService.user(parseInt(userId)).subscribe(
-        res => {
-            this.currentUser = res; 
-        }
-      );
-      this.structureService.all().subscribe(res => {
-        this.structureList = res; 
-      });
+  ngOnInit(): void {
+    var userId: any = this.localStore.getData('auth')
+    this.authService.user(parseInt(userId)).subscribe(
+      res => {
+        this.currentUser = res;
+      }
+    );
+    this.structureService.all().subscribe(res => {
+      this.structureList = res;
+    });
 
-      this.zoneSanteService.all().subscribe(res => {
-        this.zoneSanteList = res; 
-      });
+    this.zoneSanteService.all().subscribe(res => {
+      this.zoneSanteList = res;
+    });
 
-      this.usersService.all().subscribe(res => {
-        this.userList = res;
-        this.userID = this.userList.map(e => e.id);
-      });
+    this.usersService.all().subscribe(res => {
+      this.userList = res;
+      this.userID = this.userList.map(e => e.id);
+      this.nationaliteList = this.userList.map(user => user.nationalite);
+
+      console.log(this.nationaliteList);
+    });
 
 
 
-      this.formGroup = this._formBuilder.group({
-        structure: ['', Validators.required],
-        // photo: [''],
-        nom: ['', Validators.required],
-        postnom: ['', Validators.required],
-        prenom: ['', Validators.required],
-        sexe: ['', Validators.required],
-        nationalite: ['', Validators.required],
-        etat_civile: ['', Validators.required],
-        adresse: ['', Validators.required],
-        titre: ['', Validators.required],
-        province: ['', Validators.required],
-        zone_sante: ['', Validators.required],
-        email: [''],
-        telephone: ['', Validators.required],
-      });
-      
-    }
+
+    this.formGroup = this._formBuilder.group({
+      structure: ['', Validators.required],
+      // photo: [''],
+      nom: ['', Validators.required],
+      postnom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      sexe: ['', Validators.required],
+      nationalite: ['', Validators.required],
+      etat_civile: ['', Validators.required],
+      adresse: ['', Validators.required],
+      titre: ['', Validators.required],
+      province: ['', Validators.required],
+      zone_sante: ['', Validators.required],
+      email: [''],
+      telephone: ['', Validators.required],
+    });
+  }
 
   onSubmit() {
     try {
-      console.log(this.formGroup); 
-      console.log(this.currentUser.matricule); 
+      console.log(this.formGroup);
+      console.log(this.currentUser.matricule);
       this.isLoading = true;
-      var structure = this.currentUser.structure.slice(0,3);
-      var year = formatDate(new Date(), 'yy', 'en'); 
+      var structure = this.currentUser.structure.slice(0, 3);
+      var year = formatDate(new Date(), 'yy', 'en');
       var numID = 0;
       if (this.userID.length !== 0) {
         numID = Math.max(...this.userID);
@@ -175,7 +184,8 @@ export class UserAddComponent implements OnInit {
     }
   }
 
- 
 
-  
+
+
+
 }
