@@ -93,7 +93,7 @@
                                 </div>
                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                     <span class="gray-color"> 
-                                        <a [routerLink]="[ '/patients/patient-view', epidemie.patient_id ]" class="d-flex align-items-center main-color product-info">
+                                        <a [routerLink]="[ '/layouts/patients/patient-view', epidemie.patient_id ]" class="d-flex align-items-center main-color product-info">
                                             {{ epidemie.patient_id }}
                                         </a>
                                     </span>
@@ -112,14 +112,12 @@
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
                         <li>
-                            <span class="fw-semibold d-inline-block">Fièvre: </span> 
-                            <span class="gray-color" *ngIf="epidemie.fievre"> OUI</span>
-                            <span class="gray-color" *ngIf="!epidemie.fievre"> NON</span>
+                            <span class="fw-semibold d-inline-block">Fièvre: </span>  
+                            <span class="gray-color"> {{ epidemie.fievre }}</span>
                         </li>
                         <li>
-                            <span class="fw-semibold d-inline-block">Eruption cutanée: </span> 
-                            <span class="gray-color" *ngIf="epidemie.eruption_cutanee"> OUI</span>
-                            <span class="gray-color" *ngIf="!epidemie.eruption_cutanee"> NON</span>
+                            <span class="fw-semibold d-inline-block">Eruption cutanée: </span>  
+                            <span class="gray-color"> {{ epidemie.eruption_cutanee }}</span>
                         </li>
                         <li>
                             <span class="fw-semibold d-inline-block">Date symptôme: </span>
@@ -166,9 +164,8 @@
                 <mat-card-content>
                    <ul class="list ps-0 mb-0">
                         <li> 
-                            <span class="fw-semibold d-inline-b lock">A été contact avec le patient: </span>
-                            <span class="gray-color" *ngIf="epidemie.a_ete_contact_patient"> OUI</span>
-                            <span class="gray-color" *ngIf="!epidemie.a_ete_contact_patient"> NON</span>
+                            <span class="fw-semibold d-inline-b lock">A été contact avec le patient: </span> 
+                            <span class="gray-color"> {{ epidemie.a_ete_contact_patient }}</span>
                         </li>
                         <li>
                             <span class="fw-semibold d-inline-b lock">Type de contact: </span>
@@ -176,8 +173,7 @@
                         </li>
                         <li>
                             <span class="fw-semibold d-inline-b lock">A été hospitalisé: </span> 
-                            <span class="gray-color" *ngIf="epidemie.a_ete_hospitalise"> OUI</span>
-                            <span class="gray-color" *ngIf="!epidemie.a_ete_hospitalise"> NON</span>
+                            <span class="gray-color"> {{ epidemie.a_ete_hospitalise }}</span> 
                         </li>
                     </ul>
                 </mat-card-content>

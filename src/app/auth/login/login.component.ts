@@ -39,9 +39,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.isLoading = true;
+    this.localStore.removeData('auth');
     this.authService.login(this.form.getRawValue()).subscribe({
         next: (res) => {
-          // console.log(res);
+          // console.log(res); 
           this.localStore.saveData('auth', JSON.stringify(res));
           this.isLoading = false;
           this.router.navigate(['/layouts/dashboard']);

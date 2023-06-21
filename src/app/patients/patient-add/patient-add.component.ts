@@ -51,9 +51,12 @@ export class PatientAddComponent implements OnInit {
 };
 
 
-  fourchetteAgeList: any = [
+  fourchetteAgeMoisList: any = [
     "0 - 11 MOIS",
-    "12 - 59 MOIS",
+    "12 - 59 MOIS", 
+  ]
+
+  fourchetteAgeAnList: any = [
     "5 - 15 ANS",
     "Plus de 15 ANS"
   ]
@@ -76,7 +79,7 @@ export class PatientAddComponent implements OnInit {
       res => {
           this.currentUser = res; 
       }
-    ); 
+    );
 
     this.formGroup = this._formBuilder.group({
       photo: ['-'],
@@ -85,17 +88,16 @@ export class PatientAddComponent implements OnInit {
       age_an: ['0', Validators.required],
       age_mois: ['0', Validators.required],
       fourchette_age: ['', Validators.required],
-      lieu_residence: ['', Validators.required], 
-      profession: ['', Validators.required],
+      lieu_residence: ['', Validators.required],
+      profession: ['-'],
       email: ['conctat@opca-rdc.org'],
-      telephone: ['', Validators.required],
+      telephone: [''],
     });
-    
   }
 
   public toggle(event: MatSlideToggleChange) {
     console.log('toggle', event.checked);
-      this.isNourrison = event.checked;
+    this.isNourrison = event.checked;
   }
 
   onSubmit() {

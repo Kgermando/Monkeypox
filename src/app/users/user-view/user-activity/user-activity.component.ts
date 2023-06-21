@@ -15,7 +15,7 @@ import { UserModel } from '../../models/user-models';
 export class UserActivityComponent implements AfterViewInit {
     @Input() user: UserModel;
 
-    displayedColumns: string[] = ['id', 'fullname', 'sexe', 'fourchette_age', 'aire_sante', 'created'];
+  displayedColumns: string[] = ['id', 'fullname', 'sexe', 'fourchette_age', 'aire_sante', 'created'];
 
 
   @ViewChild(MatPaginator)
@@ -36,7 +36,7 @@ export class UserActivityComponent implements AfterViewInit {
     this.isLoading = true;
     this.patientService.all().subscribe({
       next:  res => {
-        this.ELEMENT_DATA = res; 
+        this.ELEMENT_DATA = res;
         this.ELEMENT_DATA_FILTER = this.ELEMENT_DATA.filter(u => this.user.matricule == u.signature);
  
         this.dataSource = new MatTableDataSource<PatientModel>(this.ELEMENT_DATA_FILTER);

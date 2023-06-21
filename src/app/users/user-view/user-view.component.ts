@@ -44,50 +44,52 @@ export class UserViewComponent implements OnInit {
     private route: ActivatedRoute,
     private usersService: UsersService, 
     private patientService: PatientService) {
-      this.getData();
+      
       this.patientService.all().subscribe(res => {
         this.patientList = res;
-        this.patientFilter = this.patientList.filter(e => this.user.matricule == e.signature);
-        this.value = this.patientFilter.length * 100 / this.patientList.length;
-        var difference = this.patientList.length - this.patientFilter.length; 
-        console.log(this.value);
+        // this.patientFilter = this.patientList.filter(e => this.user.matricule == e.signature);
+        // this.value = this.patientFilter.length * 100 / this.patientList.length;
+        // var difference = this.patientList.length - this.patientFilter.length; 
+        // console.log(this.value);
 
-        this.chartOptions = {
-          series: [this.value | 2],
-          chart: {
-              height: 110,
-              width: 110,
-              offsetX: 2.5,
-              type: "radialBar",
-              sparkline: {
-                  enabled: true,
-              },
-          },
-          colors: ["#00B69B"],
-          plotOptions: {
-              radialBar: {
-                  startAngle: -120,
-                  endAngle: 120,
-                  dataLabels: {
-                      name: {
-                          show: false
-                      },
-                      value: {
-                          offsetY: 3,
-                          fontSize: "14px",
-                          fontWeight: "700",
-                      }
-                  }
-              }
-          }
-      };
+        
       });
+
+      this.chartOptions = {
+        series: [70],
+        chart: {
+            height: 110,
+            width: 110,
+            offsetX: 2.5,
+            type: "radialBar",
+            sparkline: {
+                enabled: true,
+            },
+        },
+        colors: ["#00B69B"],
+        plotOptions: {
+            radialBar: {
+                startAngle: -120,
+                endAngle: 120,
+                dataLabels: {
+                    name: {
+                        show: false
+                    },
+                    value: {
+                        offsetY: 3,
+                        fontSize: "14px",
+                        fontWeight: "700",
+                    }
+                }
+            }
+        }
+    };
       
       
   }
 
   ngOnInit(): void {
-    
+    this.getData();
   }
 
   getData() {
@@ -100,6 +102,7 @@ export class UserViewComponent implements OnInit {
       console.log(this.user);
       console.log(id);
     });
+    this.isLoading = false;
   }
 
 

@@ -91,6 +91,7 @@ export class UserEditComponent {
       zone_sante: [''],
       email: [''],
       telephone: [''],
+      role: [''],
     });
  
      
@@ -115,6 +116,7 @@ export class UserEditComponent {
           email: user.email,
           telephone: user.telephone,
           matricule: user.matricule,
+          role: user.role,
           signature: this.currentUser.matricule,
           created: user.created,
           update_created: new Date()

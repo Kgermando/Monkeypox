@@ -130,6 +130,7 @@ export class UserAddComponent implements OnInit {
       zone_sante: ['', Validators.required],
       email: [''],
       telephone: ['', Validators.required],
+      role: ['', Validators.required],
     });
   }
 
@@ -161,6 +162,7 @@ export class UserAddComponent implements OnInit {
         email: this.formGroup.value.email,
         telephone: this.formGroup.value.telephone,
         matricule: `${structure}-${year}-${numID + 1}`,
+        role: this.formGroup.value.role,
         signature: this.currentUser.matricule,
         created: new Date(),
         update_created: new Date()

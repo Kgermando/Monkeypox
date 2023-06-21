@@ -1,6 +1,8 @@
-export const environment = {
-  production: false,
-  title: 'Local Environment Heading',
-  // apiURL: 'https://mpox.eventdrc.tech/api'
-  apiURL: 'http://localhost:8080/api'
+declare let process: any;
+const env = process.env.NODE_ENV;
+
+export const environment = {  
+  apiURL: (env  === 'production') 
+    ? 'https://mpox.eventdrc.tech/api'
+    : 'http://localhost:8080/api'
 };

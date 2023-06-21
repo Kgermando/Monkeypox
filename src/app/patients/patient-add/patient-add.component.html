@@ -54,7 +54,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6">
                             <mat-slide-toggle
                                 [checked]="isNourrison" (change)="toggle($event)"
-                            >Cocher pour les nourrisons</mat-slide-toggle>
+                            >Cocher pour les mois</mat-slide-toggle>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="isNourrison">
                             <div class="tagus-form-group">
@@ -81,11 +81,20 @@
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Fourchette âge</label>
-                        <mat-form-field appearance="fill">
+                        <mat-form-field appearance="fill" *ngIf="isNourrison">
                             <i class="ri-road-map-line"></i>
-                            <mat-label>Entrer la fourchette d'age</mat-label>
+                            <mat-label>Entrer la fourchette d'âge par mois</mat-label>
                             <mat-select formControlName="fourchette_age" required="Champs obligatoire">
-                                <mat-option *ngFor="let age of fourchetteAgeList" [value]="age">
+                                <mat-option *ngFor="let age of fourchetteAgeMoisList" [value]="age">
+                                    {{age}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field appearance="fill" *ngIf="!isNourrison">
+                            <i class="ri-road-map-line"></i>
+                            <mat-label>Entrer la fourchette d'âge par AN</mat-label>
+                            <mat-select formControlName="fourchette_age" required="Champs obligatoire">
+                                <mat-option *ngFor="let age of fourchetteAgeAnList" [value]="age">
                                     {{age}}
                                 </mat-option>
                             </mat-select>
@@ -101,8 +110,8 @@
                             <input matInput formControlName="lieu_residence" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
-                </div> 
-                <div class="col-lg-6 col-md-6 col-sm-6">
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="!isNourrison">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Profession</label>
                         <mat-form-field appearance="fill">
@@ -111,7 +120,7 @@
                             <input matInput formControlName="profession" required="Champs obligatoire">
                         </mat-form-field>
                     </div>
-                </div> 
+                </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="tagus-form-group">
                         <label class="d-block mb-12 fw-semibold gray-color">Email</label>

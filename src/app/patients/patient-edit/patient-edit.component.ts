@@ -9,6 +9,7 @@ import { PatientModel } from '../models/patient-model';
 import { ZoneSanteService } from 'src/app/reglage/zone-santes/zone-sante.service';
 import { ZoneSanteModel } from 'src/app/reglage/models/zone-sante-model';
 import { LocalService } from 'src/app/shared/services/local.service';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-patient-edit',
@@ -49,15 +50,17 @@ export class PatientEditComponent {
 };
 
   fourchetteAgeList: any = [
-    "Nourissons",
-    "Enfant",
-    "Adolescent(e)",
-    "Adulte"
+    "0 - 11 MOIS",
+    "12 - 59 MOIS",
+    "5 - 15 ANS",
+    "Plus de 15 ANS"
   ]
 
   patient: PatientModel;
 
   id: number;
+
+  public isNourrison = false;
 
   constructor(
       public themeService: CustomizerSettingsService,
@@ -116,7 +119,12 @@ export class PatientEditComponent {
           update_created: new Date()
         });
       }
-    ); 
+    );
+  }
+
+  public toggle(event: MatSlideToggleChange) {
+    console.log('toggle', event.checked);
+    this.isNourrison = event.checked;
   }
 
   onSubmit() {

@@ -1,0 +1,32 @@
+<mat-card class="mb-25 terminals-box tagus-card" [class.component-dark-theme]="themeService.isDark()">
+    <mat-card-header class="border-bottom">
+        <h5 class="mb-0">Stats d'enregistrements</h5>
+    </mat-card-header>
+    <mat-card-content>
+        <div class="terminals-list position-relative">
+            <div class="terminal-box position-relative rounded-circle text-center">
+                <div class="text">
+                    <h4>36 110</h4>
+                    <span>Fiches</span>
+                </div>
+            </div>
+            <div class="terminal-box position-relative rounded-circle text-center">
+                <div class="text">
+                    <h4>1 200</h4>
+                    <span>Patients</span>
+                </div>
+            </div> 
+            <div class="terminal-box position-relative rounded-circle text-center">
+                <div class="text">
+                    <h4>150</h4>
+                    <span>Users</span>
+                </div>
+            </div>
+        </div>
+        <ul class="list text-center ps-0 mb-0">
+            <li class="position-relative gray-color">Fiches enregistrés</li>
+            <li class="position-relative gray-color">Patients enregistrés</li>
+            <li class="position-relative gray-color">Utilisateurs enregistrés</li>
+        </ul>
+    </mat-card-content>
+</mat-card>

@@ -3,14 +3,14 @@
 
         <app-welcome-dashboard></app-welcome-dashboard>
 
-        <app-analytics-status></app-analytics-status>
+         <app-tranche-age></app-tranche-age>
 
     </div>
     <div fxFlex="67%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.lg="67%" fxFlex.md="100%" class="col">
 
-        <app-analytics-stats></app-analytics-stats>
+        <app-patient-stats></app-patient-stats>
 
-        <app-analytics-audience-overview></app-analytics-audience-overview>
+       <app-statut-stats></app-statut-stats>
 
     </div>
 </div>
@@ -18,27 +18,16 @@
 <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
 
     <div fxFlex="66.666666%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-        <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0">
-            <div fxFlex="66.666666%" fxFlex.xs="100%" fxFlex.sm="100%" class="col">
+        <app-statut-epidemiologique></app-statut-epidemiologique>
 
-                <app-sales-analytics></app-sales-analytics>
-
-                <app-revenue-report></app-revenue-report>
-
-            </div>
-            <div fxFlex="33.333333%" fxFlex.xs="100%" fxFlex.sm="100%" class="col"> 
-
-                <app-analytics-activity></app-analytics-activity>
-
-            </div>
-        </div>
+        <app-evolution-cas-stats></app-evolution-cas-stats> 
     </div>
 
     <div fxFlex="33.333333%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
 
-        <app-sessions-by-countries></app-sessions-by-countries>
+        <app-province-stats></app-province-stats>
 
-        <app-terminals></app-terminals>
+        <app-enregistrements-stats></app-enregistrements-stats>
 
     </div>
 
@@ -46,18 +35,24 @@
 
 <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
     <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-        <app-analytics-gender></app-analytics-gender>
+        <app-sexe-stats></app-sexe-stats>
     </div> 
     <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-        <app-new-vs-returing></app-new-vs-returing>
+        <app-en-contact-stats></app-en-contact-stats>
     </div> 
     <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-        <app-visitors-age></app-visitors-age>
+        <app-taux-hospitalisation-stats></app-taux-hospitalisation-stats>
     </div>
     <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-        <app-analytics-language></app-analytics-language>
+        <app-type-contact-stats></app-type-contact-stats>
     </div>
     <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
-        <app-sessions-device></app-sessions-device>
+        <app-fievre-stats></app-fievre-stats>
+    </div> 
+</div>
+
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" fxLayoutGap="25px" fxLayoutGap.xs="0" fxLayoutGap.sm="0" fxLayoutGap.md="0">
+    <div fxFlex="20%" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%" class="col">
+        <app-eruption-cutanee></app-eruption-cutanee>
     </div>
 </div>
