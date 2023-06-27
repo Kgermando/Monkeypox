@@ -2,8 +2,7 @@
     fxLayout="row"
     fxLayout.xs="column"
     fxLayoutGap="25px"
-    fxLayoutGap.xs="0"
-    [class.component-rtl-enabled]="themeService.isRTLEnabled()"
+    fxLayoutGap.xs="0" 
 >
     <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
         <mat-card class="single-stats-box tagus-card mb-25">
@@ -12,11 +11,14 @@
                     <i class="flaticon-donut-chart"></i>
                 </div>
                 <div class="title">
-                    <span class="d-block gray-color">Patients</span>
-                    <h3>1200</h3>
+                    <span class="d-block gray-color">Total patients</span>
+                    <h3>{{ patientCount }}</h3>
                 </div>
             </div>
-            <p class="position-relative up"><span>Total patients</span></p>
+            <p class="position-relative up">
+                <i class="flaticon-user"></i> 
+                <span> 100 %</span>
+            </p>
         </mat-card>
     </div>
     <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
@@ -27,10 +29,14 @@
                 </div>
                 <div class="title">
                     <span class="d-block gray-color">Cas suspect</span>
-                    <h3>851</h3>
+                    <h3>{{suspectCount}}</h3>
                 </div>
             </div>
-            <p class="position-relative up"><i class="flaticon-trend"></i> <span>70.9%</span></p>
+            <p class="position-relative up" *ngFor="let item of suspectCountList">
+                <i class="flaticon-trend" *ngIf="item.pourcentage >= 50"></i> 
+                <i class="flaticon-trend-1" *ngIf="item.pourcentage < 50"></i> 
+                <span>{{item.pourcentage}} %</span>
+            </p>
         </mat-card>
     </div>
     <div fxFlex="33.333333%" fxFlex.xs="100%" class="col">
@@ -41,10 +47,14 @@
                 </div>
                 <div class="title">
                     <span class="d-block gray-color">Décès</span>
-                    <h3>349</h3>
+                    <h3>{{decesCount}}</h3>
                 </div>
             </div>
-            <p class="position-relative down"><i class="flaticon-trend-1"></i> <span>29.0%</span></p>
+            <p class="position-relative down" *ngFor="let item of decesCountList">
+                <i class="flaticon-trend" *ngIf="item.pourcentage >= 50"></i> 
+                <i class="flaticon-trend-1" *ngIf="item.pourcentage < 50"></i> 
+                <span>{{item.pourcentage}} %</span>
+            </p>
         </mat-card>
     </div>
 </div>

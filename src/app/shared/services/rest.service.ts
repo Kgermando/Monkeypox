@@ -19,7 +19,7 @@ export abstract class RestService {
     return this.http.get(url);
     // return this.http.get(`${this.endpoint}?page=${page}`);
   }
-
+ 
   get(id: number): Observable<any> {
     return this.http.get(`${this.endpoint}/${id}`);
   }

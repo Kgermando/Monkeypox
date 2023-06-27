@@ -2,8 +2,8 @@
     <mat-card-header class="border-bottom">
         <h5 class="mb-0">Tranches d'âge</h5>
     </mat-card-header>
-    <mat-card-content>
-        <div class="chart activeCoursesChart">
+    <mat-card-content> 
+        <div class="chart activeCoursesChart" *ngIf="trancheAgeList.length > 0">
             <apx-chart
                 [series]="chartOptions.series!"
                 [chart]="chartOptions.chart!"

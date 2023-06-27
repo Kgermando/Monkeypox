@@ -7,7 +7,7 @@
         <h5 class="mb-0">Nbre de patients par sexe</h5> 
     </mat-card-header>
     <mat-card-content>
-        <div class="chart">
+        <div class="chart" *ngIf="nbrePatientSexeList.length > 0">
             <apx-chart
                 [series]="chartOptions.series!"
                 [chart]="chartOptions.chart!"
@@ -19,13 +19,19 @@
         <ul class="list mb-0">
             <li class="d-flex align-items-center justify-content-space-between position-relative">
                 <span class="gray-color">Femme</span>
-                <span class="gray-color fw-semibold">700</span>
-                <span class="gray-color"><i class="flaticon-bar-chart-4"></i> 58.3%</span>
+                <span class="gray-color fw-semibold"></span>
+                <span class="gray-color" *ngFor="let item of nbrePatientSexeFilter">
+                    <i class="flaticon-bar-chart-4"></i> 
+                    {{item.pourcentage}} %
+                </span>
             </li>
             <li class="d-flex align-items-center justify-content-space-between position-relative">
                 <span class="gray-color">Homme</span>
-                <span class="gray-color fw-semibold">500</span>
-                <span class="gray-color"><i class="flaticon-bar-chart-4"></i> 41.6%</span>
+                <span class="gray-color fw-semibold"></span>
+                <span class="gray-color"  *ngFor="let item of nbrePatientSexeFilterH">
+                    <i class="flaticon-bar-chart-4"></i> 
+                    {{item.pourcentage}} %
+                </span>
             </li>
         </ul>
     </mat-card-content>

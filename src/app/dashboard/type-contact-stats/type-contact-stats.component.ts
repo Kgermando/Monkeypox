@@ -6,6 +6,8 @@ import {
     ApexChart
 } from "ng-apexcharts";
 import { CustomizerSettingsService } from "src/app/common/customizer-settings/customizer-settings.service";
+import { TypeContactModel } from "src/app/shared/models/dashboard-model";
+import { DashboardService } from "../dashboard.service";
 
 export type ChartOptions = {
     series: ApexNonAxisChartSeries;
@@ -26,35 +28,52 @@ export class TypeContactStatsComponent {
   @ViewChild("chart") chart: ChartComponent | undefined;
   public chartOptions: Partial<ChartOptions>;
 
+  typeContactList: TypeContactModel[] = [];
+  typeContactFilterTouche: TypeContactModel[] = [];
+  typeContactFilterVoyage: TypeContactModel[] = [];
+
+
   constructor(
-      public themeService: CustomizerSettingsService
+      public themeService: CustomizerSettingsService,
+      private dashboardService: DashboardService
   ) {
-      this.chartOptions = {
-          series: [36],
-          chart: {
-              height: 230,
-              type: "radialBar"
-          },
-          plotOptions: {
-              radialBar: {
-                  hollow: {
-                      size: "50%"
-                  },
-                  dataLabels: {
-                      name: {
-                          show: false
-                      },
-                      value: {
-                          offsetY: 5,
-                          fontSize: "15px",
-                          fontWeight: "700",
-                      }
-                  }
-              }
-          },
-          colors: ["#2DB6F5"],
-          labels: ["English & Others"]
-      };
+
+    this.dashboardService.typeContact().subscribe({
+        next: res => {
+            this.typeContactList = res;
+            this.typeContactFilterTouche = this.typeContactList.filter(value => value.type_contact == 'A touché animal domestique');
+            this.typeContactFilterVoyage = this.typeContactList.filter(value => value.type_contact == 'A voyagé en dehors de chez lui');  
+            this.chartOptions = {
+                series: this.typeContactFilterTouche.map((item: any) => parseFloat(item.pourcentage)),
+                chart: {
+                    height: 230,
+                    type: "radialBar"
+                },
+                plotOptions: {
+                    radialBar: {
+                        hollow: {
+                            size: "50%"
+                        },
+                        dataLabels: {
+                            name: {
+                                show: false
+                            },
+                            value: {
+                                offsetY: 5,
+                                fontSize: "15px",
+                                fontWeight: "700",
+                            }
+                        }
+                    }
+                },
+                colors: ["#2DB6F5"],
+                labels: ["NON & OUI"]
+            };
+        },
+        error: err => {
+            console.log(err);
+        }
+    });
   }
 
   toggleTheme() {

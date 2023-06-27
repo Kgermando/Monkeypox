@@ -7,7 +7,7 @@
         <h5 class="mb-0">En contact avec un patient</h5> 
     </mat-card-header>
     <mat-card-content>
-        <div class="chart">
+        <div class="chart" *ngIf="eteContactPatientList.length > 0">
             <apx-chart
                 [series]="chartOptions.series!"
                 [chart]="chartOptions.chart!"
@@ -19,13 +19,19 @@
         <ul class="list mb-0">
             <li class="d-flex align-items-center justify-content-space-between position-relative">
                 <span class="gray-color">OUI</span>
-                <span class="gray-color fw-semibold">450</span>
-                <span class="gray-color"><i class="flaticon-bar-chart-4"></i> 37.5%</span>
+                <span class="gray-color fw-semibold"></span>
+                <span class="gray-color" *ngFor="let item of eteContactPatientFilterOUI">
+                    <i class="flaticon-bar-chart-4"></i> 
+                    {{item.pourcentage}} %
+                </span>
             </li>
             <li class="d-flex align-items-center justify-content-space-between position-relative">
                 <span class="gray-color">NON</span>
-                <span class="gray-color fw-semibold">750</span>
-                <span class="gray-color"><i class="flaticon-bar-chart-4"></i> 62.5%</span>
+                <span class="gray-color fw-semibold"></span>
+                <span class="gray-color" *ngFor="let item of eteContactPatientFilterNON">
+                    <i class="flaticon-bar-chart-4"></i> 
+                    {{item.pourcentage}} %
+                </span>
             </li>
         </ul>
     </mat-card-content>

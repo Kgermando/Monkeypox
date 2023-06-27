@@ -30,6 +30,7 @@ export class PatientViewComponent implements OnInit {
   
         console.log(this.patient);
         console.log(id);
+        this.isLoading = true;
       });
     }
   
