@@ -68,6 +68,10 @@ export class DashboardService {
     return this.http.get(`${this.endpoint}/eruption-cutanee`);
   }
 
+  decesProvince(): Observable<any> {
+    return this.http.get(`${this.endpoint}/deces-province`);
+  }
+
   // get(id: number): Observable<any> {
   //   return this.http.get(`${this.endpoint}/${id}`);
   // }

@@ -37,3 +37,8 @@ export class EruptionCutaneeModel {
     eruption_cutanee: string;
     pourcentage: number;
 }
+
+export class DecesProvinceModel {
+    province: string;
+    count: number;
+}
