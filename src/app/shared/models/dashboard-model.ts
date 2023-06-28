@@ -48,3 +48,14 @@ export class StatutEpidemiologiqueModel {
     statut: string;
     count: number;
 }
+
+export class EvolutionCasModel { 
+    year: any;
+    statut: string;
+    count: number;
+}
+
+export class StatutDecesModel {  
+    month: any;
+    pourcentage: number;
+}

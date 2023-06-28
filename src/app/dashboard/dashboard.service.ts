@@ -76,6 +76,14 @@ export class DashboardService {
     return this.http.get(`${this.endpoint}/statut-epidemiologique`);
   }
 
+  evolutionCas(): Observable<any> {
+    return this.http.get(`${this.endpoint}/evolution-cas`);
+  }
+
+  decesAnnee(): Observable<any> {
+    return this.http.get(`${this.endpoint}/deces-annee`);
+  }
+
   // get(id: number): Observable<any> {
   //   return this.http.get(`${this.endpoint}/${id}`);
   // }

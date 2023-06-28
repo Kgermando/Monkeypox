@@ -11,6 +11,8 @@ import {
     ApexXAxis,
     ApexFill
 } from "ng-apexcharts";
+import { StatutDecesModel } from "src/app/shared/models/dashboard-model";
+import { DashboardService } from "../dashboard.service";
 
 export type ChartOptions = {
     series: ApexAxisChartSeries;
@@ -35,126 +37,180 @@ export class StatutStatsComponent {
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
 
-  constructor() {
-      this.chartOptions = {
-          series: [
-            {
-              name: "Décès",
-              data: [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
-            }
-          ],
-          chart: {
-              height: 350,
-              type: "bar",
-              toolbar: {
-                  show: true
-              }
-          },
-          plotOptions: {
-              bar: {
-                  dataLabels: {
-                      position: "top" // top, center, bottom
+  statutDecesModelList: StatutDecesModel[] = [];
+
+  constructor(private dashboardService: DashboardService) {
+    this.dashboardService.decesAnnee().subscribe(
+        res => {
+            this.statutDecesModelList = res;
+            console.log(this.statutDecesModelList);
+            this.chartOptions = {
+                series: [
+                  {
+                    name: "Décès",
+                    data: this.statutDecesModelList.map((item: StatutDecesModel) => item.pourcentage),
+                  //   [2.3, 3.1, 4.0, 10.1, 4.0, 3.6, 3.2, 2.3, 1.4, 0.8, 0.5, 0.2]
                   }
-              }
-          },
-          dataLabels: {
-              enabled: true,
-              formatter: function(val) {
-                  return val + "%";
-              },
-              offsetY: -25,
-              style: {
-                  fontSize: "12px",
-                  colors: ["#304758"]
-              }
-          },
-          xaxis: {
-              categories: [
-                  "Jan",
-                  "Feb",
-                  "Mar",
-                  "Apr",
-                  "May",
-                  "Jun",
-                  "Jul",
-                  "Aug",
-                  "Sep",
-                  "Oct",
-                  "Nov",
-                  "Dec"
-              ],
-              position: "bottom",
-              labels: {
-                  style: {
-                      colors: "#a9a9c8",
-                      fontSize: "14px",
-                  }
-              },
-              axisBorder: {
-                  show: false
-              },
-              axisTicks: {
-                  show: false
-              },
-              crosshairs: {
-                  fill: {
-                      type: "gradient",
-                      gradient: {
-                          colorFrom: "#D8E3F0",
-                          colorTo: "#BED1E6",
-                          stops: [0, 100],
-                          opacityFrom: 0.4,
-                          opacityTo: 0.5
-                      }
-                  }
-              },
-              tooltip: {
-                  enabled: true,
-                  offsetY: -35
-              }
-          },
-          fill: {
-              type: "gradient",
-              gradient: {
-                  shade: "light",
-                  type: "horizontal",
-                  shadeIntensity: 0.25,
-                  gradientToColors: undefined,
-                  inverseColors: true,
-                  opacityFrom: 1,
-                  opacityTo: 1,
-                  stops: [50, 0, 100, 100]
-              }
-          },
-          yaxis: {
-              axisBorder: {
-                  show: false
-              },
-              axisTicks: {
-                  show: false
-              },
-              labels: {
-                  show: false,
-                  formatter: function(val) {
-                      return val + "%";
-                  },
-                  style: {
-                      colors: "#a9a9c8",
-                      fontSize: "14px",
-                  }
-              }
-          },
-          title: {
-              text: "",
-              offsetY: 0,
-              align: "center"
-          },
-          grid: {
-              show: true,
-              strokeDashArray: 5,
-              borderColor: "#EDEFF5"
-          }
-      };
+                ],
+                chart: {
+                    height: 350,
+                    type: "bar",
+                    toolbar: {
+                        show: true
+                    }
+                },
+                plotOptions: {
+                    bar: {
+                        dataLabels: {
+                            position: "top" // top, center, bottom
+                        }
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    formatter: function(val) {
+                        return val + "%";
+                    },
+                    offsetY: -25,
+                    style: {
+                        fontSize: "12px",
+                        colors: ["#304758"]
+                    }
+                },
+                xaxis: {
+                    categories: this.statutDecesModelList.map((item: StatutDecesModel) => item.month), // this.getValue(item.month)
+                  //   [
+                  //       "Jan",
+                  //       "Feb",
+                  //       "Mar",
+                  //       "Apr",
+                  //       "May",
+                  //       "Jun",
+                  //       "Jul",
+                  //       "Aug",
+                  //       "Sep",
+                  //       "Oct",
+                  //       "Nov",
+                  //       "Dec"
+                  //   ],
+                    position: "bottom",
+                    labels: {
+                        style: {
+                            colors: "#a9a9c8",
+                            fontSize: "14px",
+                        }
+                    },
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+                    },
+                    crosshairs: {
+                        fill: {
+                            type: "gradient",
+                            gradient: {
+                                colorFrom: "#D8E3F0",
+                                colorTo: "#BED1E6",
+                                stops: [0, 100],
+                                opacityFrom: 0.4,
+                                opacityTo: 0.5
+                            }
+                        }
+                    },
+                    tooltip: {
+                        enabled: true,
+                        offsetY: -35
+                    }
+                },
+                fill: {
+                    type: "gradient",
+                    gradient: {
+                        shade: "light",
+                        type: "horizontal",
+                        shadeIntensity: 0.25,
+                        gradientToColors: undefined,
+                        inverseColors: true,
+                        opacityFrom: 1,
+                        opacityTo: 1,
+                        stops: [50, 0, 100, 100]
+                    }
+                },
+                yaxis: {
+                    axisBorder: {
+                        show: false
+                    },
+                    axisTicks: {
+                        show: false
+                    },
+                    labels: {
+                        show: false,
+                        formatter: function(val) {
+                            return val + "%";
+                        },
+                        style: {
+                            colors: "#a9a9c8",
+                            fontSize: "14px",
+                        }
+                    }
+                },
+                title: {
+                    text: "",
+                    offsetY: 0,
+                    align: "center"
+                },
+                grid: {
+                    show: true,
+                    strokeDashArray: 5,
+                    borderColor: "#EDEFF5"
+                }
+            };
+        }
+    )
+      
   }
 
+  
+    getValue(value: any) {
+        switch (value) { 
+            case 1:
+                "Jan"
+                break;
+            case 2:
+                "Feb"
+                break;
+            case 3:
+                "Mar"
+                break;
+            case 4:
+                "Avr"
+                break;
+            case 5:
+                "Mai"
+                break;
+            case 6:
+                "Jui"
+                break;
+            case 7:
+                "Jul"
+                break;
+            case 8:
+                "Aou"
+                break;
+            case 9:
+                "Sep"
+                break;
+            case 10:
+                "Oct"
+                break;
+            case 11:
+                "Nov"
+                break;
+            case 12:
+                "Dec"
+                break;
+            default:
+                break;
+        }
+    }
 }

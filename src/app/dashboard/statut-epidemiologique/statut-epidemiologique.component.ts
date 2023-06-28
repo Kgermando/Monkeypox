@@ -59,23 +59,23 @@ export class StatutEpidemiologiqueComponent {
                     series: [
                         {
                             name: "Cas non actif",
-                            data: this.statutEpidemiologiqueFilterNonActif.map((item: any) => parseFloat(item.statut)),
+                            data: this.statutEpidemiologiqueFilterNonActif.map((item: any) => item.count),
                         },
                         {
                             name: "Cas suspect",
-                            data: this.statutEpidemiologiqueFilterSuspect.map((item: any) => parseFloat(item.statut)),
+                            data: this.statutEpidemiologiqueFilterSuspect.map((item: any) => item.count),
                         },
                         {
                             name: "Cas probable",
-                            data: this.statutEpidemiologiqueFilterProbable.map((item: any) => parseFloat(item.statut)),
+                            data: this.statutEpidemiologiqueFilterProbable.map((item: any) => item.count),
                         },
                         {
                             name: "Cas confirmé",
-                            data: this.statutEpidemiologiqueFilterConfirme.map((item: any) => parseFloat(item.statut)),
+                            data: this.statutEpidemiologiqueFilterConfirme.map((item: any) => item.count),
                         },
                         {
                             name: "Décès",
-                            data: this.statutEpidemiologiqueFilterDeces.map((item: any) => parseFloat(item.statut)),
+                            data: this.statutEpidemiologiqueFilterDeces.map((item: any) => item.count),
                         }
                     ],
                     chart: {
@@ -109,7 +109,7 @@ export class StatutEpidemiologiqueComponent {
                     // colors: ["#757fef", "#2db6f5", "#ee368c"],
                     xaxis: {
                         type: "category",
-                        categories: this.statutEpidemiologiqueList.map((item: any) => `${parseFloat(item.month)}/2023`),
+                        categories: this.statutEpidemiologiqueList.map((item: any) => `${item.month}/2023`),
                         // [
                         //     "01/2023",
                         //     "02/2023",
