@@ -27,9 +27,7 @@ export class EnregistrementsStatsComponent implements OnInit {
       this.patientsCount = res[0]['count'];
     }); 
     this.dashboardService.statsRecordUser().subscribe(res => {
-      this.usersCount = res[0]['count'];
-
-      console.log(this.usersCount);
+      this.usersCount = res[0]['count']; 
     });
   }
 

@@ -42,3 +42,9 @@ export class DecesProvinceModel {
     province: string;
     count: number;
 }
+
+export class StatutEpidemiologiqueModel {
+    month: any;
+    statut: string;
+    count: number;
+}
