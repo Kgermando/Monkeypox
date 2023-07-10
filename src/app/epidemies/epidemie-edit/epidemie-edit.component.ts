@@ -122,6 +122,7 @@ id: number;
         console.log(this.epidemieID)
         this.isLoadingData = false;
       });
+      this.isLoadingData = false;
 
       this.campaignService.all().subscribe(res => {
         this.campaignList = res;  

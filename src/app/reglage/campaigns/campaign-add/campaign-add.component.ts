@@ -68,25 +68,28 @@ export class CampaignAddComponent implements OnInit {
   
   onSubmit() {
     try {
-      console.log(this.formGroup); 
-      console.log(this.currentUser.matricule); 
-      this.isLoading = true;
-      var body = {
-        nom: this.formGroup.value.nom,
-        date_debut: this.formGroup.value.date_debut,
-        date_fin: this.formGroup.value.date_fin,
-        aire_sante: '-',
-        nbre_agent: this.formGroup.value.nbre_agent,
-        signature: this.currentUser.matricule,
-        created: new Date(),
-        update_created: new Date()
-      };
-      console.log(body);
-      this.campaignService.create(body).subscribe(() => {
-          this.isLoading = false;
-          this.router.navigate(['layouts//reglages/campaign-list']);
-      });
-      this.isLoading = false;
+      if (this.formGroup.valid) {
+        console.log(this.formGroup); 
+        console.log(this.currentUser.matricule); 
+        this.isLoading = true;
+        var body = {
+          nom: this.formGroup.value.nom,
+          date_debut: this.formGroup.value.date_debut,
+          date_fin: this.formGroup.value.date_fin,
+          aire_sante: '-',
+          nbre_agent: this.formGroup.value.nbre_agent,
+          signature: this.currentUser.matricule,
+          created: new Date(),
+          update_created: new Date()
+        };
+        console.log(body);
+        this.campaignService.create(body).subscribe(() => {
+            this.isLoading = false;
+            this.router.navigate(['layouts/reglages/campaign-list']);
+        });
+        this.isLoading = false;
+      }
+      
     } catch (error) {
       console.log(error);
     }

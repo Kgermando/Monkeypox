@@ -119,6 +119,7 @@ import {AutocompleteLibModule} from 'angular-ng-autocomplete';
     ColorPickerModule,
 
     AutocompleteLibModule,
+    
   ],
   exports: [
     MatMenuModule,

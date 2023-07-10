@@ -71,22 +71,26 @@ export class ZoneSanteAddComponent implements OnInit {
   
   onSubmit() {
     try {
-      console.log(this.formGroup); 
-      console.log(this.currentUser.matricule); 
-      this.isLoading = true;
-      var body = {
-        zone: this.formGroup.value.zone,
-        province: this.formGroup.value.province,
-        territoire: this.formGroup.value.territoire,
-        signature: this.currentUser.matricule,
-        created: new Date(),
-        update_created: new Date()
-      };
-      console.log(body);
-      this.zoneSanteService.create(body).subscribe(() => {
-          this.isLoading = false;
-          this.router.navigate(['/layouts/reglages/zone-sante-list']);
-      }); 
+      if (this.formGroup.valid) {
+        console.log(this.formGroup); 
+        console.log(this.currentUser.matricule); 
+        this.isLoading = true;
+        var body = {
+          zone: this.formGroup.value.zone,
+          province: this.formGroup.value.province,
+          territoire: this.formGroup.value.territoire,
+          signature: this.currentUser.matricule,
+          created: new Date(),
+          update_created: new Date()
+        };
+        console.log(body);
+        this.zoneSanteService.create(body).subscribe(() => {
+            this.isLoading = false;
+            this.router.navigate(['/layouts/reglages/zone-sante-list']);
+        }); 
+        this.isLoading = false;
+      }
+      
     } catch (error) {
       console.log(error);
     }

@@ -23,6 +23,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer nom complet</mat-label>
                             <input matInput formControlName="nom_complet" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['nom_complet'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -33,6 +36,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer en sigle</mat-label>
                             <input matInput formControlName="single" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['single'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -43,6 +49,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer manager</mat-label>
                             <input matInput formControlName="manager" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['manager'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -52,7 +61,7 @@
                 <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
             </div>
             <div *ngIf="!isLoading">
-                <button mat-flat-button class="tagus" matStepperSuivant [disabled]="!formGroup.valid">Soumettre</button>
+                <button mat-flat-button class="tagus" matStepperSuivant>Soumettre</button>
             </div>
         </form>
     </mat-card-content>

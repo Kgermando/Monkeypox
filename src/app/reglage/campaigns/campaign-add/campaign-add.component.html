@@ -1,5 +1,5 @@
 <div class="breadcrumb-card mb-25 d-md-flex align-items-center justify-content-space-between">
-    <h4 class="mb-0">Nouvelle campaigne</h4>
+    <h4 class="mb-0">Nouvelle campagne</h4>
     <ol class="breadcrumb mb-0 ps-0">
         <li class="breadcrumb-item">
             <a routerLink="/users/user-list">
@@ -23,6 +23,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer le nom</mat-label>
                             <input matInput formControlName="nom" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['nom'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -34,6 +37,9 @@
                             <input matInput [matDatepicker]="picker" formControlName="date_debut" required="Champs obligatoire">
                             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
+                            <mat-error *ngIf="formGroup.controls['date_debut'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -45,6 +51,9 @@
                             <input matInput [matDatepicker]="picker2" formControlName="date_fin" required="Champs obligatoire">
                             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error *ngIf="formGroup.controls['date_fin'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -66,6 +75,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer le nombre agent</mat-label>
                             <input matInput formControlName="nbre_agent" type="number" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['nbre_agent'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -75,7 +87,7 @@
                 <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
             </div>
             <div *ngIf="!isLoading">
-                <button mat-flat-button class="tagus" matStepperSuivant [disabled]="!formGroup.valid">Soumettre</button>
+                <button mat-flat-button class="tagus" matStepperSuivant >Soumettre</button>
             </div>
         </form>
     </mat-card-content>

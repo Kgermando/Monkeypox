@@ -43,7 +43,6 @@ export class EpidemieListComponent implements AfterViewInit {
             }
           });
           this.isLoading = false;
-      
         }
 
       applyFilter(event: Event) {
@@ -54,7 +53,6 @@ export class EpidemieListComponent implements AfterViewInit {
       editItem(id: number){
         this.router.navigate(['/epidemies/epidemie-edit', id]);
       }
-    
     
       removeItem(id: number){
         this.epidemieService.delete(id);

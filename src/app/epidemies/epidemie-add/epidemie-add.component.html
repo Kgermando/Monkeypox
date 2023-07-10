@@ -7,7 +7,7 @@
                 Epidemie
             </a>
         </li>
-        <li class="breadcrumb-item fw-semibold">Add</li>
+        <li class="breadcrumb-item fw-semibold">Nouveau</li>
     </ol>
 </div>
 
@@ -18,50 +18,59 @@
     <mat-card-content>
         <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">N° ordre du patient</label>
-                        <mat-form-field appearance="fill">
-                            <i class="ri-user-3-line"></i>
-                            <mat-label>Entrer N° ordre du patient</mat-label>
-                            <input matInput 
-                                formControlName="patient_id"
-                                (keyup)="onKeyUpEvent($event)" >
-                        </mat-form-field>  
-                    </div>
-                </div> 
-                <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="patient">
-                    <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Nom du patient</label>
-                        <mat-form-field appearance="fill">
-                            <i class="ri-user-3-line"></i>
-                            <mat-label>{{patient.fullname}}</mat-label>
-                            <input matInput [disabled]="true" >
-                        </mat-form-field>
-                    </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">N° ordre du patient</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-user-3-line"></i>
+                        <mat-label>Entrer N° ordre du patient</mat-label>
+                        <input matInput
+                        formControlName="patient_id"
+                        (keyup)="onKeyUpEvent($event)"
+                        required="Champs obligatoire">
+                        <mat-error *ngIf="formGroup.controls['patient_id'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Semaine épidemiologique</label>
-                        <mat-form-field appearance="fill">
-                            <i class="ri-calendar-2-fill"></i>
-                            <mat-label>Entrer la semaine épidemiologique</mat-label>
-                            <input matInput formControlName="semaine_epi" required="Champs obligatoire">
-                        </mat-form-field>
-                    </div>
+            </div> 
+            <div class="col-lg-6 col-md-6 col-sm-6" *ngIf="patient">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Nom du patient</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-user-3-line"></i>
+                        <mat-label>{{patient.fullname}}</mat-label>
+                        <input matInput [disabled]="true" >
+                    </mat-form-field>
                 </div>
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="tagus-form-group">
-                        <label class="d-block mb-12 fw-semibold gray-color">Date notification</label>
-                        <mat-form-field appearance="fill">
-                            <mat-label>Date notification</mat-label>
-                            <input matInput [matDatepicker]="picker" formControlName="date_notification" required="Champs obligatoire">
-                            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                        </mat-form-field>
-                    </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Semaine épidemiologique</label>
+                    <mat-form-field appearance="fill">
+                        <i class="ri-calendar-2-fill"></i>
+                        <mat-label>Entrer la semaine épidemiologique</mat-label>
+                        <input matInput formControlName="semaine_epi" required="Champs obligatoire">
+                        <mat-error *ngIf="formGroup.controls['semaine_epi'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
                 </div>
-              
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="tagus-form-group">
+                    <label class="d-block mb-12 fw-semibold gray-color">Date notification</label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Date notification</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="date_notification" required="Champs obligatoire">
+                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <mat-error *ngIf="formGroup.controls['date_notification'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
                 <mat-divider></mat-divider>
 
                 <h5 class="d-flex justify-content-center m-3">Symptômes et signes cliniques</h5>
@@ -73,6 +82,9 @@
                             <mat-radio-button value="Oui">Oui</mat-radio-button>
                             <mat-radio-button value="Non">Non</mat-radio-button>
                         </mat-radio-group>
+                        <mat-error *ngIf="formGroup.controls['fievre'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -82,6 +94,9 @@
                             <mat-radio-button value="Oui">Oui</mat-radio-button>
                             <mat-radio-button value="Non">Non</mat-radio-button>
                         </mat-radio-group>
+                        <mat-error *ngIf="formGroup.controls['eruption_cutanee'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -92,6 +107,9 @@
                             <input matInput [matDatepicker]="picker2" formControlName="date_symptome" required="Champs obligatoire">
                             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
+                            <mat-error *ngIf="formGroup.controls['date_symptome'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -102,6 +120,9 @@
                             <i class="ri-map-pin-line"></i>
                             <mat-label>Autres</mat-label>
                             <input matInput formControlName="autres" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['autres'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div> 
@@ -116,6 +137,9 @@
                             <input matInput [matDatepicker]="picker3" formControlName="date_admition" required="Champs obligatoire">
                             <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
                             <mat-datepicker #picker3></mat-datepicker>
+                            <mat-error *ngIf="formGroup.controls['date_admition'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -127,6 +151,9 @@
                             <input matInput [matDatepicker]="picker4" formControlName="date_diagonstic" required="Champs obligatoire">
                             <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>
                             <mat-datepicker #picker4></mat-datepicker>
+                            <mat-error *ngIf="formGroup.controls['date_diagonstic'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -142,6 +169,9 @@
                             <mat-radio-button value="Oui">Oui</mat-radio-button>
                             <mat-radio-button value="Non">Non</mat-radio-button>
                         </mat-radio-group>
+                        <mat-error *ngIf="formGroup.controls['a_ete_contact_patient'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
@@ -151,6 +181,9 @@
                             <mat-radio-button value="Oui">Oui</mat-radio-button>
                             <mat-radio-button value="Non">Non</mat-radio-button>
                         </mat-radio-group>
+                        <mat-error *ngIf="formGroup.controls['a_ete_hospitalise'].hasError('required')">
+                            Ce champs est obligatoire
+                        </mat-error>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4">
@@ -162,6 +195,9 @@
                                 <mat-option value="A touché animal domestique">A touché animal domestique</mat-option>
                                 <mat-option value="A voyagé en dehors de chez lui">A voyagé en dehors de chez lui</mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['type_contact'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div> 
@@ -180,6 +216,9 @@
                             <i class="ri-map-pin-line"></i>
                             <mat-label>Entrer le croute</mat-label>
                             <input matInput formControlName="croute" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['croute'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div> 
@@ -190,6 +229,9 @@
                             <i class="ri-team-line"></i>
                             <mat-label>Entrer ecouvillon</mat-label>
                             <input matInput formControlName="ecouvillon" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['ecouvillon'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -200,6 +242,9 @@
                             <i class="ri-team-line"></i>
                             <mat-label>Entrer le prevelement sanguin</mat-label>
                             <input matInput formControlName="prevelement_sanguin" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['prevelement_sanguin'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -211,6 +256,9 @@
                             <input matInput [matDatepicker]="picker5" formControlName="date_prelevement" required="Champs obligatoire">
                             <mat-datepicker-toggle matIconSuffix [for]="picker5"></mat-datepicker-toggle>
                             <mat-datepicker #picker5></mat-datepicker>
+                            <mat-error *ngIf="formGroup.controls['date_prelevement'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -222,6 +270,9 @@
                             <input matInput [matDatepicker]="picker6" formControlName="date_expedition" required="Champs obligatoire">
                             <mat-datepicker-toggle matIconSuffix [for]="picker6"></mat-datepicker-toggle>
                             <mat-datepicker #picker6></mat-datepicker>
+                            <mat-error *ngIf="formGroup.controls['date_expedition'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -241,6 +292,9 @@
                                 <mat-option value="Cas non actif">Cas non actif</mat-option>
                                 <mat-option value="Décès">Décès</mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['statut'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>   
@@ -262,6 +316,9 @@
                                     {{campaign.nom}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['campaign'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div> 

@@ -136,7 +136,8 @@ export class UserAddComponent implements OnInit {
 
   onSubmit() {
     try {
-      console.log(this.formGroup);
+      if (this.formGroup.valid) {
+        console.log(this.formGroup);
       console.log(this.currentUser.matricule);
       this.isLoading = true;
       var structure = this.currentUser.structure.slice(0, 3);
@@ -179,6 +180,7 @@ export class UserAddComponent implements OnInit {
           console.log(err);
         }
       });
+      } 
       this.isLoading = false;
     } catch (error) {
       this.isLoading = false;

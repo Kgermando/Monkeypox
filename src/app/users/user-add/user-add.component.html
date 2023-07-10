@@ -27,6 +27,9 @@
                                     {{structure.single}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['structure'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -44,6 +47,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer nom</mat-label>
                             <input matInput formControlName="nom" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['nom'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -54,6 +60,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer postnom</mat-label>
                             <input matInput formControlName="postnom" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['postnom'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -64,6 +73,9 @@
                             <i class="ri-user-3-line"></i>
                             <mat-label>Entrer prenom</mat-label>
                             <input matInput formControlName="prenom" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['prenom'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -77,6 +89,9 @@
                                 <mat-option value="Femme">Femme</mat-option>
                                 <mat-option value="Homme">Homme</mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['sexe'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -87,6 +102,9 @@
                             <i class="ri-map-pin-line"></i>
                             <mat-label>Entrer la Nationalité</mat-label>
                             <input matInput formControlName="nationalite" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['nationalite'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -100,6 +118,9 @@
                                 <mat-option value="CELIBATAIRE">Célibataire</mat-option>
                                 <mat-option value="MARIE(E)">Marié</mat-option> 
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['etat_civile'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -110,6 +131,9 @@
                             <i class="ri-map-pin-line"></i>
                             <mat-label>Entrer l'adresse</mat-label>
                             <input matInput formControlName="adresse" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['adresse'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div> 
@@ -120,6 +144,9 @@
                             <i class="ri-team-line"></i>
                             <mat-label>Entrer le titre</mat-label>
                             <input matInput formControlName="titre" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['titre'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -134,6 +161,9 @@
                                     {{province}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['province'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -148,6 +178,9 @@
                                     {{zoneSante.zone}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['zone_sante'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div> 
@@ -158,6 +191,9 @@
                             <i class="ri-mail-line"></i>
                             <mat-label>Entrer email</mat-label>
                             <input matInput type="email" formControlName="email">
+                            <mat-error *ngIf="formGroup.controls['email'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -168,6 +204,9 @@
                             <i class="ri-phone-line"></i>
                             <mat-label>Entrer phone number</mat-label>
                             <input matInput type="tel" formControlName="telephone" required="Champs obligatoire">
+                            <mat-error *ngIf="formGroup.controls['telephone'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -183,6 +222,9 @@
                                 <mat-option value="Enqueteur">Enqueteur</mat-option>
                                 <mat-option value="Admin">Admin</mat-option>
                             </mat-select>
+                            <mat-error *ngIf="formGroup.controls['role'].hasError('required')">
+                                Ce champs est obligatoire
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -191,7 +233,7 @@
                 <mat-spinner color="warn" [diameter]="30"></mat-spinner> <p class="ml-2">Patientez-svp...</p>
             </div>
             <div *ngIf="!isLoading">
-                <button mat-flat-button class="tagus" matStepperSuivant [disabled]="!formGroup.valid">Soumettre</button>
+                <button mat-flat-button class="tagus" matStepperSuivant>Soumettre</button>
             </div>
         </form>
     </mat-card-content>

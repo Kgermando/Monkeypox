@@ -102,33 +102,36 @@ export class PatientAddComponent implements OnInit {
 
   onSubmit() {
     try {
-      console.log(this.formGroup);
-      console.log(this.currentUser.matricule);
-      this.isLoading = true;
-      var body = {
-        photo: this.formGroup.value.photo,
-        fullname: this.formGroup.value.fullname, 
-        sexe: this.formGroup.value.sexe,
-        age_an: this.formGroup.value.age_an,
-        age_mois: this.formGroup.value.age_mois,
-        fourchette_age: this.formGroup.value.fourchette_age,
-        lieu_residence: this.formGroup.value.lieu_residence,
-        aire_sante: this.currentUser.zone_sante,
-        profession: this.formGroup.value.profession,
-        email: this.formGroup.value.email,
-        telephone: this.formGroup.value.telephone,
-        province: this.currentUser.province,
-        signature: this.currentUser.matricule,
-        created: new Date(),
-        update_created: new Date()
-      };
-      console.log(body);
-      this.patientService.create(body).subscribe(() => {
-          this.isLoading = false;
-          this.formGroup.reset();
-          this.router.navigate(['/layouts/patients/patient-list']);
-      });
-      this.isLoading = false;
+      if (this.formGroup.valid) {
+        console.log(this.formGroup);
+        console.log(this.currentUser.matricule);
+        this.isLoading = true;
+        var body = {
+          photo: this.formGroup.value.photo,
+          fullname: this.formGroup.value.fullname, 
+          sexe: this.formGroup.value.sexe,
+          age_an: this.formGroup.value.age_an,
+          age_mois: this.formGroup.value.age_mois,
+          fourchette_age: this.formGroup.value.fourchette_age,
+          lieu_residence: this.formGroup.value.lieu_residence,
+          aire_sante: this.currentUser.zone_sante,
+          profession: this.formGroup.value.profession,
+          email: this.formGroup.value.email,
+          telephone: this.formGroup.value.telephone,
+          province: this.currentUser.province,
+          signature: this.currentUser.matricule,
+          created: new Date(),
+          update_created: new Date()
+        };
+        console.log(body);
+        this.patientService.create(body).subscribe(() => {
+            this.isLoading = false;
+            this.formGroup.reset();
+            this.router.navigate(['/layouts/patients/patient-list']);
+        });
+        this.isLoading = false;
+      }
+     
     } catch (error) {
       this.isLoading = false;
       console.log(error);

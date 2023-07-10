@@ -119,6 +119,7 @@ export class EpidemieAddComponent implements OnInit, OnDestroy {
         console.log(this.epidemieID)
         this.isLoadingData = false;
       });
+      this.isLoadingData = false;
 
       
 
@@ -173,7 +174,8 @@ export class EpidemieAddComponent implements OnInit, OnDestroy {
   
     onSubmit() {
       try { 
-        this.isLoading = true;
+        if (this.formGroup.valid) {
+          this.isLoading = true;
         var prov = this.currentUser.province.slice(0,3);
         var zoneSante = this.currentUser.zone_sante.replace(/\s/g, "").slice(0,5);
         var year = formatDate(new Date(), 'yy', 'en'); 
@@ -219,6 +221,8 @@ export class EpidemieAddComponent implements OnInit, OnDestroy {
             this.router.navigate(['/layouts/epidemies/epidemie-list']);
         });
         this.isLoading = false;
+        }
+        
       } catch (error) {
         this.isLoading = false;
         console.log(error);

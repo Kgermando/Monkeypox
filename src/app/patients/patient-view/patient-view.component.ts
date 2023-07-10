@@ -26,12 +26,9 @@ export class PatientViewComponent implements OnInit {
       let id = this.route.snapshot.paramMap.get('id');
       this.patientService.get(Number(id)).subscribe(res => {
         this.patient = res;
-        this.isLoading = false;
-  
-        console.log(this.patient);
-        console.log(id);
-        this.isLoading = true;
+        this.isLoading = false;  
       });
+      this.isLoading = false;
     }
   
     toggleTheme() {

@@ -127,10 +127,6 @@ export class ProfileComponent implements OnInit {
 
     toggleCardBorderRadiusTheme() {
         this.themeService.toggleCardBorderRadiusTheme();
-    }
-
-    toggleRTLEnabledTheme() {
-        this.themeService.toggleRTLEnabledTheme();
-    }
+    } 
 
 }

@@ -73,22 +73,26 @@ export class StructureAddComponent implements OnInit {
   
   onSubmit() {
     try {
-      console.log(this.formGroup); 
-      console.log(this.currentUser.matricule); 
-      this.isLoading = true;
-      var body = {
-        nom_complet: this.formGroup.value.nom_complet,
-        single: this.formGroup.value.single,
-        manager: this.formGroup.value.manager,
-        signature: this.currentUser.matricule,
-        created: new Date(),
-        update_created: new Date()
-      };
-      console.log(body);
-      this.structureService.create(body).subscribe(() => {
-          this.isLoading = false;
-          this.router.navigate(['/layouts/reglages/structure-list']);
-      }); 
+      if (this.formGroup.valid) {
+        console.log(this.formGroup); 
+        console.log(this.currentUser.matricule); 
+        this.isLoading = true;
+        var body = {
+          nom_complet: this.formGroup.value.nom_complet,
+          single: this.formGroup.value.single,
+          manager: this.formGroup.value.manager,
+          signature: this.currentUser.matricule,
+          created: new Date(),
+          update_created: new Date()
+        };
+        console.log(body);
+        this.structureService.create(body).subscribe(() => {
+            this.isLoading = false;
+            this.router.navigate(['/layouts/reglages/structure-list']);
+        }); 
+        this.isLoading = false;
+      }
+     
     } catch (error) {
       console.log(error);
     }
