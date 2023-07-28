@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="col-lg-6 col-md-6 col-sm-6"> 
                             <mat-slide-toggle
                                 [checked]="isNourrison" (change)="toggle($event)"
                             >Cocher pour les mois</mat-slide-toggle>
@@ -71,7 +71,7 @@
                                     <input matInput formControlName="age_mois" input="number" ng-pattern="onlyNumbers" required="Champs obligatoire">
                                     <mat-error *ngIf="formGroup.controls['age_mois'].hasError('required')">
                                         Ce champs est obligatoire
-                                    </mat-error> 
+                                    </mat-error>
                                 </mat-form-field> 
                             </div>
                         </div>
